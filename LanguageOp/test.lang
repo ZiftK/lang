@@ -1,0 +1,7 @@
+String s1 = "Resultado: "*"abcd"^2;
+
+Alph alph1 = {"ab"};
+
+Int length_s1 = |"aaaaa" on alph1|;
+
+show length_s1;

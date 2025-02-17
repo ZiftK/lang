@@ -1,0 +1,101 @@
+from ply import lex
+
+"""
+Language contexts
+
+code
+comments
+"""
+
+# object types
+types = {
+    "String": "StringType",
+    "Lang": "LangType",
+    "Alph": "AlphType",
+    "Int": "IntType"
+}
+
+instructions = {
+    "on": "On",
+    "show": "Show"
+}
+
+reserved_words = {
+    **types,
+    **instructions
+}
+
+tokens = [
+    "Eq",
+    "String",
+    "Int",
+    "OpenStruct",
+    "CloseStruct",
+    "Splitter",
+    "Concat",
+    "Pow",
+    "LenOp",
+    "VarName",
+    "Term",
+    "NextLine",
+] + list(reserved_words.values())
+
+t_ignore = r"[ ]+"
+t_Eq = r"="
+t_OpenStruct = r"{"
+t_CloseStruct = r"}"
+t_Splitter = r","
+t_Concat = r"\*"
+t_Pow = r"\^"
+t_LenOp = r"\|"
+t_Term = r";"
+
+
+def t_VarName(t):
+    r"""[_A-Za-z][_A-Za-z0-9]*"""
+    val: str = t.value
+
+    if val in reserved_words:
+        t.type = reserved_words.get(val)
+    return t
+
+
+def t_String(t):
+    r"""\"[^\"]*\""""
+    t.value = t.value.replace("\"", "")
+    return t
+
+
+def t_Int(t):
+    r"""\d+"""
+    t.value = int(t.value)
+    return t
+
+
+def t_NextLine(t):
+    r"""\n+"""
+    t.lexer.lineno += t.value.count("\n")
+
+
+def t_error(t):
+    print("Salaverga")
+
+
+lexer = lex.lex()
+if __name__ == "__main__":
+
+    with open("./test.lang", "r") as file:
+        content = file.read()
+
+    lexer.input(content)
+
+    token = lexer.token()
+
+    while True:
+        print(token)
+
+        try:
+            token = lexer.next()
+        except StopIteration:
+            print("Fin...")
+            break
