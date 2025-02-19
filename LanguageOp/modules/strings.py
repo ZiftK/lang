@@ -1,7 +1,5 @@
 import re
 
-from modules.variables import vars
-
 
 def p_StringExpression(p):
     """StringExpression : StringConcat"""
