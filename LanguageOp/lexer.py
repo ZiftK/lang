@@ -14,14 +14,19 @@ types = {
     "String": "StringType",
     "Lang": "LangType",
     "Alph": "AlphType",
-    "Int": "IntType"
+    "Int": "IntType",
+    "Boolean": "BooleanType"
 }
 
 instructions = {
     "on": "On",
     "show": "Show",
     "prefixof": "Prefix",
-    "suffixof": "Suffix"
+    "suffixof": "Suffix",
+    "true": "True",
+    "false": "False",
+    "or": "Or",
+    "and": "And"
 }
 
 reserved_words = {
@@ -43,7 +48,8 @@ tokens = [
     "Term",
     "NextLine",
     "LGroup",
-    "RGroup"
+    "RGroup",
+    "SuchThat"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
@@ -57,6 +63,7 @@ t_LenOp = r"\|"
 t_Term = r";"
 t_LGroup = r"\("
 t_RGroup = r"\)"
+t_SuchThat = r":"
 
 
 def t_VarName(t):

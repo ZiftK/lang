@@ -24,8 +24,7 @@ def assign_var(*, name: str, value, type: str):
 
 
 def p_ShowVal(p):
-    r"""ShowVal : Show IntExpression
-                | Show StringExpression"""
+    r"""ShowVal : Show expression"""
     if p.slice[2].type == "VarName":
         if not p[2] in vars:
             raise Exception(f"Undefined variable {p[2]}")
@@ -39,7 +38,8 @@ def p_Declares(p):
     """Declares : StringDeclare
         | IntDeclare
         | AlphDeclare
-        | LangDeclare"""
+        | LangDeclare
+        | BooleanDeclare"""
     p[0] = p[1]
 
 
@@ -47,7 +47,8 @@ def p_Assigns(p):
     """Assigns : StringAssign
         | IntAssign
         | AlphAssign
-        | LangAssign"""
+        | LangAssign
+        | BooleanAssign"""
     p[0] = p[1]
 
 
@@ -148,5 +149,31 @@ def p_LangAssign(p):
     """LangAssign : VarName Eq LangExpression"""
 
     assign_var(name=p[1], value=p[3], type="Alph")
+
+    p[0] = p[3]
+
+
+def p_BooleanDeclare(p):
+    """BooleanDeclare : BooleanType VarName
+                | BooleanType VarName Eq BooleanExpression
+                | BooleanDeclare Splitter VarName
+                | BooleanDeclare Splitter VarName Eq BooleanExpression"""
+
+    if len(p) <= 4:
+        declare_var(name=p[len(p) - 1], type="Boolean")
+
+    if len(p) == 5:
+        declare_var(name=p[2], type="Boolean", value=p[4])
+
+    if len(p) == 6:
+        declare_var(name=p[3], type="Boolean", value=p[5])
+
+    p[0] = p[2]
+
+
+def p_BooleanAssign(p):
+    """BooleanAssign : VarName Eq BooleanExpression"""
+
+    assign_var(name=p[1], value=p[3], type="Boolean")
 
     p[0] = p[3]

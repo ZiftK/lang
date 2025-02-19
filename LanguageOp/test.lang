@@ -1,17 +1,8 @@
-String a,b,c;
-a = "a";
-b = "b";
-c = a*b;
+Boolean a, b, c;
 
-Int d = 2;
+a = true;
+b = false;
 
-show "Resultado: "*c^d;
+c = a or b;
 
-Alph alph1 = {"ab"};
-Alph al = {";"};
-
-Lang l1 = prefixof c;
-Lang l2 = suffixof c;
-
-show l1;
-show l2;
+show c;

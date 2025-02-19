@@ -4,6 +4,9 @@ def p_LangExpression(p):
     p[0] = p[1]
 
 
+def p_Lang(p):
+    """Lang :  OpenStruct VarName SuchThat """
+
 def p_StringPrefix(p):
     """StringPrefix : Prefix StringExpression"""
 

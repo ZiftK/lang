@@ -6,6 +6,7 @@ from modules.alph import *
 from modules.instructions import *
 from modules.variables import *
 from modules.lang import *
+from modules.boolean import *
 
 
 precedence = (
