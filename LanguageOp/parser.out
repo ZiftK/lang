@@ -8,83 +8,88 @@ Unused terminals:
 Grammar
 
 Rule 0     S' -> expressions
-Rule 1     expressions -> expressions expression Term
-Rule 2     expressions -> expression Term
-Rule 3     expression -> VarAssign
-Rule 4     expression -> ShowVal
-Rule 5     ShowVal -> Show Integer
-Rule 6     ShowVal -> Show StringConcat
-Rule 7     ShowVal -> Show Alph
-Rule 8     ShowVal -> Show VarName
-Rule 9     VarAssign -> StringType VarName Eq StringConcat
-Rule 10    VarAssign -> AlphType VarName Eq Alph
-Rule 11    VarAssign -> IntType VarName Eq Integer
-Rule 12    Alph -> OpenStruct StringList CloseStruct
-Rule 13    Alph -> OpenStruct String CloseStruct
-Rule 14    StringList -> StringList Splitter StringConcat
-Rule 15    StringList -> StringConcat Splitter StringConcat
-Rule 16    StringConcat -> StringConcat Concat StringPow
-Rule 17    StringConcat -> StringPow
-Rule 18    StringPow -> StringPow Pow Integer
-Rule 19    StringPow -> StringPow Pow VarName
-Rule 20    StringPow -> String
-Rule 21    Integer -> Int
-Rule 22    Integer -> StringLen
-Rule 23    StringLen -> LenOp String LenOp
-Rule 24    StringLen -> LenOp String On Alph LenOp
-Rule 25    StringLen -> LenOp String On VarName LenOp
+Rule 1     SuperAlph -> Alph
+Rule 2     SuperAlph -> StringPrefix
+Rule 3     Integer -> Int
+Rule 4     Integer -> StringLen
+Rule 5     SuperString -> StringConcat
+Rule 6     Alph -> OpenStruct StringList CloseStruct
+Rule 7     Alph -> OpenStruct SuperString CloseStruct
+Rule 8     ShowVal -> Show Integer
+Rule 9     ShowVal -> Show SuperString
+Rule 10    ShowVal -> Show SuperAlph
+Rule 11    StringList -> StringList Splitter StringConcat
+Rule 12    StringList -> StringConcat Splitter StringConcat
+Rule 13    expressions -> expressions expression Term
+Rule 14    expressions -> expression Term
+Rule 15    expression -> VarAssign
+Rule 16    expression -> ShowVal
+Rule 17    VarAssign -> StringType VarName Eq SuperString
+Rule 18    VarAssign -> AlphType VarName Eq SuperAlph
+Rule 19    VarAssign -> IntType VarName Eq Integer
+Rule 20    StringPrefix -> Prefix SuperString
+Rule 21    StringConcat -> StringConcat Concat StringPow
+Rule 22    StringConcat -> StringPow
+Rule 23    StringPow -> StringPow Pow Integer
+Rule 24    StringPow -> String
+Rule 25    StringLen -> LenOp SuperString LenOp
+Rule 26    StringLen -> LenOp SuperString On Alph LenOp
+Rule 27    StringLen -> LenOp SuperString On VarName LenOp
 
 Terminals, with rules where they appear
 
-AlphType             : 10
-CloseStruct          : 12 13
-Concat               : 16
-Eq                   : 9 10 11
-Int                  : 21
-IntType              : 11
+AlphType             : 18
+CloseStruct          : 6 7
+Concat               : 21
+Eq                   : 17 18 19
+Int                  : 3
+IntType              : 19
 LangType             : 
-LenOp                : 23 23 24 24 25 25
+LenOp                : 25 25 26 26 27 27
 NextLine             : 
-On                   : 24 25
-OpenStruct           : 12 13
-Pow                  : 18 19
-Show                 : 5 6 7 8
-Splitter             : 14 15
-String               : 13 20 23 24 25
-StringType           : 9
-Term                 : 1 2
-VarName              : 8 9 10 11 19 25
+On                   : 26 27
+OpenStruct           : 6 7
+Pow                  : 23
+Prefix               : 20
+Show                 : 8 9 10
+Splitter             : 11 12
+String               : 24
+StringType           : 17
+Term                 : 13 14
+VarName              : 17 18 19 27
 error                : 
 
 Nonterminals, with rules where they appear
 
-Alph                 : 7 10 24
-Integer              : 5 11 18
-ShowVal              : 4
-StringConcat         : 6 9 14 15 15 16
-StringLen            : 22
-StringList           : 12 14
-StringPow            : 16 17 18 19
-VarAssign            : 3
-expression           : 1 2
-expressions          : 1 0
+Alph                 : 1 26
+Integer              : 8 19 23
+ShowVal              : 16
+StringConcat         : 5 11 12 12 21
+StringLen            : 4
+StringList           : 6 11
+StringPow            : 21 22 23
+StringPrefix         : 2
+SuperAlph            : 10 18
+SuperString          : 7 9 17 20 25 26 27
+VarAssign            : 15
+expression           : 13 14
+expressions          : 13 0
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . expressions
-    (1) expressions -> . expressions expression Term
-    (2) expressions -> . expression Term
-    (3) expression -> . VarAssign
-    (4) expression -> . ShowVal
-    (9) VarAssign -> . StringType VarName Eq StringConcat
-    (10) VarAssign -> . AlphType VarName Eq Alph
-    (11) VarAssign -> . IntType VarName Eq Integer
-    (5) ShowVal -> . Show Integer
-    (6) ShowVal -> . Show StringConcat
-    (7) ShowVal -> . Show Alph
-    (8) ShowVal -> . Show VarName
+    (13) expressions -> . expressions expression Term
+    (14) expressions -> . expression Term
+    (15) expression -> . VarAssign
+    (16) expression -> . ShowVal
+    (17) VarAssign -> . StringType VarName Eq SuperString
+    (18) VarAssign -> . AlphType VarName Eq SuperAlph
+    (19) VarAssign -> . IntType VarName Eq Integer
+    (8) ShowVal -> . Show Integer
+    (9) ShowVal -> . Show SuperString
+    (10) ShowVal -> . Show SuperAlph
 
     StringType      shift and go to state 5
     AlphType        shift and go to state 6
@@ -99,16 +104,15 @@ state 0
 state 1
 
     (0) S' -> expressions .
-    (1) expressions -> expressions . expression Term
-    (3) expression -> . VarAssign
-    (4) expression -> . ShowVal
-    (9) VarAssign -> . StringType VarName Eq StringConcat
-    (10) VarAssign -> . AlphType VarName Eq Alph
-    (11) VarAssign -> . IntType VarName Eq Integer
-    (5) ShowVal -> . Show Integer
-    (6) ShowVal -> . Show StringConcat
-    (7) ShowVal -> . Show Alph
-    (8) ShowVal -> . Show VarName
+    (13) expressions -> expressions . expression Term
+    (15) expression -> . VarAssign
+    (16) expression -> . ShowVal
+    (17) VarAssign -> . StringType VarName Eq SuperString
+    (18) VarAssign -> . AlphType VarName Eq SuperAlph
+    (19) VarAssign -> . IntType VarName Eq Integer
+    (8) ShowVal -> . Show Integer
+    (9) ShowVal -> . Show SuperString
+    (10) ShowVal -> . Show SuperAlph
 
     StringType      shift and go to state 5
     AlphType        shift and go to state 6
@@ -121,513 +125,568 @@ state 1
 
 state 2
 
-    (2) expressions -> expression . Term
+    (14) expressions -> expression . Term
 
     Term            shift and go to state 10
 
 
 state 3
 
-    (3) expression -> VarAssign .
+    (15) expression -> VarAssign .
 
-    Term            reduce using rule 3 (expression -> VarAssign .)
+    Term            reduce using rule 15 (expression -> VarAssign .)
 
 
 state 4
 
-    (4) expression -> ShowVal .
+    (16) expression -> ShowVal .
 
-    Term            reduce using rule 4 (expression -> ShowVal .)
+    Term            reduce using rule 16 (expression -> ShowVal .)
 
 
 state 5
 
-    (9) VarAssign -> StringType . VarName Eq StringConcat
+    (17) VarAssign -> StringType . VarName Eq SuperString
 
     VarName         shift and go to state 11
 
 
 state 6
 
-    (10) VarAssign -> AlphType . VarName Eq Alph
+    (18) VarAssign -> AlphType . VarName Eq SuperAlph
 
     VarName         shift and go to state 12
 
 
 state 7
 
-    (11) VarAssign -> IntType . VarName Eq Integer
+    (19) VarAssign -> IntType . VarName Eq Integer
 
     VarName         shift and go to state 13
 
 
 state 8
 
-    (5) ShowVal -> Show . Integer
-    (6) ShowVal -> Show . StringConcat
-    (7) ShowVal -> Show . Alph
-    (8) ShowVal -> Show . VarName
-    (21) Integer -> . Int
-    (22) Integer -> . StringLen
-    (16) StringConcat -> . StringConcat Concat StringPow
-    (17) StringConcat -> . StringPow
-    (12) Alph -> . OpenStruct StringList CloseStruct
-    (13) Alph -> . OpenStruct String CloseStruct
-    (23) StringLen -> . LenOp String LenOp
-    (24) StringLen -> . LenOp String On Alph LenOp
-    (25) StringLen -> . LenOp String On VarName LenOp
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (8) ShowVal -> Show . Integer
+    (9) ShowVal -> Show . SuperString
+    (10) ShowVal -> Show . SuperAlph
+    (3) Integer -> . Int
+    (4) Integer -> . StringLen
+    (5) SuperString -> . StringConcat
+    (1) SuperAlph -> . Alph
+    (2) SuperAlph -> . StringPrefix
+    (25) StringLen -> . LenOp SuperString LenOp
+    (26) StringLen -> . LenOp SuperString On Alph LenOp
+    (27) StringLen -> . LenOp SuperString On VarName LenOp
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (6) Alph -> . OpenStruct StringList CloseStruct
+    (7) Alph -> . OpenStruct SuperString CloseStruct
+    (20) StringPrefix -> . Prefix SuperString
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    VarName         shift and go to state 17
-    Int             shift and go to state 18
-    OpenStruct      shift and go to state 21
-    LenOp           shift and go to state 23
-    String          shift and go to state 22
+    Int             shift and go to state 17
+    LenOp           shift and go to state 22
+    OpenStruct      shift and go to state 24
+    Prefix          shift and go to state 25
+    String          shift and go to state 26
 
     Integer                        shift and go to state 14
-    StringConcat                   shift and go to state 15
-    Alph                           shift and go to state 16
-    StringLen                      shift and go to state 19
-    StringPow                      shift and go to state 20
+    SuperString                    shift and go to state 15
+    SuperAlph                      shift and go to state 16
+    StringLen                      shift and go to state 18
+    StringConcat                   shift and go to state 19
+    Alph                           shift and go to state 20
+    StringPrefix                   shift and go to state 21
+    StringPow                      shift and go to state 23
 
 state 9
 
-    (1) expressions -> expressions expression . Term
+    (13) expressions -> expressions expression . Term
 
-    Term            shift and go to state 24
+    Term            shift and go to state 27
 
 
 state 10
 
-    (2) expressions -> expression Term .
+    (14) expressions -> expression Term .
 
-    StringType      reduce using rule 2 (expressions -> expression Term .)
-    AlphType        reduce using rule 2 (expressions -> expression Term .)
-    IntType         reduce using rule 2 (expressions -> expression Term .)
-    Show            reduce using rule 2 (expressions -> expression Term .)
-    $end            reduce using rule 2 (expressions -> expression Term .)
+    StringType      reduce using rule 14 (expressions -> expression Term .)
+    AlphType        reduce using rule 14 (expressions -> expression Term .)
+    IntType         reduce using rule 14 (expressions -> expression Term .)
+    Show            reduce using rule 14 (expressions -> expression Term .)
+    $end            reduce using rule 14 (expressions -> expression Term .)
 
 
 state 11
 
-    (9) VarAssign -> StringType VarName . Eq StringConcat
+    (17) VarAssign -> StringType VarName . Eq SuperString
 
-    Eq              shift and go to state 25
+    Eq              shift and go to state 28
 
 
 state 12
 
-    (10) VarAssign -> AlphType VarName . Eq Alph
+    (18) VarAssign -> AlphType VarName . Eq SuperAlph
 
-    Eq              shift and go to state 26
+    Eq              shift and go to state 29
 
 
 state 13
 
-    (11) VarAssign -> IntType VarName . Eq Integer
+    (19) VarAssign -> IntType VarName . Eq Integer
 
-    Eq              shift and go to state 27
+    Eq              shift and go to state 30
 
 
 state 14
 
-    (5) ShowVal -> Show Integer .
+    (8) ShowVal -> Show Integer .
 
-    Term            reduce using rule 5 (ShowVal -> Show Integer .)
+    Term            reduce using rule 8 (ShowVal -> Show Integer .)
 
 
 state 15
 
-    (6) ShowVal -> Show StringConcat .
-    (16) StringConcat -> StringConcat . Concat StringPow
+    (9) ShowVal -> Show SuperString .
 
-    Term            reduce using rule 6 (ShowVal -> Show StringConcat .)
-    Concat          shift and go to state 28
+    Term            reduce using rule 9 (ShowVal -> Show SuperString .)
 
 
 state 16
 
-    (7) ShowVal -> Show Alph .
+    (10) ShowVal -> Show SuperAlph .
 
-    Term            reduce using rule 7 (ShowVal -> Show Alph .)
+    Term            reduce using rule 10 (ShowVal -> Show SuperAlph .)
 
 
 state 17
 
-    (8) ShowVal -> Show VarName .
+    (3) Integer -> Int .
 
-    Term            reduce using rule 8 (ShowVal -> Show VarName .)
+    Term            reduce using rule 3 (Integer -> Int .)
+    Pow             reduce using rule 3 (Integer -> Int .)
+    Concat          reduce using rule 3 (Integer -> Int .)
+    LenOp           reduce using rule 3 (Integer -> Int .)
+    On              reduce using rule 3 (Integer -> Int .)
+    Splitter        reduce using rule 3 (Integer -> Int .)
+    CloseStruct     reduce using rule 3 (Integer -> Int .)
 
 
 state 18
 
-    (21) Integer -> Int .
+    (4) Integer -> StringLen .
 
-    Term            reduce using rule 21 (Integer -> Int .)
-    Pow             reduce using rule 21 (Integer -> Int .)
-    Concat          reduce using rule 21 (Integer -> Int .)
-    Splitter        reduce using rule 21 (Integer -> Int .)
-    CloseStruct     reduce using rule 21 (Integer -> Int .)
+    Term            reduce using rule 4 (Integer -> StringLen .)
+    Pow             reduce using rule 4 (Integer -> StringLen .)
+    Concat          reduce using rule 4 (Integer -> StringLen .)
+    LenOp           reduce using rule 4 (Integer -> StringLen .)
+    On              reduce using rule 4 (Integer -> StringLen .)
+    Splitter        reduce using rule 4 (Integer -> StringLen .)
+    CloseStruct     reduce using rule 4 (Integer -> StringLen .)
 
 
 state 19
 
-    (22) Integer -> StringLen .
+    (5) SuperString -> StringConcat .
+    (21) StringConcat -> StringConcat . Concat StringPow
 
-    Term            reduce using rule 22 (Integer -> StringLen .)
-    Pow             reduce using rule 22 (Integer -> StringLen .)
-    Concat          reduce using rule 22 (Integer -> StringLen .)
-    Splitter        reduce using rule 22 (Integer -> StringLen .)
-    CloseStruct     reduce using rule 22 (Integer -> StringLen .)
+    Term            reduce using rule 5 (SuperString -> StringConcat .)
+    LenOp           reduce using rule 5 (SuperString -> StringConcat .)
+    On              reduce using rule 5 (SuperString -> StringConcat .)
+    Concat          shift and go to state 31
 
 
 state 20
 
-    (17) StringConcat -> StringPow .
-    (18) StringPow -> StringPow . Pow Integer
-    (19) StringPow -> StringPow . Pow VarName
+    (1) SuperAlph -> Alph .
 
-    Concat          reduce using rule 17 (StringConcat -> StringPow .)
-    Term            reduce using rule 17 (StringConcat -> StringPow .)
-    Splitter        reduce using rule 17 (StringConcat -> StringPow .)
-    CloseStruct     reduce using rule 17 (StringConcat -> StringPow .)
-    Pow             shift and go to state 29
+    Term            reduce using rule 1 (SuperAlph -> Alph .)
 
 
 state 21
 
-    (12) Alph -> OpenStruct . StringList CloseStruct
-    (13) Alph -> OpenStruct . String CloseStruct
-    (14) StringList -> . StringList Splitter StringConcat
-    (15) StringList -> . StringConcat Splitter StringConcat
-    (16) StringConcat -> . StringConcat Concat StringPow
-    (17) StringConcat -> . StringPow
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (2) SuperAlph -> StringPrefix .
 
-    String          shift and go to state 31
+    Term            reduce using rule 2 (SuperAlph -> StringPrefix .)
 
-    StringList                     shift and go to state 30
-    StringConcat                   shift and go to state 32
-    StringPow                      shift and go to state 20
 
 state 22
 
-    (20) StringPow -> String .
+    (25) StringLen -> LenOp . SuperString LenOp
+    (26) StringLen -> LenOp . SuperString On Alph LenOp
+    (27) StringLen -> LenOp . SuperString On VarName LenOp
+    (5) SuperString -> . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    Pow             reduce using rule 20 (StringPow -> String .)
-    Concat          reduce using rule 20 (StringPow -> String .)
-    Term            reduce using rule 20 (StringPow -> String .)
-    Splitter        reduce using rule 20 (StringPow -> String .)
-    CloseStruct     reduce using rule 20 (StringPow -> String .)
+    String          shift and go to state 26
 
+    SuperString                    shift and go to state 32
+    StringConcat                   shift and go to state 19
+    StringPow                      shift and go to state 23
 
 state 23
 
-    (23) StringLen -> LenOp . String LenOp
-    (24) StringLen -> LenOp . String On Alph LenOp
-    (25) StringLen -> LenOp . String On VarName LenOp
+    (22) StringConcat -> StringPow .
+    (23) StringPow -> StringPow . Pow Integer
 
-    String          shift and go to state 33
+    Concat          reduce using rule 22 (StringConcat -> StringPow .)
+    Term            reduce using rule 22 (StringConcat -> StringPow .)
+    LenOp           reduce using rule 22 (StringConcat -> StringPow .)
+    On              reduce using rule 22 (StringConcat -> StringPow .)
+    Splitter        reduce using rule 22 (StringConcat -> StringPow .)
+    CloseStruct     reduce using rule 22 (StringConcat -> StringPow .)
+    Pow             shift and go to state 33
 
 
 state 24
 
-    (1) expressions -> expressions expression Term .
+    (6) Alph -> OpenStruct . StringList CloseStruct
+    (7) Alph -> OpenStruct . SuperString CloseStruct
+    (11) StringList -> . StringList Splitter StringConcat
+    (12) StringList -> . StringConcat Splitter StringConcat
+    (5) SuperString -> . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    StringType      reduce using rule 1 (expressions -> expressions expression Term .)
-    AlphType        reduce using rule 1 (expressions -> expressions expression Term .)
-    IntType         reduce using rule 1 (expressions -> expressions expression Term .)
-    Show            reduce using rule 1 (expressions -> expressions expression Term .)
-    $end            reduce using rule 1 (expressions -> expressions expression Term .)
+    String          shift and go to state 26
 
+    StringList                     shift and go to state 34
+    SuperString                    shift and go to state 35
+    StringConcat                   shift and go to state 36
+    StringPow                      shift and go to state 23
 
 state 25
 
-    (9) VarAssign -> StringType VarName Eq . StringConcat
-    (16) StringConcat -> . StringConcat Concat StringPow
-    (17) StringConcat -> . StringPow
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (20) StringPrefix -> Prefix . SuperString
+    (5) SuperString -> . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    String          shift and go to state 22
+    String          shift and go to state 26
 
-    StringConcat                   shift and go to state 34
-    StringPow                      shift and go to state 20
+    SuperString                    shift and go to state 37
+    StringConcat                   shift and go to state 19
+    StringPow                      shift and go to state 23
 
 state 26
 
-    (10) VarAssign -> AlphType VarName Eq . Alph
-    (12) Alph -> . OpenStruct StringList CloseStruct
-    (13) Alph -> . OpenStruct String CloseStruct
+    (24) StringPow -> String .
 
-    OpenStruct      shift and go to state 21
+    Pow             reduce using rule 24 (StringPow -> String .)
+    Concat          reduce using rule 24 (StringPow -> String .)
+    Term            reduce using rule 24 (StringPow -> String .)
+    LenOp           reduce using rule 24 (StringPow -> String .)
+    On              reduce using rule 24 (StringPow -> String .)
+    Splitter        reduce using rule 24 (StringPow -> String .)
+    CloseStruct     reduce using rule 24 (StringPow -> String .)
 
-    Alph                           shift and go to state 35
 
 state 27
 
-    (11) VarAssign -> IntType VarName Eq . Integer
-    (21) Integer -> . Int
-    (22) Integer -> . StringLen
-    (23) StringLen -> . LenOp String LenOp
-    (24) StringLen -> . LenOp String On Alph LenOp
-    (25) StringLen -> . LenOp String On VarName LenOp
+    (13) expressions -> expressions expression Term .
 
-    Int             shift and go to state 18
-    LenOp           shift and go to state 23
+    StringType      reduce using rule 13 (expressions -> expressions expression Term .)
+    AlphType        reduce using rule 13 (expressions -> expressions expression Term .)
+    IntType         reduce using rule 13 (expressions -> expressions expression Term .)
+    Show            reduce using rule 13 (expressions -> expressions expression Term .)
+    $end            reduce using rule 13 (expressions -> expressions expression Term .)
 
-    Integer                        shift and go to state 36
-    StringLen                      shift and go to state 19
 
 state 28
 
-    (16) StringConcat -> StringConcat Concat . StringPow
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (17) VarAssign -> StringType VarName Eq . SuperString
+    (5) SuperString -> . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    String          shift and go to state 22
+    String          shift and go to state 26
 
-    StringPow                      shift and go to state 37
+    SuperString                    shift and go to state 38
+    StringConcat                   shift and go to state 19
+    StringPow                      shift and go to state 23
 
 state 29
 
-    (18) StringPow -> StringPow Pow . Integer
-    (19) StringPow -> StringPow Pow . VarName
-    (21) Integer -> . Int
-    (22) Integer -> . StringLen
-    (23) StringLen -> . LenOp String LenOp
-    (24) StringLen -> . LenOp String On Alph LenOp
-    (25) StringLen -> . LenOp String On VarName LenOp
+    (18) VarAssign -> AlphType VarName Eq . SuperAlph
+    (1) SuperAlph -> . Alph
+    (2) SuperAlph -> . StringPrefix
+    (6) Alph -> . OpenStruct StringList CloseStruct
+    (7) Alph -> . OpenStruct SuperString CloseStruct
+    (20) StringPrefix -> . Prefix SuperString
 
-    VarName         shift and go to state 39
-    Int             shift and go to state 18
-    LenOp           shift and go to state 23
+    OpenStruct      shift and go to state 24
+    Prefix          shift and go to state 25
 
-    Integer                        shift and go to state 38
-    StringLen                      shift and go to state 19
+    SuperAlph                      shift and go to state 39
+    Alph                           shift and go to state 20
+    StringPrefix                   shift and go to state 21
 
 state 30
 
-    (12) Alph -> OpenStruct StringList . CloseStruct
-    (14) StringList -> StringList . Splitter StringConcat
+    (19) VarAssign -> IntType VarName Eq . Integer
+    (3) Integer -> . Int
+    (4) Integer -> . StringLen
+    (25) StringLen -> . LenOp SuperString LenOp
+    (26) StringLen -> . LenOp SuperString On Alph LenOp
+    (27) StringLen -> . LenOp SuperString On VarName LenOp
 
-    CloseStruct     shift and go to state 40
-    Splitter        shift and go to state 41
+    Int             shift and go to state 17
+    LenOp           shift and go to state 22
 
+    Integer                        shift and go to state 40
+    StringLen                      shift and go to state 18
 
 state 31
 
-    (13) Alph -> OpenStruct String . CloseStruct
-    (20) StringPow -> String .
+    (21) StringConcat -> StringConcat Concat . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    CloseStruct     shift and go to state 42
-    Pow             reduce using rule 20 (StringPow -> String .)
-    Splitter        reduce using rule 20 (StringPow -> String .)
-    Concat          reduce using rule 20 (StringPow -> String .)
+    String          shift and go to state 26
 
+    StringPow                      shift and go to state 41
 
 state 32
 
-    (15) StringList -> StringConcat . Splitter StringConcat
-    (16) StringConcat -> StringConcat . Concat StringPow
+    (25) StringLen -> LenOp SuperString . LenOp
+    (26) StringLen -> LenOp SuperString . On Alph LenOp
+    (27) StringLen -> LenOp SuperString . On VarName LenOp
 
-    Splitter        shift and go to state 43
-    Concat          shift and go to state 28
+    LenOp           shift and go to state 42
+    On              shift and go to state 43
 
 
 state 33
 
-    (23) StringLen -> LenOp String . LenOp
-    (24) StringLen -> LenOp String . On Alph LenOp
-    (25) StringLen -> LenOp String . On VarName LenOp
+    (23) StringPow -> StringPow Pow . Integer
+    (3) Integer -> . Int
+    (4) Integer -> . StringLen
+    (25) StringLen -> . LenOp SuperString LenOp
+    (26) StringLen -> . LenOp SuperString On Alph LenOp
+    (27) StringLen -> . LenOp SuperString On VarName LenOp
 
-    LenOp           shift and go to state 44
-    On              shift and go to state 45
+    Int             shift and go to state 17
+    LenOp           shift and go to state 22
 
+    Integer                        shift and go to state 44
+    StringLen                      shift and go to state 18
 
 state 34
 
-    (9) VarAssign -> StringType VarName Eq StringConcat .
-    (16) StringConcat -> StringConcat . Concat StringPow
+    (6) Alph -> OpenStruct StringList . CloseStruct
+    (11) StringList -> StringList . Splitter StringConcat
 
-    Term            reduce using rule 9 (VarAssign -> StringType VarName Eq StringConcat .)
-    Concat          shift and go to state 28
+    CloseStruct     shift and go to state 45
+    Splitter        shift and go to state 46
 
 
 state 35
 
-    (10) VarAssign -> AlphType VarName Eq Alph .
+    (7) Alph -> OpenStruct SuperString . CloseStruct
 
-    Term            reduce using rule 10 (VarAssign -> AlphType VarName Eq Alph .)
+    CloseStruct     shift and go to state 47
 
 
 state 36
 
-    (11) VarAssign -> IntType VarName Eq Integer .
+    (12) StringList -> StringConcat . Splitter StringConcat
+    (5) SuperString -> StringConcat .
+    (21) StringConcat -> StringConcat . Concat StringPow
 
-    Term            reduce using rule 11 (VarAssign -> IntType VarName Eq Integer .)
+    Splitter        shift and go to state 48
+    CloseStruct     reduce using rule 5 (SuperString -> StringConcat .)
+    Concat          shift and go to state 31
 
 
 state 37
 
-    (16) StringConcat -> StringConcat Concat StringPow .
-    (18) StringPow -> StringPow . Pow Integer
-    (19) StringPow -> StringPow . Pow VarName
+    (20) StringPrefix -> Prefix SuperString .
 
-    Concat          reduce using rule 16 (StringConcat -> StringConcat Concat StringPow .)
-    Term            reduce using rule 16 (StringConcat -> StringConcat Concat StringPow .)
-    Splitter        reduce using rule 16 (StringConcat -> StringConcat Concat StringPow .)
-    CloseStruct     reduce using rule 16 (StringConcat -> StringConcat Concat StringPow .)
-    Pow             shift and go to state 29
+    Term            reduce using rule 20 (StringPrefix -> Prefix SuperString .)
 
 
 state 38
 
-    (18) StringPow -> StringPow Pow Integer .
+    (17) VarAssign -> StringType VarName Eq SuperString .
 
-    Pow             reduce using rule 18 (StringPow -> StringPow Pow Integer .)
-    Concat          reduce using rule 18 (StringPow -> StringPow Pow Integer .)
-    Term            reduce using rule 18 (StringPow -> StringPow Pow Integer .)
-    Splitter        reduce using rule 18 (StringPow -> StringPow Pow Integer .)
-    CloseStruct     reduce using rule 18 (StringPow -> StringPow Pow Integer .)
+    Term            reduce using rule 17 (VarAssign -> StringType VarName Eq SuperString .)
 
 
 state 39
 
-    (19) StringPow -> StringPow Pow VarName .
+    (18) VarAssign -> AlphType VarName Eq SuperAlph .
 
-    Pow             reduce using rule 19 (StringPow -> StringPow Pow VarName .)
-    Concat          reduce using rule 19 (StringPow -> StringPow Pow VarName .)
-    Term            reduce using rule 19 (StringPow -> StringPow Pow VarName .)
-    Splitter        reduce using rule 19 (StringPow -> StringPow Pow VarName .)
-    CloseStruct     reduce using rule 19 (StringPow -> StringPow Pow VarName .)
+    Term            reduce using rule 18 (VarAssign -> AlphType VarName Eq SuperAlph .)
 
 
 state 40
 
-    (12) Alph -> OpenStruct StringList CloseStruct .
+    (19) VarAssign -> IntType VarName Eq Integer .
 
-    Term            reduce using rule 12 (Alph -> OpenStruct StringList CloseStruct .)
-    LenOp           reduce using rule 12 (Alph -> OpenStruct StringList CloseStruct .)
+    Term            reduce using rule 19 (VarAssign -> IntType VarName Eq Integer .)
 
 
 state 41
 
-    (14) StringList -> StringList Splitter . StringConcat
-    (16) StringConcat -> . StringConcat Concat StringPow
-    (17) StringConcat -> . StringPow
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (21) StringConcat -> StringConcat Concat StringPow .
+    (23) StringPow -> StringPow . Pow Integer
 
-    String          shift and go to state 22
+    Concat          reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    Term            reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    LenOp           reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    On              reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    Splitter        reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    CloseStruct     reduce using rule 21 (StringConcat -> StringConcat Concat StringPow .)
+    Pow             shift and go to state 33
 
-    StringConcat                   shift and go to state 46
-    StringPow                      shift and go to state 20
 
 state 42
 
-    (13) Alph -> OpenStruct String CloseStruct .
+    (25) StringLen -> LenOp SuperString LenOp .
 
-    Term            reduce using rule 13 (Alph -> OpenStruct String CloseStruct .)
-    LenOp           reduce using rule 13 (Alph -> OpenStruct String CloseStruct .)
+    Term            reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    Pow             reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    Concat          reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    LenOp           reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    On              reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    Splitter        reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
+    CloseStruct     reduce using rule 25 (StringLen -> LenOp SuperString LenOp .)
 
 
 state 43
 
-    (15) StringList -> StringConcat Splitter . StringConcat
-    (16) StringConcat -> . StringConcat Concat StringPow
-    (17) StringConcat -> . StringPow
-    (18) StringPow -> . StringPow Pow Integer
-    (19) StringPow -> . StringPow Pow VarName
-    (20) StringPow -> . String
+    (26) StringLen -> LenOp SuperString On . Alph LenOp
+    (27) StringLen -> LenOp SuperString On . VarName LenOp
+    (6) Alph -> . OpenStruct StringList CloseStruct
+    (7) Alph -> . OpenStruct SuperString CloseStruct
 
-    String          shift and go to state 22
+    VarName         shift and go to state 50
+    OpenStruct      shift and go to state 24
 
-    StringConcat                   shift and go to state 47
-    StringPow                      shift and go to state 20
+    Alph                           shift and go to state 49
 
 state 44
 
-    (23) StringLen -> LenOp String LenOp .
+    (23) StringPow -> StringPow Pow Integer .
 
-    Term            reduce using rule 23 (StringLen -> LenOp String LenOp .)
-    Pow             reduce using rule 23 (StringLen -> LenOp String LenOp .)
-    Concat          reduce using rule 23 (StringLen -> LenOp String LenOp .)
-    Splitter        reduce using rule 23 (StringLen -> LenOp String LenOp .)
-    CloseStruct     reduce using rule 23 (StringLen -> LenOp String LenOp .)
+    Pow             reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    Concat          reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    Term            reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    LenOp           reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    On              reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    Splitter        reduce using rule 23 (StringPow -> StringPow Pow Integer .)
+    CloseStruct     reduce using rule 23 (StringPow -> StringPow Pow Integer .)
 
 
 state 45
 
-    (24) StringLen -> LenOp String On . Alph LenOp
-    (25) StringLen -> LenOp String On . VarName LenOp
-    (12) Alph -> . OpenStruct StringList CloseStruct
-    (13) Alph -> . OpenStruct String CloseStruct
+    (6) Alph -> OpenStruct StringList CloseStruct .
 
-    VarName         shift and go to state 49
-    OpenStruct      shift and go to state 21
+    Term            reduce using rule 6 (Alph -> OpenStruct StringList CloseStruct .)
+    LenOp           reduce using rule 6 (Alph -> OpenStruct StringList CloseStruct .)
 
-    Alph                           shift and go to state 48
 
 state 46
 
-    (14) StringList -> StringList Splitter StringConcat .
-    (16) StringConcat -> StringConcat . Concat StringPow
+    (11) StringList -> StringList Splitter . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    CloseStruct     reduce using rule 14 (StringList -> StringList Splitter StringConcat .)
-    Splitter        reduce using rule 14 (StringList -> StringList Splitter StringConcat .)
-    Concat          shift and go to state 28
+    String          shift and go to state 26
 
+    StringConcat                   shift and go to state 51
+    StringPow                      shift and go to state 23
 
 state 47
 
-    (15) StringList -> StringConcat Splitter StringConcat .
-    (16) StringConcat -> StringConcat . Concat StringPow
+    (7) Alph -> OpenStruct SuperString CloseStruct .
 
-    CloseStruct     reduce using rule 15 (StringList -> StringConcat Splitter StringConcat .)
-    Splitter        reduce using rule 15 (StringList -> StringConcat Splitter StringConcat .)
-    Concat          shift and go to state 28
+    Term            reduce using rule 7 (Alph -> OpenStruct SuperString CloseStruct .)
+    LenOp           reduce using rule 7 (Alph -> OpenStruct SuperString CloseStruct .)
 
 
 state 48
 
-    (24) StringLen -> LenOp String On Alph . LenOp
+    (12) StringList -> StringConcat Splitter . StringConcat
+    (21) StringConcat -> . StringConcat Concat StringPow
+    (22) StringConcat -> . StringPow
+    (23) StringPow -> . StringPow Pow Integer
+    (24) StringPow -> . String
 
-    LenOp           shift and go to state 50
+    String          shift and go to state 26
 
+    StringConcat                   shift and go to state 52
+    StringPow                      shift and go to state 23
 
 state 49
 
-    (25) StringLen -> LenOp String On VarName . LenOp
+    (26) StringLen -> LenOp SuperString On Alph . LenOp
 
-    LenOp           shift and go to state 51
+    LenOp           shift and go to state 53
 
 
 state 50
 
-    (24) StringLen -> LenOp String On Alph LenOp .
+    (27) StringLen -> LenOp SuperString On VarName . LenOp
 
-    Term            reduce using rule 24 (StringLen -> LenOp String On Alph LenOp .)
-    Pow             reduce using rule 24 (StringLen -> LenOp String On Alph LenOp .)
-    Concat          reduce using rule 24 (StringLen -> LenOp String On Alph LenOp .)
-    Splitter        reduce using rule 24 (StringLen -> LenOp String On Alph LenOp .)
-    CloseStruct     reduce using rule 24 (StringLen -> LenOp String On Alph LenOp .)
+    LenOp           shift and go to state 54
 
 
 state 51
 
-    (25) StringLen -> LenOp String On VarName LenOp .
+    (11) StringList -> StringList Splitter StringConcat .
+    (21) StringConcat -> StringConcat . Concat StringPow
 
-    Term            reduce using rule 25 (StringLen -> LenOp String On VarName LenOp .)
-    Pow             reduce using rule 25 (StringLen -> LenOp String On VarName LenOp .)
-    Concat          reduce using rule 25 (StringLen -> LenOp String On VarName LenOp .)
-    Splitter        reduce using rule 25 (StringLen -> LenOp String On VarName LenOp .)
-    CloseStruct     reduce using rule 25 (StringLen -> LenOp String On VarName LenOp .)
+    CloseStruct     reduce using rule 11 (StringList -> StringList Splitter StringConcat .)
+    Splitter        reduce using rule 11 (StringList -> StringList Splitter StringConcat .)
+    Concat          shift and go to state 31
+
+
+state 52
+
+    (12) StringList -> StringConcat Splitter StringConcat .
+    (21) StringConcat -> StringConcat . Concat StringPow
+
+    CloseStruct     reduce using rule 12 (StringList -> StringConcat Splitter StringConcat .)
+    Splitter        reduce using rule 12 (StringList -> StringConcat Splitter StringConcat .)
+    Concat          shift and go to state 31
+
+
+state 53
+
+    (26) StringLen -> LenOp SuperString On Alph LenOp .
+
+    Term            reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    Pow             reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    Concat          reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    LenOp           reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    On              reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    Splitter        reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+    CloseStruct     reduce using rule 26 (StringLen -> LenOp SuperString On Alph LenOp .)
+
+
+state 54
+
+    (27) StringLen -> LenOp SuperString On VarName LenOp .
+
+    Term            reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    Pow             reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    Concat          reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    LenOp           reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    On              reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    Splitter        reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
+    CloseStruct     reduce using rule 27 (StringLen -> LenOp SuperString On VarName LenOp .)
 

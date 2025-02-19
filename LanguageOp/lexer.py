@@ -1,5 +1,7 @@
 from ply import lex
 
+from modules.variables import vars
+
 """
 Language contexts
 
@@ -17,7 +19,8 @@ types = {
 
 instructions = {
     "on": "On",
-    "show": "Show"
+    "show": "Show",
+    "prefixof": "Prefix"
 }
 
 reserved_words = {
@@ -37,7 +40,7 @@ tokens = [
     "LenOp",
     "VarName",
     "Term",
-    "NextLine",
+    "NextLine"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
@@ -57,6 +60,8 @@ def t_VarName(t):
 
     if val in reserved_words:
         t.type = reserved_words.get(val)
+
+
     return t
 
 

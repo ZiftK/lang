@@ -1,7 +1,6 @@
-String s1 = "Resultado: "*"abcd"^2;
+String b = "abcd"*" ddd"^2 ;
 
-Alph alph1 = {"ab"};
+Alph a1 = prefixof b;
 
-Int length_s1 = |"aaaaa" on alph1|;
-
-show length_s1;
+show b;
+show a1;

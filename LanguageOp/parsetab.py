@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftConcatrightPowAlphType CloseStruct Concat Eq Int IntType LangType LenOp NextLine On OpenStruct Pow Show Splitter String StringType Term VarNameexpressions : expressions expression Term\n                    | expression Termexpression : VarAssign\n                    | ShowValShowVal : Show Integer\n                | Show StringConcat\n                | Show Alph\n                | Show VarNameVarAssign :  StringType VarName Eq StringConcat\n                    | AlphType VarName Eq Alph\n                    | IntType VarName Eq IntegerAlph : OpenStruct StringList CloseStruct\n            | OpenStruct String CloseStructStringList : StringList Splitter StringConcat\n                    | StringConcat Splitter StringConcatStringConcat : StringConcat Concat StringPow\n                    | StringPowStringPow : StringPow Pow Integer\n                | StringPow Pow VarName\n                | StringInteger : Int\n                | StringLenStringLen : LenOp String LenOp\n                | LenOp String On Alph LenOp\n                | LenOp String On VarName LenOp'
+_lr_signature = 'expressionsleftConcatrightPowAlphType CloseStruct Concat Eq Int IntType LangType LenOp NextLine On OpenStruct Pow Prefix Show Splitter String StringType Term VarNameSuperAlph : Alph\n                | StringPrefixInteger : Int\n                | StringLenSuperString : StringConcatAlph : OpenStruct StringList CloseStruct\n            | OpenStruct SuperString CloseStructShowVal : Show Integer\n                | Show SuperString\n                | Show SuperAlphStringList : StringList Splitter StringConcat\n                    | StringConcat Splitter StringConcatexpressions : expressions expression Term\n                    | expression Termexpression : VarAssign\n                    | ShowValVarAssign :  StringType VarName Eq SuperString\n                    | AlphType VarName Eq SuperAlph\n                    | IntType VarName Eq IntegerStringPrefix : Prefix SuperStringStringConcat : StringConcat Concat StringPow\n                    | StringPowStringPow : StringPow Pow Integer\n                | StringStringLen : LenOp SuperString LenOp\n                | LenOp SuperString On Alph LenOp\n                | LenOp SuperString On VarName LenOp'
     
-_lr_action_items = {'StringType':([0,1,10,24,],[5,5,-2,-1,]),'AlphType':([0,1,10,24,],[6,6,-2,-1,]),'IntType':([0,1,10,24,],[7,7,-2,-1,]),'Show':([0,1,10,24,],[8,8,-2,-1,]),'$end':([1,10,24,],[0,-2,-1,]),'Term':([2,3,4,9,14,15,16,17,18,19,20,22,34,35,36,37,38,39,40,42,44,50,51,],[10,-3,-4,24,-5,-6,-7,-8,-21,-22,-17,-20,-9,-10,-11,-16,-18,-19,-12,-13,-23,-24,-25,]),'VarName':([5,6,7,8,29,45,],[11,12,13,17,39,49,]),'Int':([8,27,29,],[18,18,18,]),'OpenStruct':([8,26,45,],[21,21,21,]),'LenOp':([8,27,29,33,40,42,48,49,],[23,23,23,44,-12,-13,50,51,]),'String':([8,21,23,25,28,41,43,],[22,31,33,22,22,22,22,]),'Eq':([11,12,13,],[25,26,27,]),'Concat':([15,18,19,20,22,31,32,34,37,38,39,44,46,47,50,51,],[28,-21,-22,-17,-20,-20,28,28,-16,-18,-19,-23,28,28,-24,-25,]),'Pow':([18,19,20,22,31,37,38,39,44,50,51,],[-21,-22,29,-20,-20,29,-18,-19,-23,-24,-25,]),'Splitter':([18,19,20,22,30,31,32,37,38,39,44,46,47,50,51,],[-21,-22,-17,-20,41,-20,43,-16,-18,-19,-23,-14,-15,-24,-25,]),'CloseStruct':([18,19,20,22,30,31,37,38,39,44,46,47,50,51,],[-21,-22,-17,-20,40,42,-16,-18,-19,-23,-14,-15,-24,-25,]),'On':([33,],[45,]),}
+_lr_action_items = {'StringType':([0,1,10,27,],[5,5,-14,-13,]),'AlphType':([0,1,10,27,],[6,6,-14,-13,]),'IntType':([0,1,10,27,],[7,7,-14,-13,]),'Show':([0,1,10,27,],[8,8,-14,-13,]),'$end':([1,10,27,],[0,-14,-13,]),'Term':([2,3,4,9,14,15,16,17,18,19,20,21,23,26,37,38,39,40,41,42,44,45,47,53,54,],[10,-15,-16,27,-8,-9,-10,-3,-4,-5,-1,-2,-22,-24,-20,-17,-18,-19,-21,-25,-23,-6,-7,-26,-27,]),'VarName':([5,6,7,43,],[11,12,13,50,]),'Int':([8,30,33,],[17,17,17,]),'LenOp':([8,17,18,19,23,26,30,32,33,41,42,44,45,47,49,50,53,54,],[22,-3,-4,-5,-22,-24,22,42,22,-21,-25,-23,-6,-7,53,54,-26,-27,]),'OpenStruct':([8,29,43,],[24,24,24,]),'Prefix':([8,29,],[25,25,]),'String':([8,22,24,25,28,31,46,48,],[26,26,26,26,26,26,26,26,]),'Eq':([11,12,13,],[28,29,30,]),'Pow':([17,18,23,26,41,42,44,53,54,],[-3,-4,33,-24,33,-25,-23,-26,-27,]),'Concat':([17,18,19,23,26,36,41,42,44,51,52,53,54,],[-3,-4,31,-22,-24,31,-21,-25,-23,31,31,-26,-27,]),'On':([17,18,19,23,26,32,41,42,44,53,54,],[-3,-4,-5,-22,-24,43,-21,-25,-23,-26,-27,]),'Splitter':([17,18,23,26,34,36,41,42,44,51,52,53,54,],[-3,-4,-22,-24,46,48,-21,-25,-23,-11,-12,-26,-27,]),'CloseStruct':([17,18,23,26,34,35,36,41,42,44,51,52,53,54,],[-3,-4,-22,-24,45,47,-5,-21,-25,-23,-11,-12,-26,-27,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expressions':([0,],[1,]),'expression':([0,1,],[2,9,]),'VarAssign':([0,1,],[3,3,]),'ShowVal':([0,1,],[4,4,]),'Integer':([8,27,29,],[14,36,38,]),'StringConcat':([8,21,25,41,43,],[15,32,34,46,47,]),'Alph':([8,26,45,],[16,35,48,]),'StringLen':([8,27,29,],[19,19,19,]),'StringPow':([8,21,25,28,41,43,],[20,20,20,37,20,20,]),'StringList':([21,],[30,]),}
+_lr_goto_items = {'expressions':([0,],[1,]),'expression':([0,1,],[2,9,]),'VarAssign':([0,1,],[3,3,]),'ShowVal':([0,1,],[4,4,]),'Integer':([8,30,33,],[14,40,44,]),'SuperString':([8,22,24,25,28,],[15,32,35,37,38,]),'SuperAlph':([8,29,],[16,39,]),'StringLen':([8,30,33,],[18,18,18,]),'StringConcat':([8,22,24,25,28,46,48,],[19,19,36,19,19,51,52,]),'Alph':([8,29,43,],[20,20,49,]),'StringPrefix':([8,29,],[21,21,]),'StringPow':([8,22,24,25,28,31,46,48,],[23,23,23,23,23,41,23,23,]),'StringList':([24,],[34,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,29 +27,31 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expressions","S'",1,None,None,None),
-  ('expressions -> expressions expression Term','expressions',3,'p_expressions','parser.py',14),
-  ('expressions -> expression Term','expressions',2,'p_expressions','parser.py',15),
-  ('expression -> VarAssign','expression',1,'p_expression','parser.py',20),
-  ('expression -> ShowVal','expression',1,'p_expression','parser.py',21),
-  ('ShowVal -> Show Integer','ShowVal',2,'p_ShowVal','parser.py',26),
-  ('ShowVal -> Show StringConcat','ShowVal',2,'p_ShowVal','parser.py',27),
-  ('ShowVal -> Show Alph','ShowVal',2,'p_ShowVal','parser.py',28),
-  ('ShowVal -> Show VarName','ShowVal',2,'p_ShowVal','parser.py',29),
-  ('VarAssign -> StringType VarName Eq StringConcat','VarAssign',4,'p_VarAssign','parser.py',38),
-  ('VarAssign -> AlphType VarName Eq Alph','VarAssign',4,'p_VarAssign','parser.py',39),
-  ('VarAssign -> IntType VarName Eq Integer','VarAssign',4,'p_VarAssign','parser.py',40),
-  ('Alph -> OpenStruct StringList CloseStruct','Alph',3,'p_Alph','parser.py',47),
-  ('Alph -> OpenStruct String CloseStruct','Alph',3,'p_Alph','parser.py',48),
-  ('StringList -> StringList Splitter StringConcat','StringList',3,'p_StringList','parser.py',56),
-  ('StringList -> StringConcat Splitter StringConcat','StringList',3,'p_StringList','parser.py',57),
-  ('StringConcat -> StringConcat Concat StringPow','StringConcat',3,'p_StringConcat','parser.py',69),
-  ('StringConcat -> StringPow','StringConcat',1,'p_StringConcat','parser.py',70),
-  ('StringPow -> StringPow Pow Integer','StringPow',3,'p_StringPow','parser.py',78),
-  ('StringPow -> StringPow Pow VarName','StringPow',3,'p_StringPow','parser.py',79),
-  ('StringPow -> String','StringPow',1,'p_StringPow','parser.py',80),
-  ('Integer -> Int','Integer',1,'p_Integer','parser.py',98),
-  ('Integer -> StringLen','Integer',1,'p_Integer','parser.py',99),
-  ('StringLen -> LenOp String LenOp','StringLen',3,'p_StringLen','parser.py',109),
-  ('StringLen -> LenOp String On Alph LenOp','StringLen',5,'p_StringLen','parser.py',110),
-  ('StringLen -> LenOp String On VarName LenOp','StringLen',5,'p_StringLen','parser.py',111),
+  ('SuperAlph -> Alph','SuperAlph',1,'p_SuperAlph','alph.py',2),
+  ('SuperAlph -> StringPrefix','SuperAlph',1,'p_SuperAlph','alph.py',3),
+  ('Integer -> Int','Integer',1,'p_Integer','integers.py',5),
+  ('Integer -> StringLen','Integer',1,'p_Integer','integers.py',6),
+  ('SuperString -> StringConcat','SuperString',1,'p_SuperString','strings.py',7),
+  ('Alph -> OpenStruct StringList CloseStruct','Alph',3,'p_Alph','alph.py',8),
+  ('Alph -> OpenStruct SuperString CloseStruct','Alph',3,'p_Alph','alph.py',9),
+  ('ShowVal -> Show Integer','ShowVal',2,'p_ShowVal','instructions.py',10),
+  ('ShowVal -> Show SuperString','ShowVal',2,'p_ShowVal','instructions.py',11),
+  ('ShowVal -> Show SuperAlph','ShowVal',2,'p_ShowVal','instructions.py',12),
+  ('StringList -> StringList Splitter StringConcat','StringList',3,'p_StringList','strings.py',12),
+  ('StringList -> StringConcat Splitter StringConcat','StringList',3,'p_StringList','strings.py',13),
+  ('expressions -> expressions expression Term','expressions',3,'p_expressions','parser.py',16),
+  ('expressions -> expression Term','expressions',2,'p_expressions','parser.py',17),
+  ('expression -> VarAssign','expression',1,'p_expression','parser.py',22),
+  ('expression -> ShowVal','expression',1,'p_expression','parser.py',23),
+  ('VarAssign -> StringType VarName Eq SuperString','VarAssign',4,'p_VarAssign','instructions.py',23),
+  ('VarAssign -> AlphType VarName Eq SuperAlph','VarAssign',4,'p_VarAssign','instructions.py',24),
+  ('VarAssign -> IntType VarName Eq Integer','VarAssign',4,'p_VarAssign','instructions.py',25),
+  ('StringPrefix -> Prefix SuperString','StringPrefix',2,'p_StringPrefix','strings.py',25),
+  ('StringConcat -> StringConcat Concat StringPow','StringConcat',3,'p_StringConcat','strings.py',44),
+  ('StringConcat -> StringPow','StringConcat',1,'p_StringConcat','strings.py',45),
+  ('StringPow -> StringPow Pow Integer','StringPow',3,'p_StringPow','strings.py',53),
+  ('StringPow -> String','StringPow',1,'p_StringPow','strings.py',54),
+  ('StringLen -> LenOp SuperString LenOp','StringLen',3,'p_StringLen','strings.py',74),
+  ('StringLen -> LenOp SuperString On Alph LenOp','StringLen',5,'p_StringLen','strings.py',75),
+  ('StringLen -> LenOp SuperString On VarName LenOp','StringLen',5,'p_StringLen','strings.py',76),
 ]
