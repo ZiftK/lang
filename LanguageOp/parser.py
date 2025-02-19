@@ -18,6 +18,7 @@ precedence = (
 def p_expressions(p):
     r"""expressions : expressions expression Term
                     | expression Term"""
+
     p[0] = p[1]
 
 
@@ -30,6 +31,7 @@ def p_expression(p):
                     | Assigns
                     | Declares"""
     p[0] = p[1]
+
 
 
 def p_error(p):
@@ -47,6 +49,7 @@ if __name__ == "__main__":
     with open("./test.lang", "r") as file:
         content = file.read()
 
+    print(content)
     result = parser.parse(content, debug=False)
 
     # print(result)

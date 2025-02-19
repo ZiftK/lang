@@ -1,8 +1,4 @@
-Boolean a, b, c;
-
-a = true;
-b = false;
-
-c = a or b;
-
+Int a = 4;
+Int b = 2;
+Int c = a + b;
 show c;

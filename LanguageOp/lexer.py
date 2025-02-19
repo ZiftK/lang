@@ -49,15 +49,21 @@ tokens = [
     "NextLine",
     "LGroup",
     "RGroup",
-    "SuchThat"
+    "SuchThat",
+    "Add",
+    "Sub",
+    "Div"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
 t_Eq = r"="
+t_Add = r'\+'
+t_Sub = r'-'
 t_OpenStruct = r"{"
 t_CloseStruct = r"}"
 t_Splitter = r","
 t_Concat = r"\*"
+t_Div = r"/"
 t_Pow = r"\^"
 t_LenOp = r"\|"
 t_Term = r";"
