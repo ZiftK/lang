@@ -1,5 +1,6 @@
 def p_AlphExpression(p):
-    """AlphExpression : Alph"""
+    """AlphExpression : Alph
+    | VarValue"""
     p[0] = p[1]
 
 

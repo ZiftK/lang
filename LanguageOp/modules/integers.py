@@ -1,4 +1,4 @@
-from modules.variables import vars
+import re
 
 
 def p_IntegerExpression(p):
@@ -9,8 +9,18 @@ def p_IntegerExpression(p):
 
 
 def p_StringLen(p):
-    """StringLen : LenOp StringExpression LenOp"""
-    p[0] = len(p[2])
+    """StringLen : LenOp StringExpression LenOp
+        | LenOp StringExpression On AlphExpression LenOp"""
+
+    if len(p) == 4:
+        p[0] = len(p[2])
+        return
+
+    pattern = "(" + ")|(".join(p[4]) + ")"
+    pattern = re.compile(pattern)
+    matches = re.findall(pattern, p[2])
+
+    p[0] = len(matches)
 
 
 def p_StringPrefix(p):
