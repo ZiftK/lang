@@ -11,5 +11,7 @@ Alph alph1 = {"ab"};
 Alph al = {";"};
 
 Lang l1 = prefixof c;
+Lang l2 = suffixof c;
 
 show l1;
+show l2;

@@ -20,7 +20,8 @@ types = {
 instructions = {
     "on": "On",
     "show": "Show",
-    "prefixof": "Prefix"
+    "prefixof": "Prefix",
+    "suffixof": "Suffix"
 }
 
 reserved_words = {
