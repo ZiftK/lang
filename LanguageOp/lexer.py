@@ -40,7 +40,9 @@ tokens = [
     "LenOp",
     "VarName",
     "Term",
-    "NextLine"
+    "NextLine",
+    "LGroup",
+    "RGroup"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
@@ -52,6 +54,8 @@ t_Concat = r"\*"
 t_Pow = r"\^"
 t_LenOp = r"\|"
 t_Term = r";"
+t_LGroup = r"\("
+t_RGroup = r"\)"
 
 
 def t_VarName(t):

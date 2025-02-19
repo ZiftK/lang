@@ -1,17 +1,21 @@
 from modules.variables import vars
 
 
-def p_Integer(p):
-    r"""Integer : Int
-                | StringLen"""
+def p_IntegerExpression(p):
+    """IntExpression : Int
+        | StringLen
+        | VarValue"""
+    p[0] = p[1]
 
-    if p.slice[1].type == "Int" or p.slice[1].type == "StringLen":
-        p[0] = p[1]
-        return
 
-    if p.slice[1].type == "VarName":
-        if not p[1] in vars:
-            raise Exception(f"Undeclared varaible {p[1]}")
-        tp = vars.get(p[1])[1]
-        if not tp == "Int":
-            raise Exception(f"A integer was expected. {p[1]} is a {tp}")
+def p_StringLen(p):
+    """StringLen : LenOp StringExpression LenOp"""
+    p[0] = len(p[2])
+
+
+def p_StringPrefix(p):
+    """StringPrefix : Prefix StringExpression"""
+
+    str_val = p[2]
+
+    p[0] = set(str_val[0:n] for n in range(len(str_val) + 1))

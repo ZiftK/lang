@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'expressionsleftConcatrightPowAlphType CloseStruct Concat Eq Int IntType LangType LenOp NextLine On OpenStruct Pow Prefix Show Splitter String StringType Term VarNameSuperAlph : Alph\n                | StringPrefixInteger : Int\n                | StringLenSuperString : StringConcatAlph : OpenStruct StringList CloseStruct\n            | OpenStruct SuperString CloseStructShowVal : Show Integer\n                | Show SuperString\n                | Show SuperAlphStringList : StringList Splitter StringConcat\n                    | StringConcat Splitter StringConcatexpressions : expressions expression Term\n                    | expression Termexpression : VarAssign\n                    | ShowValVarAssign :  StringType VarName Eq SuperString\n                    | AlphType VarName Eq SuperAlph\n                    | IntType VarName Eq IntegerStringPrefix : Prefix SuperStringStringConcat : StringConcat Concat StringPow\n                    | StringPowStringPow : StringPow Pow Integer\n                | StringStringLen : LenOp SuperString LenOp\n                | LenOp SuperString On Alph LenOp\n                | LenOp SuperString On VarName LenOp'
+_lr_signature = 'expressionsleftConcatrightPowAlphType CloseStruct Concat Eq Int IntType LGroup LangType LenOp NextLine On OpenStruct Pow Prefix RGroup Show Splitter String StringType Term VarNameAlphExpression : AlphIntExpression : Int\n        | StringLen\n        | VarValueVarValue : VarNameAlph : OpenStruct StringList CloseStruct\n            | OpenStruct StringExpression CloseStructStringExpression : StringConcatStringLen : LenOp StringExpression LenOpStringConcat : StringConcat Concat StringPow\n                    | StringPowStringList : StringList Splitter StringExpression\n                    | StringExpression Splitter StringExpressionexpressions : expressions expression Term\n                    | expression TermStringPrefix : Prefix StringExpressionStringPow : StringPow Pow IntExpression\n                | StringGroup expression : StringExpression\n                    | IntExpression\n                    | AlphExpression\n                    | ShowVal\n                    | Assigns\n                    | DeclaresShowVal : Show IntExpression\n                | Show StringExpressionStringGroup : LGroup StringExpression RGroup\n                    | String\n                    | VarValueDeclares : StringDeclare\n        | IntDeclare\n        | AlphDeclareAssigns : StringAssign\n        | IntAssign\n        | AlphAssignStringDeclare : StringType VarName\n                | StringType VarName Eq StringExpression\n                | StringDeclare Splitter VarName\n                | StringDeclare Splitter VarName Eq StringExpressionStringAssign : VarName Eq StringExpressionIntDeclare : IntType VarName\n        | IntType VarName Eq IntExpression\n        | IntDeclare Splitter VarName\n        | IntDeclare Splitter VarName Eq IntExpressionIntAssign : VarName Eq IntExpressionAlphDeclare : AlphType VarName\n        | AlphDeclare VarName Eq AlphExpression\n        | AlphDeclare Splitter VarName\n        | AlphDeclare Splitter VarName Eq AlphExpressionAlphAssign : VarName Eq AlphExpression'
     
-_lr_action_items = {'StringType':([0,1,10,27,],[5,5,-14,-13,]),'AlphType':([0,1,10,27,],[6,6,-14,-13,]),'IntType':([0,1,10,27,],[7,7,-14,-13,]),'Show':([0,1,10,27,],[8,8,-14,-13,]),'$end':([1,10,27,],[0,-14,-13,]),'Term':([2,3,4,9,14,15,16,17,18,19,20,21,23,26,37,38,39,40,41,42,44,45,47,53,54,],[10,-15,-16,27,-8,-9,-10,-3,-4,-5,-1,-2,-22,-24,-20,-17,-18,-19,-21,-25,-23,-6,-7,-26,-27,]),'VarName':([5,6,7,43,],[11,12,13,50,]),'Int':([8,30,33,],[17,17,17,]),'LenOp':([8,17,18,19,23,26,30,32,33,41,42,44,45,47,49,50,53,54,],[22,-3,-4,-5,-22,-24,22,42,22,-21,-25,-23,-6,-7,53,54,-26,-27,]),'OpenStruct':([8,29,43,],[24,24,24,]),'Prefix':([8,29,],[25,25,]),'String':([8,22,24,25,28,31,46,48,],[26,26,26,26,26,26,26,26,]),'Eq':([11,12,13,],[28,29,30,]),'Pow':([17,18,23,26,41,42,44,53,54,],[-3,-4,33,-24,33,-25,-23,-26,-27,]),'Concat':([17,18,19,23,26,36,41,42,44,51,52,53,54,],[-3,-4,31,-22,-24,31,-21,-25,-23,31,31,-26,-27,]),'On':([17,18,19,23,26,32,41,42,44,53,54,],[-3,-4,-5,-22,-24,43,-21,-25,-23,-26,-27,]),'Splitter':([17,18,23,26,34,36,41,42,44,51,52,53,54,],[-3,-4,-22,-24,46,48,-21,-25,-23,-11,-12,-26,-27,]),'CloseStruct':([17,18,23,26,34,35,36,41,42,44,51,52,53,54,],[-3,-4,-22,-24,45,47,-5,-21,-25,-23,-11,-12,-26,-27,]),}
+_lr_action_items = {'Int':([0,1,14,32,41,44,51,68,71,],[10,10,10,-15,10,10,-14,10,10,]),'Show':([0,1,32,51,],[14,14,-15,-14,]),'LenOp':([0,1,9,10,11,14,21,28,30,32,36,41,42,43,44,51,52,57,58,59,68,69,71,],[22,22,-8,-2,-3,22,-11,-18,-28,-15,-5,22,59,-29,22,-14,-10,-17,-4,-9,22,-27,22,]),'VarName':([0,1,13,14,20,22,24,25,26,27,29,32,33,37,38,40,41,44,49,51,56,63,64,65,66,67,68,70,71,72,80,],[23,23,-1,36,39,36,36,47,48,49,36,-15,36,53,54,56,36,36,-46,-14,-48,-6,36,-7,36,36,36,36,36,-47,-49,]),'OpenStruct':([0,1,32,44,51,55,73,],[24,24,-15,24,-14,24,24,]),'StringType':([0,1,32,51,],[25,25,-15,-14,]),'IntType':([0,1,32,51,],[26,26,-15,-14,]),'AlphType':([0,1,32,51,],[27,27,-15,-14,]),'LGroup':([0,1,14,22,24,29,32,33,44,51,64,66,67,70,],[29,29,29,29,29,29,-15,29,29,-14,29,29,29,29,]),'String':([0,1,14,22,24,29,32,33,44,51,64,66,67,70,],[30,30,30,30,30,30,-15,30,30,-14,30,30,30,30,]),'$end':([1,32,51,],[0,-15,-14,]),'Term':([2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,23,28,30,31,34,35,36,43,47,48,49,52,53,54,56,57,58,59,60,61,62,63,65,69,72,76,77,78,79,80,],[32,-19,-20,-21,-22,-23,-24,-8,-2,-3,-4,-1,-33,-34,-35,-30,-31,-32,-11,-5,-18,-28,51,-25,-26,-5,-29,-36,-41,-46,-10,-38,-43,-48,-17,-4,-9,-40,-45,-50,-6,-7,-27,-47,-37,-42,-39,-44,-49,]),'CloseStruct':([9,10,11,21,28,30,36,43,45,46,52,57,58,59,69,74,75,],[-8,-2,-3,-11,-18,-28,-5,-29,63,65,-10,-17,-4,-9,-27,-12,-13,]),'Splitter':([9,10,11,13,18,19,20,21,28,30,36,43,45,46,47,48,49,52,53,54,56,57,58,59,63,65,69,72,74,75,76,77,78,79,80,],[-8,-2,-3,-1,37,38,40,-11,-18,-28,-5,-29,64,66,-36,-41,-46,-10,-38,-43,-48,-17,-4,-9,-6,-7,-27,-47,-12,-13,-37,-42,-39,-44,-49,]),'RGroup':([9,10,11,21,28,30,36,43,50,52,57,58,59,69,],[-8,-2,-3,-11,-18,-28,-5,-29,69,-10,-17,-4,-9,-27,]),'Concat':([9,10,11,12,21,23,28,30,36,43,52,57,58,59,69,],[33,-2,-3,-29,-11,-5,-18,-28,-5,-29,-10,-17,-4,-9,-27,]),'Pow':([10,11,12,21,23,28,30,36,43,52,57,58,59,69,],[-2,-3,-29,41,-5,-18,-28,-5,-29,41,-17,-4,-9,-27,]),'Eq':([23,39,47,48,53,54,56,],[44,55,67,68,70,71,73,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expressions':([0,],[1,]),'expression':([0,1,],[2,9,]),'VarAssign':([0,1,],[3,3,]),'ShowVal':([0,1,],[4,4,]),'Integer':([8,30,33,],[14,40,44,]),'SuperString':([8,22,24,25,28,],[15,32,35,37,38,]),'SuperAlph':([8,29,],[16,39,]),'StringLen':([8,30,33,],[18,18,18,]),'StringConcat':([8,22,24,25,28,46,48,],[19,19,36,19,19,51,52,]),'Alph':([8,29,43,],[20,20,49,]),'StringPrefix':([8,29,],[21,21,]),'StringPow':([8,22,24,25,28,31,46,48,],[23,23,23,23,23,41,23,23,]),'StringList':([24,],[34,]),}
+_lr_goto_items = {'expressions':([0,],[1,]),'expression':([0,1,],[2,31,]),'StringExpression':([0,1,14,22,24,29,44,64,66,67,70,],[3,3,35,42,46,50,60,74,75,76,78,]),'IntExpression':([0,1,14,41,44,68,71,],[4,4,34,57,61,77,79,]),'AlphExpression':([0,1,44,55,73,],[5,5,62,72,80,]),'ShowVal':([0,1,],[6,6,]),'Assigns':([0,1,],[7,7,]),'Declares':([0,1,],[8,8,]),'StringConcat':([0,1,14,22,24,29,44,64,66,67,70,],[9,9,9,9,9,9,9,9,9,9,9,]),'StringLen':([0,1,14,41,44,68,71,],[11,11,11,11,11,11,11,]),'VarValue':([0,1,14,22,24,29,33,41,44,64,66,67,68,70,71,],[12,12,12,43,43,43,43,58,12,43,43,43,58,43,58,]),'Alph':([0,1,44,55,73,],[13,13,13,13,13,]),'StringAssign':([0,1,],[15,15,]),'IntAssign':([0,1,],[16,16,]),'AlphAssign':([0,1,],[17,17,]),'StringDeclare':([0,1,],[18,18,]),'IntDeclare':([0,1,],[19,19,]),'AlphDeclare':([0,1,],[20,20,]),'StringPow':([0,1,14,22,24,29,33,44,64,66,67,70,],[21,21,21,21,21,21,52,21,21,21,21,21,]),'StringGroup':([0,1,14,22,24,29,33,44,64,66,67,70,],[28,28,28,28,28,28,28,28,28,28,28,28,]),'StringList':([24,],[45,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,31 +27,54 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expressions","S'",1,None,None,None),
-  ('SuperAlph -> Alph','SuperAlph',1,'p_SuperAlph','alph.py',2),
-  ('SuperAlph -> StringPrefix','SuperAlph',1,'p_SuperAlph','alph.py',3),
-  ('Integer -> Int','Integer',1,'p_Integer','integers.py',5),
-  ('Integer -> StringLen','Integer',1,'p_Integer','integers.py',6),
-  ('SuperString -> StringConcat','SuperString',1,'p_SuperString','strings.py',7),
-  ('Alph -> OpenStruct StringList CloseStruct','Alph',3,'p_Alph','alph.py',8),
-  ('Alph -> OpenStruct SuperString CloseStruct','Alph',3,'p_Alph','alph.py',9),
-  ('ShowVal -> Show Integer','ShowVal',2,'p_ShowVal','instructions.py',10),
-  ('ShowVal -> Show SuperString','ShowVal',2,'p_ShowVal','instructions.py',11),
-  ('ShowVal -> Show SuperAlph','ShowVal',2,'p_ShowVal','instructions.py',12),
-  ('StringList -> StringList Splitter StringConcat','StringList',3,'p_StringList','strings.py',12),
-  ('StringList -> StringConcat Splitter StringConcat','StringList',3,'p_StringList','strings.py',13),
-  ('expressions -> expressions expression Term','expressions',3,'p_expressions','parser.py',16),
-  ('expressions -> expression Term','expressions',2,'p_expressions','parser.py',17),
-  ('expression -> VarAssign','expression',1,'p_expression','parser.py',22),
-  ('expression -> ShowVal','expression',1,'p_expression','parser.py',23),
-  ('VarAssign -> StringType VarName Eq SuperString','VarAssign',4,'p_VarAssign','instructions.py',23),
-  ('VarAssign -> AlphType VarName Eq SuperAlph','VarAssign',4,'p_VarAssign','instructions.py',24),
-  ('VarAssign -> IntType VarName Eq Integer','VarAssign',4,'p_VarAssign','instructions.py',25),
-  ('StringPrefix -> Prefix SuperString','StringPrefix',2,'p_StringPrefix','strings.py',25),
-  ('StringConcat -> StringConcat Concat StringPow','StringConcat',3,'p_StringConcat','strings.py',44),
-  ('StringConcat -> StringPow','StringConcat',1,'p_StringConcat','strings.py',45),
-  ('StringPow -> StringPow Pow Integer','StringPow',3,'p_StringPow','strings.py',53),
-  ('StringPow -> String','StringPow',1,'p_StringPow','strings.py',54),
-  ('StringLen -> LenOp SuperString LenOp','StringLen',3,'p_StringLen','strings.py',74),
-  ('StringLen -> LenOp SuperString On Alph LenOp','StringLen',5,'p_StringLen','strings.py',75),
-  ('StringLen -> LenOp SuperString On VarName LenOp','StringLen',5,'p_StringLen','strings.py',76),
+  ('AlphExpression -> Alph','AlphExpression',1,'p_AlphExpression','alph.py',2),
+  ('IntExpression -> Int','IntExpression',1,'p_IntegerExpression','integers.py',5),
+  ('IntExpression -> StringLen','IntExpression',1,'p_IntegerExpression','integers.py',6),
+  ('IntExpression -> VarValue','IntExpression',1,'p_IntegerExpression','integers.py',7),
+  ('VarValue -> VarName','VarValue',1,'p_VarValue','variables.py',5),
+  ('Alph -> OpenStruct StringList CloseStruct','Alph',3,'p_Alph','alph.py',7),
+  ('Alph -> OpenStruct StringExpression CloseStruct','Alph',3,'p_Alph','alph.py',8),
+  ('StringExpression -> StringConcat','StringExpression',1,'p_StringExpression','strings.py',7),
+  ('StringLen -> LenOp StringExpression LenOp','StringLen',3,'p_StringLen','integers.py',12),
+  ('StringConcat -> StringConcat Concat StringPow','StringConcat',3,'p_StringConcat','strings.py',12),
+  ('StringConcat -> StringPow','StringConcat',1,'p_StringConcat','strings.py',13),
+  ('StringList -> StringList Splitter StringExpression','StringList',3,'p_StringList','alph.py',16),
+  ('StringList -> StringExpression Splitter StringExpression','StringList',3,'p_StringList','alph.py',17),
+  ('expressions -> expressions expression Term','expressions',3,'p_expressions','parser.py',17),
+  ('expressions -> expression Term','expressions',2,'p_expressions','parser.py',18),
+  ('StringPrefix -> Prefix StringExpression','StringPrefix',2,'p_StringPrefix','integers.py',17),
+  ('StringPow -> StringPow Pow IntExpression','StringPow',3,'p_StringPow','strings.py',21),
+  ('StringPow -> StringGroup','StringPow',1,'p_StringPow','strings.py',22),
+  ('expression -> StringExpression','expression',1,'p_expression','parser.py',23),
+  ('expression -> IntExpression','expression',1,'p_expression','parser.py',24),
+  ('expression -> AlphExpression','expression',1,'p_expression','parser.py',25),
+  ('expression -> ShowVal','expression',1,'p_expression','parser.py',26),
+  ('expression -> Assigns','expression',1,'p_expression','parser.py',27),
+  ('expression -> Declares','expression',1,'p_expression','parser.py',28),
+  ('ShowVal -> Show IntExpression','ShowVal',2,'p_ShowVal','instructions.py',27),
+  ('ShowVal -> Show StringExpression','ShowVal',2,'p_ShowVal','instructions.py',28),
+  ('StringGroup -> LGroup StringExpression RGroup','StringGroup',3,'p_StringGroup','strings.py',31),
+  ('StringGroup -> String','StringGroup',1,'p_StringGroup','strings.py',32),
+  ('StringGroup -> VarValue','StringGroup',1,'p_StringGroup','strings.py',33),
+  ('Declares -> StringDeclare','Declares',1,'p_Declares','instructions.py',39),
+  ('Declares -> IntDeclare','Declares',1,'p_Declares','instructions.py',40),
+  ('Declares -> AlphDeclare','Declares',1,'p_Declares','instructions.py',41),
+  ('Assigns -> StringAssign','Assigns',1,'p_Assigns','instructions.py',45),
+  ('Assigns -> IntAssign','Assigns',1,'p_Assigns','instructions.py',46),
+  ('Assigns -> AlphAssign','Assigns',1,'p_Assigns','instructions.py',47),
+  ('StringDeclare -> StringType VarName','StringDeclare',2,'p_StringDeclare','instructions.py',52),
+  ('StringDeclare -> StringType VarName Eq StringExpression','StringDeclare',4,'p_StringDeclare','instructions.py',53),
+  ('StringDeclare -> StringDeclare Splitter VarName','StringDeclare',3,'p_StringDeclare','instructions.py',54),
+  ('StringDeclare -> StringDeclare Splitter VarName Eq StringExpression','StringDeclare',5,'p_StringDeclare','instructions.py',55),
+  ('StringAssign -> VarName Eq StringExpression','StringAssign',3,'p_StringAssign','instructions.py',70),
+  ('IntDeclare -> IntType VarName','IntDeclare',2,'p_IntDeclare','instructions.py',78),
+  ('IntDeclare -> IntType VarName Eq IntExpression','IntDeclare',4,'p_IntDeclare','instructions.py',79),
+  ('IntDeclare -> IntDeclare Splitter VarName','IntDeclare',3,'p_IntDeclare','instructions.py',80),
+  ('IntDeclare -> IntDeclare Splitter VarName Eq IntExpression','IntDeclare',5,'p_IntDeclare','instructions.py',81),
+  ('IntAssign -> VarName Eq IntExpression','IntAssign',3,'p_IntAssign','instructions.py',95),
+  ('AlphDeclare -> AlphType VarName','AlphDeclare',2,'p_AlphDeclare','instructions.py',103),
+  ('AlphDeclare -> AlphDeclare VarName Eq AlphExpression','AlphDeclare',4,'p_AlphDeclare','instructions.py',104),
+  ('AlphDeclare -> AlphDeclare Splitter VarName','AlphDeclare',3,'p_AlphDeclare','instructions.py',105),
+  ('AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression','AlphDeclare',5,'p_AlphDeclare','instructions.py',106),
+  ('AlphAssign -> VarName Eq AlphExpression','AlphAssign',3,'p_AlphAssign','instructions.py',120),
 ]

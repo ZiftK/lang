@@ -4,6 +4,7 @@ from modules.strings import *
 from modules.integers import *
 from modules.alph import *
 from modules.instructions import *
+from modules.variables import *
 
 
 precedence = (
@@ -19,14 +20,19 @@ def p_expressions(p):
 
 
 def p_expression(p):
-    r"""expression : VarAssign
-                    | ShowVal"""
+    r"""expression : StringExpression
+                    | IntExpression
+                    | AlphExpression
+                    | ShowVal
+                    | Assigns
+                    | Declares"""
     p[0] = p[1]
 
 
 def p_error(p):
     if p:
         print(f"Error de sintaxis en '{p.value}' (Línea {p.lineno})")
+        print(f"Token tipo [{p.type}] inesperado")
     else:
         print("Error de sintaxis al final del archivo")
 
@@ -40,5 +46,6 @@ if __name__ == "__main__":
 
     result = parser.parse(content, debug=False)
 
+    # print(result)
     # print(f"{vars=}")
 

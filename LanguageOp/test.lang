@@ -1,6 +1,8 @@
-String b = "abcd"*" ddd"^2 ;
+String a,b,c;
+a = "a";
+b = "b";
+c = a*b;
 
-Alph a1 = prefixof b;
+Int d = 2;
 
-show b;
-show a1;
+show "Resultado: "*c^d;
