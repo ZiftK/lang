@@ -6,3 +6,7 @@ c = a*b;
 Int d = 2;
 
 show "Resultado: "*c^d;
+
+Alph alph1 = {"a", "b", "c"}
+
+show |"ab" on alph1|

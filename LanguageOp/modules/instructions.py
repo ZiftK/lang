@@ -101,7 +101,7 @@ def p_IntAssign(p):
 
 def p_AlphDeclare(p):
     """AlphDeclare : AlphType VarName
-        | AlphDeclare VarName Eq AlphExpression
+        | AlphType VarName Eq AlphExpression
         | AlphDeclare Splitter VarName
         | AlphDeclare Splitter VarName Eq AlphExpression"""
     if len(p) <= 4:
