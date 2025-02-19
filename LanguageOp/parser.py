@@ -5,6 +5,7 @@ from modules.integers import *
 from modules.alph import *
 from modules.instructions import *
 from modules.variables import *
+from modules.lang import *
 
 
 precedence = (
@@ -23,6 +24,7 @@ def p_expression(p):
     r"""expression : StringExpression
                     | IntExpression
                     | AlphExpression
+                    | LangExpression
                     | ShowVal
                     | Assigns
                     | Declares"""

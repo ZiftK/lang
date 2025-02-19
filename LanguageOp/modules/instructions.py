@@ -38,13 +38,16 @@ def p_ShowVal(p):
 def p_Declares(p):
     """Declares : StringDeclare
         | IntDeclare
-        | AlphDeclare"""
+        | AlphDeclare
+        | LangDeclare"""
     p[0] = p[1]
-    
+
+
 def p_Assigns(p):
     """Assigns : StringAssign
         | IntAssign
-        | AlphAssign"""
+        | AlphAssign
+        | LangAssign"""
     p[0] = p[1]
 
 
@@ -124,3 +127,26 @@ def p_AlphAssign(p):
     p[0] = p[3]
 
 
+def p_LangDeclare(p):
+    """LangDeclare : LangType VarName
+        | LangType VarName Eq LangExpression
+        | LangDeclare Splitter VarName
+        | LangDeclare Splitter VarName Eq LangExpression"""
+    if len(p) <= 4:
+        declare_var(name=p[len(p) - 1], type="Alph")
+
+    if len(p) == 5:
+        declare_var(name=p[2], type="String", value=p[4])
+
+    if len(p) == 6:
+        declare_var(name=p[3], type="Alph", value=p[5])
+
+    p[0] = p[2]
+
+
+def p_LangAssign(p):
+    """LangAssign : VarName Eq LangExpression"""
+
+    assign_var(name=p[1], value=p[3], type="Alph")
+
+    p[0] = p[3]

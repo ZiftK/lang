@@ -10,4 +10,6 @@ show "Resultado: "*c^d;
 Alph alph1 = {"ab"};
 Alph al = {";"};
 
-show |"ab" on al|;
+Lang l1 = prefixof c;
+
+show l1;
