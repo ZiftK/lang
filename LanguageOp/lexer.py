@@ -55,7 +55,8 @@ tokens = [
     "LGroup",
     "RGroup",
     "SuchThat",
-    "KleeneC"
+    "KleeneC",
+    "PositiveC"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
@@ -71,6 +72,7 @@ t_LGroup = r"\("
 t_RGroup = r"\)"
 t_SuchThat = r":"
 t_KleeneC = r"\*\*"
+t_PositiveC = r"\*\+"
 
 
 def t_VarName(t):

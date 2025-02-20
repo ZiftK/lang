@@ -1,13 +1,22 @@
 Alph alp1 = {"a", "b"};
 Alph alp2 = {"cd"};
+
+show "Alp2: ";
 show alp2;
+show "";
 
 Alph alp3 = alp1*alp2;
 
+show "Alp3: ";
 show alp3;
+show "";
 
-Lang l1 = alp3**2;
+show "Alp3^2: ";
 show alp3^2;
+show "";
 
 
+Lang l1 = alp3*+2;
+
+l1 = l1*+3;
 show l1;

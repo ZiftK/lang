@@ -6,6 +6,9 @@ def p_LangExpression(p):
     """LangExpression : StringPrefix
     | StringSuffix
     | AlphKleeneC
+    | AlphPositiveC
+    | LangKleeneC
+    | LangPositiveC
     | VLang"""
     p[0] = p[1]
 
@@ -13,7 +16,25 @@ def p_LangExpression(p):
 def p_AlphKleeneC(p):
     """AlphKleeneC : AlphExpression KleeneC IntExpression"""
     alph: Alph = p[1]
-    p[0] = alph.calc_kleene_clau(p[3])
+    p[0] = alph.get_kleene_clau(p[3])
+
+
+def p_AlphPositiveC(p):
+    """AlphPositiveC : AlphExpression PositiveC IntExpression"""
+    alph: Alph = p[1]
+    p[0] = alph.get_positive_clau(p[3])
+
+
+def p_LangKleeneC(p):
+    """LangKleeneC : LangExpression KleeneC IntExpression"""
+    lang: Lang = p[1]
+    p[0] = lang.get_kleene_clau(p[3])
+
+
+def p_LangPositiveC(p):
+    """LangPositiveC : LangExpression PositiveC IntExpression"""
+    lang: Lang = p[1]
+    p[0] = lang.get_positive_clau(p[3])
 
 
 def p_StringPrefix(p):

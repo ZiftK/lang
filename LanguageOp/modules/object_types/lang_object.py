@@ -13,13 +13,32 @@ class Lang:
     def get_content(self) -> set:
         return self._content
 
-    def get_flat_kleene_clau(self):
+    def _get_flat_kleene_clau(self):
         return list(chain(*self.__kleene_clau))
 
-    def calc_kleene_clau(self, steps: int = 1):
+    def get_kleene_clau(self, steps: int):
+        if len(self.__kleene_clau) >= steps:
+            flat_list = self._get_flat_kleene_clau()[:steps]
+            return Lang(flat_list)
+
+        steps -= len(self.__kleene_clau)
+        return self.calc_kleene_clau(steps)
+
+    def get_positive_clau(self, steps: int):
+        steps += 1
+        if len(self.__kleene_clau) >= steps:
+            flat_list = self._get_flat_kleene_clau()[1:steps]
+            return Lang(flat_list)
+
+        steps -= len(self.__kleene_clau)
+        return self.calc_kleene_clau(steps, include_lambda=False)
+
+    def calc_kleene_clau(self, steps: int, include_lambda=True):
 
         if steps == 0:
-            return Lang(self.get_flat_kleene_clau())
+            result = self._get_flat_kleene_clau()
+            result = result if include_lambda else result[1:]
+            return Lang(result)
 
         current = self.__kleene_clau[-1]
 
@@ -33,7 +52,7 @@ class Lang:
 
         self.__kleene_clau.append(aux)
 
-        return self.calc_kleene_clau(steps - 1)
+        return self.calc_kleene_clau(steps - 1, include_lambda=include_lambda)
 
     def __str__(self):
         cont = list(self._content)
