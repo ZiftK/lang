@@ -1,3 +1,5 @@
+import copy
+
 from ply import lex
 
 from modules.variables import vars
@@ -29,9 +31,12 @@ instructions = {
     "and": "And"
 }
 
+var_types = {"T" + x: "V" + v.replace("Type", "") for x, v in types.items()}
+
 reserved_words = {
     **types,
-    **instructions
+    **instructions,
+    **var_types
 }
 
 tokens = [
@@ -49,7 +54,8 @@ tokens = [
     "NextLine",
     "LGroup",
     "RGroup",
-    "SuchThat"
+    "SuchThat",
+    "KleeneC"
 ] + list(reserved_words.values())
 
 t_ignore = r"[ ]+"
@@ -64,15 +70,18 @@ t_Term = r";"
 t_LGroup = r"\("
 t_RGroup = r"\)"
 t_SuchThat = r":"
+t_KleeneC = r"\*\*"
 
 
 def t_VarName(t):
     r"""[_A-Za-z][_A-Za-z0-9]*"""
     val: str = t.value
 
+    if val in vars:
+        t.value = vars.get(val).get("value")
+        t.type = vars.get(val).get("type")
     if val in reserved_words:
         t.type = reserved_words.get(val)
-
 
     return t
 

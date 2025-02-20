@@ -1,11 +1,20 @@
+from modules.object_types.lang_object import Lang
+from modules.object_types.alph_object import Alph
+
+
 def p_LangExpression(p):
     """LangExpression : StringPrefix
-    | StringSuffix"""
+    | StringSuffix
+    | AlphKleeneC
+    | VLang"""
     p[0] = p[1]
 
 
-def p_Lang(p):
-    """Lang :  OpenStruct VarName SuchThat """
+def p_AlphKleeneC(p):
+    """AlphKleeneC : AlphExpression KleeneC IntExpression"""
+    alph: Alph = p[1]
+    p[0] = alph.calc_kleene_clau(p[3])
+
 
 def p_StringPrefix(p):
     """StringPrefix : Prefix StringExpression"""

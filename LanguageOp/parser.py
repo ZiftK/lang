@@ -1,11 +1,11 @@
 from ply import yacc
 from lexer import tokens
-from modules.strings import *
 from modules.integers import *
 from modules.alph import *
 from modules.instructions import *
 from modules.variables import *
 from modules.lang import *
+from modules.strings import *
 from modules.boolean import *
 
 
@@ -22,9 +22,9 @@ def p_expressions(p):
 
 
 def p_expression(p):
-    r"""expression : StringExpression
-                    | IntExpression
+    r"""expression : IntExpression
                     | AlphExpression
+                    | StringExpression
                     | LangExpression
                     | ShowVal
                     | Assigns
@@ -50,5 +50,5 @@ if __name__ == "__main__":
     result = parser.parse(content, debug=False)
 
     # print(result)
-    # print(f"{vars=}")
+    print(f"{vars=}")
 

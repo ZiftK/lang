@@ -3,928 +3,1044 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     NextLine
+    SuchThat
 
 Grammar
 
 Rule 0     S' -> expressions
-Rule 1     AlphExpression -> Alph
-Rule 2     AlphExpression -> VarValue
-Rule 3     BooleanExpression -> BooleanOr
-Rule 4     LangExpression -> StringPrefix
-Rule 5     LangExpression -> StringSuffix
-Rule 6     IntExpression -> Int
-Rule 7     IntExpression -> StringLen
-Rule 8     IntExpression -> VarValue
-Rule 9     VarValue -> VarName
+Rule 1     BooleanExpression -> BooleanOr
+Rule 2     AlphExpression -> AlphConcat
+Rule 3     IntExpression -> Int
+Rule 4     IntExpression -> StringLen
+Rule 5     IntExpression -> VInt
+Rule 6     LangExpression -> StringPrefix
+Rule 7     LangExpression -> StringSuffix
+Rule 8     LangExpression -> AlphKleeneC
+Rule 9     LangExpression -> VLang
 Rule 10    BooleanOr -> BooleanAnd Or BooleanAnd
 Rule 11    BooleanOr -> BooleanAnd
 Rule 12    StringExpression -> StringConcat
-Rule 13    Alph -> OpenStruct StringList CloseStruct
-Rule 14    Alph -> OpenStruct StringExpression CloseStruct
-Rule 15    Lang -> OpenStruct VarName SuchThat
-Rule 16    StringPrefix -> Prefix StringExpression
-Rule 17    StringLen -> LenOp StringExpression LenOp
-Rule 18    StringLen -> LenOp StringExpression On AlphExpression LenOp
-Rule 19    StringConcat -> StringConcat Concat StringPow
-Rule 20    StringConcat -> StringPow
-Rule 21    StringList -> StringList Splitter StringExpression
-Rule 22    StringList -> StringExpression Splitter StringExpression
-Rule 23    expressions -> expressions expression Term
-Rule 24    expressions -> expression Term
-Rule 25    BooleanAnd -> BooleanAnd And BooleanAnd
-Rule 26    BooleanAnd -> BooleanGroup
-Rule 27    StringSuffix -> Suffix StringExpression
-Rule 28    StringPow -> StringPow Pow IntExpression
-Rule 29    StringPow -> StringGroup
-Rule 30    expression -> StringExpression
-Rule 31    expression -> IntExpression
-Rule 32    expression -> AlphExpression
-Rule 33    expression -> LangExpression
-Rule 34    expression -> ShowVal
-Rule 35    expression -> Assigns
-Rule 36    expression -> Declares
-Rule 37    ShowVal -> Show expression
+Rule 13    StringConcat -> StringConcat Concat StringPow
+Rule 14    StringConcat -> StringPow
+Rule 15    StringLen -> LenOp StringExpression LenOp
+Rule 16    StringLen -> LenOp StringExpression On AlphExpression LenOp
+Rule 17    AlphConcat -> AlphConcat Concat AlphPow
+Rule 18    AlphConcat -> AlphPow
+Rule 19    AlphKleeneC -> AlphExpression KleeneC IntExpression
+Rule 20    expressions -> expressions expression Term
+Rule 21    expressions -> expression Term
+Rule 22    BooleanAnd -> BooleanAnd And BooleanAnd
+Rule 23    BooleanAnd -> BooleanGroup
+Rule 24    StringPrefix -> Prefix StringExpression
+Rule 25    StringPow -> StringPow Pow IntExpression
+Rule 26    StringPow -> StringGroup
+Rule 27    expression -> IntExpression
+Rule 28    expression -> AlphExpression
+Rule 29    expression -> StringExpression
+Rule 30    expression -> LangExpression
+Rule 31    expression -> ShowVal
+Rule 32    expression -> Assigns
+Rule 33    expression -> Declares
+Rule 34    AlphPow -> AlphPow Pow IntExpression
+Rule 35    AlphPow -> AlphGroup
+Rule 36    ShowVal -> Show expression
+Rule 37    StringSuffix -> Suffix StringExpression
 Rule 38    BooleanGroup -> LGroup BooleanExpression RGroup
 Rule 39    BooleanGroup -> Boolean
-Rule 40    BooleanGroup -> VarValue
+Rule 40    BooleanGroup -> VBoolean
 Rule 41    StringGroup -> LGroup StringExpression RGroup
 Rule 42    StringGroup -> String
-Rule 43    StringGroup -> VarValue
+Rule 43    StringGroup -> VString
 Rule 44    Declares -> StringDeclare
 Rule 45    Declares -> IntDeclare
 Rule 46    Declares -> AlphDeclare
 Rule 47    Declares -> LangDeclare
 Rule 48    Declares -> BooleanDeclare
-Rule 49    Boolean -> True
-Rule 50    Boolean -> False
-Rule 51    Assigns -> StringAssign
-Rule 52    Assigns -> IntAssign
-Rule 53    Assigns -> AlphAssign
-Rule 54    Assigns -> LangAssign
-Rule 55    Assigns -> BooleanAssign
-Rule 56    StringDeclare -> StringType VarName
-Rule 57    StringDeclare -> StringType VarName Eq StringExpression
-Rule 58    StringDeclare -> StringDeclare Splitter VarName
-Rule 59    StringDeclare -> StringDeclare Splitter VarName Eq StringExpression
-Rule 60    StringAssign -> VarName Eq StringExpression
-Rule 61    IntDeclare -> IntType VarName
-Rule 62    IntDeclare -> IntType VarName Eq IntExpression
-Rule 63    IntDeclare -> IntDeclare Splitter VarName
-Rule 64    IntDeclare -> IntDeclare Splitter VarName Eq IntExpression
-Rule 65    IntAssign -> VarName Eq IntExpression
-Rule 66    AlphDeclare -> AlphType VarName
-Rule 67    AlphDeclare -> AlphType VarName Eq AlphExpression
-Rule 68    AlphDeclare -> AlphDeclare Splitter VarName
-Rule 69    AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression
-Rule 70    AlphAssign -> VarName Eq AlphExpression
-Rule 71    LangDeclare -> LangType VarName
-Rule 72    LangDeclare -> LangType VarName Eq LangExpression
-Rule 73    LangDeclare -> LangDeclare Splitter VarName
-Rule 74    LangDeclare -> LangDeclare Splitter VarName Eq LangExpression
-Rule 75    LangAssign -> VarName Eq LangExpression
-Rule 76    BooleanDeclare -> BooleanType VarName
-Rule 77    BooleanDeclare -> BooleanType VarName Eq BooleanExpression
-Rule 78    BooleanDeclare -> BooleanDeclare Splitter VarName
-Rule 79    BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression
-Rule 80    BooleanAssign -> VarName Eq BooleanExpression
+Rule 49    AlphGroup -> LGroup AlphExpression RGroup
+Rule 50    AlphGroup -> Alph
+Rule 51    AlphGroup -> VAlph
+Rule 52    Assigns -> StringAssign
+Rule 53    Assigns -> IntAssign
+Rule 54    Assigns -> AlphAssign
+Rule 55    Assigns -> LangAssign
+Rule 56    Assigns -> BooleanAssign
+Rule 57    Boolean -> True
+Rule 58    Boolean -> False
+Rule 59    Alph -> OpenStruct StringList CloseStruct
+Rule 60    Alph -> OpenStruct StringExpression CloseStruct
+Rule 61    StringDeclare -> StringType VarName
+Rule 62    StringDeclare -> StringType VarName Eq StringExpression
+Rule 63    StringDeclare -> StringDeclare Splitter VarName
+Rule 64    StringDeclare -> StringDeclare Splitter VarName Eq StringExpression
+Rule 65    StringList -> StringList Splitter StringExpression
+Rule 66    StringList -> StringExpression Splitter StringExpression
+Rule 67    StringAssign -> VarName Eq StringExpression
+Rule 68    IntDeclare -> IntType VarName
+Rule 69    IntDeclare -> IntType VarName Eq IntExpression
+Rule 70    IntDeclare -> IntDeclare Splitter VarName
+Rule 71    IntDeclare -> IntDeclare Splitter VarName Eq IntExpression
+Rule 72    IntAssign -> VarName Eq IntExpression
+Rule 73    AlphDeclare -> AlphType VarName
+Rule 74    AlphDeclare -> AlphType VarName Eq AlphExpression
+Rule 75    AlphDeclare -> AlphDeclare Splitter VarName
+Rule 76    AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression
+Rule 77    AlphAssign -> VarName Eq AlphExpression
+Rule 78    LangDeclare -> LangType VarName
+Rule 79    LangDeclare -> LangType VarName Eq LangExpression
+Rule 80    LangDeclare -> LangDeclare Splitter VarName
+Rule 81    LangDeclare -> LangDeclare Splitter VarName Eq LangExpression
+Rule 82    LangAssign -> VarName Eq LangExpression
+Rule 83    BooleanDeclare -> BooleanType VarName
+Rule 84    BooleanDeclare -> BooleanType VarName Eq BooleanExpression
+Rule 85    BooleanDeclare -> BooleanDeclare Splitter VarName
+Rule 86    BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression
+Rule 87    BooleanAssign -> VarName Eq BooleanExpression
 
 Terminals, with rules where they appear
 
-AlphType             : 66 67
-And                  : 25
-BooleanType          : 76 77
-CloseStruct          : 13 14
-Concat               : 19
-Eq                   : 57 59 60 62 64 65 67 69 70 72 74 75 77 79 80
-False                : 50
-Int                  : 6
-IntType              : 61 62
-LGroup               : 38 41
-LangType             : 71 72
-LenOp                : 17 17 18 18
+AlphType             : 73 74
+And                  : 22
+BooleanType          : 83 84
+CloseStruct          : 59 60
+Concat               : 13 17
+Eq                   : 62 64 67 69 71 72 74 76 77 79 81 82 84 86 87
+False                : 58
+Int                  : 3
+IntType              : 68 69
+KleeneC              : 19
+LGroup               : 38 41 49
+LangType             : 78 79
+LenOp                : 15 15 16 16
 NextLine             : 
-On                   : 18
-OpenStruct           : 13 14 15
+On                   : 16
+OpenStruct           : 59 60
 Or                   : 10
-Pow                  : 28
-Prefix               : 16
-RGroup               : 38 41
-Show                 : 37
-Splitter             : 21 22 58 59 63 64 68 69 73 74 78 79
+Pow                  : 25 34
+Prefix               : 24
+RGroup               : 38 41 49
+Show                 : 36
+Splitter             : 63 64 65 66 70 71 75 76 80 81 85 86
 String               : 42
-StringType           : 56 57
-SuchThat             : 15
-Suffix               : 27
-Term                 : 23 24
-True                 : 49
-VarName              : 9 15 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80
+StringType           : 61 62
+SuchThat             : 
+Suffix               : 37
+Term                 : 20 21
+True                 : 57
+VAlph                : 51
+VBoolean             : 40
+VInt                 : 5
+VLang                : 9
+VString              : 43
+VarName              : 61 62 63 64 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87
 error                : 
 
 Nonterminals, with rules where they appear
 
-Alph                 : 1
-AlphAssign           : 53
-AlphDeclare          : 46 68 69
-AlphExpression       : 18 32 67 69 70
-Assigns              : 35
+Alph                 : 50
+AlphAssign           : 54
+AlphConcat           : 2 17
+AlphDeclare          : 46 75 76
+AlphExpression       : 16 19 28 49 74 76 77
+AlphGroup            : 35
+AlphKleeneC          : 8
+AlphPow              : 17 18 34
+Assigns              : 32
 Boolean              : 39
-BooleanAnd           : 10 10 11 25 25
-BooleanAssign        : 55
-BooleanDeclare       : 48 78 79
-BooleanExpression    : 38 77 79 80
-BooleanGroup         : 26
-BooleanOr            : 3
-Declares             : 36
-IntAssign            : 52
-IntDeclare           : 45 63 64
-IntExpression        : 28 31 62 64 65
-Lang                 : 
-LangAssign           : 54
-LangDeclare          : 47 73 74
-LangExpression       : 33 72 74 75
-ShowVal              : 34
-StringAssign         : 51
-StringConcat         : 12 19
-StringDeclare        : 44 58 59
-StringExpression     : 14 16 17 18 21 22 22 27 30 41 57 59 60
-StringGroup          : 29
-StringLen            : 7
-StringList           : 13 21
-StringPow            : 19 20 28
-StringPrefix         : 4
-StringSuffix         : 5
-VarValue             : 2 8 40 43
-expression           : 23 24 37
-expressions          : 23 0
+BooleanAnd           : 10 10 11 22 22
+BooleanAssign        : 56
+BooleanDeclare       : 48 85 86
+BooleanExpression    : 38 84 86 87
+BooleanGroup         : 23
+BooleanOr            : 1
+Declares             : 33
+IntAssign            : 53
+IntDeclare           : 45 70 71
+IntExpression        : 19 25 27 34 69 71 72
+LangAssign           : 55
+LangDeclare          : 47 80 81
+LangExpression       : 30 79 81 82
+ShowVal              : 31
+StringAssign         : 52
+StringConcat         : 12 13
+StringDeclare        : 44 63 64
+StringExpression     : 15 16 24 29 37 41 60 62 64 65 66 66 67
+StringGroup          : 26
+StringLen            : 4
+StringList           : 59 65
+StringPow            : 13 14 25
+StringPrefix         : 6
+StringSuffix         : 7
+expression           : 20 21 36
+expressions          : 20 0
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . expressions
-    (23) expressions -> . expressions expression Term
-    (24) expressions -> . expression Term
-    (30) expression -> . StringExpression
-    (31) expression -> . IntExpression
-    (32) expression -> . AlphExpression
-    (33) expression -> . LangExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (20) expressions -> . expressions expression Term
+    (21) expressions -> . expression Term
+    (27) expression -> . IntExpression
+    (28) expression -> . AlphExpression
+    (29) expression -> . StringExpression
+    (30) expression -> . LangExpression
+    (31) expression -> . ShowVal
+    (32) expression -> . Assigns
+    (33) expression -> . Declares
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (2) AlphExpression -> . AlphConcat
     (12) StringExpression -> . StringConcat
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (37) ShowVal -> . Show expression
-    (51) Assigns -> . StringAssign
-    (52) Assigns -> . IntAssign
-    (53) Assigns -> . AlphAssign
-    (54) Assigns -> . LangAssign
-    (55) Assigns -> . BooleanAssign
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (36) ShowVal -> . Show expression
+    (52) Assigns -> . StringAssign
+    (53) Assigns -> . IntAssign
+    (54) Assigns -> . AlphAssign
+    (55) Assigns -> . LangAssign
+    (56) Assigns -> . BooleanAssign
     (44) Declares -> . StringDeclare
     (45) Declares -> . IntDeclare
     (46) Declares -> . AlphDeclare
     (47) Declares -> . LangDeclare
     (48) Declares -> . BooleanDeclare
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-    (60) StringAssign -> . VarName Eq StringExpression
-    (65) IntAssign -> . VarName Eq IntExpression
-    (70) AlphAssign -> . VarName Eq AlphExpression
-    (75) LangAssign -> . VarName Eq LangExpression
-    (80) BooleanAssign -> . VarName Eq BooleanExpression
-    (56) StringDeclare -> . StringType VarName
-    (57) StringDeclare -> . StringType VarName Eq StringExpression
-    (58) StringDeclare -> . StringDeclare Splitter VarName
-    (59) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
-    (61) IntDeclare -> . IntType VarName
-    (62) IntDeclare -> . IntType VarName Eq IntExpression
-    (63) IntDeclare -> . IntDeclare Splitter VarName
-    (64) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
-    (66) AlphDeclare -> . AlphType VarName
-    (67) AlphDeclare -> . AlphType VarName Eq AlphExpression
-    (68) AlphDeclare -> . AlphDeclare Splitter VarName
-    (69) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
-    (71) LangDeclare -> . LangType VarName
-    (72) LangDeclare -> . LangType VarName Eq LangExpression
-    (73) LangDeclare -> . LangDeclare Splitter VarName
-    (74) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
-    (76) BooleanDeclare -> . BooleanType VarName
-    (77) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
-    (78) BooleanDeclare -> . BooleanDeclare Splitter VarName
-    (79) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (67) StringAssign -> . VarName Eq StringExpression
+    (72) IntAssign -> . VarName Eq IntExpression
+    (77) AlphAssign -> . VarName Eq AlphExpression
+    (82) LangAssign -> . VarName Eq LangExpression
+    (87) BooleanAssign -> . VarName Eq BooleanExpression
+    (61) StringDeclare -> . StringType VarName
+    (62) StringDeclare -> . StringType VarName Eq StringExpression
+    (63) StringDeclare -> . StringDeclare Splitter VarName
+    (64) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
+    (68) IntDeclare -> . IntType VarName
+    (69) IntDeclare -> . IntType VarName Eq IntExpression
+    (70) IntDeclare -> . IntDeclare Splitter VarName
+    (71) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
+    (73) AlphDeclare -> . AlphType VarName
+    (74) AlphDeclare -> . AlphType VarName Eq AlphExpression
+    (75) AlphDeclare -> . AlphDeclare Splitter VarName
+    (76) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
+    (78) LangDeclare -> . LangType VarName
+    (79) LangDeclare -> . LangType VarName Eq LangExpression
+    (80) LangDeclare -> . LangDeclare Splitter VarName
+    (81) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
+    (83) BooleanDeclare -> . BooleanType VarName
+    (84) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
+    (85) BooleanDeclare -> . BooleanDeclare Splitter VarName
+    (86) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
     (41) StringGroup -> . LGroup StringExpression RGroup
     (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
+    (43) StringGroup -> . VString
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Int             shift and go to state 11
-    Show            shift and go to state 17
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 30
-    OpenStruct      shift and go to state 31
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-    StringType      shift and go to state 34
-    IntType         shift and go to state 35
-    AlphType        shift and go to state 36
-    LangType        shift and go to state 37
-    BooleanType     shift and go to state 38
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    VLang           shift and go to state 18
+    Show            shift and go to state 19
+    LenOp           shift and go to state 30
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    VarName         shift and go to state 35
+    StringType      shift and go to state 36
+    IntType         shift and go to state 37
+    AlphType        shift and go to state 38
+    LangType        shift and go to state 39
+    BooleanType     shift and go to state 40
+    LGroup          shift and go to state 43
+    VAlph           shift and go to state 45
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    OpenStruct      shift and go to state 48
 
     expressions                    shift and go to state 1
     expression                     shift and go to state 2
-    StringExpression               shift and go to state 3
-    IntExpression                  shift and go to state 4
-    AlphExpression                 shift and go to state 5
+    IntExpression                  shift and go to state 3
+    AlphExpression                 shift and go to state 4
+    StringExpression               shift and go to state 5
     LangExpression                 shift and go to state 6
     ShowVal                        shift and go to state 7
     Assigns                        shift and go to state 8
     Declares                       shift and go to state 9
-    StringConcat                   shift and go to state 10
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 13
-    Alph                           shift and go to state 14
+    StringLen                      shift and go to state 11
+    AlphConcat                     shift and go to state 13
+    StringConcat                   shift and go to state 14
     StringPrefix                   shift and go to state 15
     StringSuffix                   shift and go to state 16
-    StringAssign                   shift and go to state 18
-    IntAssign                      shift and go to state 19
-    AlphAssign                     shift and go to state 20
-    LangAssign                     shift and go to state 21
-    BooleanAssign                  shift and go to state 22
-    StringDeclare                  shift and go to state 23
-    IntDeclare                     shift and go to state 24
-    AlphDeclare                    shift and go to state 25
-    LangDeclare                    shift and go to state 26
-    BooleanDeclare                 shift and go to state 27
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
+    AlphKleeneC                    shift and go to state 17
+    StringAssign                   shift and go to state 20
+    IntAssign                      shift and go to state 21
+    AlphAssign                     shift and go to state 22
+    LangAssign                     shift and go to state 23
+    BooleanAssign                  shift and go to state 24
+    StringDeclare                  shift and go to state 25
+    IntDeclare                     shift and go to state 26
+    AlphDeclare                    shift and go to state 27
+    LangDeclare                    shift and go to state 28
+    BooleanDeclare                 shift and go to state 29
+    AlphPow                        shift and go to state 31
+    StringPow                      shift and go to state 32
+    AlphGroup                      shift and go to state 41
+    StringGroup                    shift and go to state 42
+    Alph                           shift and go to state 44
 
 state 1
 
     (0) S' -> expressions .
-    (23) expressions -> expressions . expression Term
-    (30) expression -> . StringExpression
-    (31) expression -> . IntExpression
-    (32) expression -> . AlphExpression
-    (33) expression -> . LangExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (20) expressions -> expressions . expression Term
+    (27) expression -> . IntExpression
+    (28) expression -> . AlphExpression
+    (29) expression -> . StringExpression
+    (30) expression -> . LangExpression
+    (31) expression -> . ShowVal
+    (32) expression -> . Assigns
+    (33) expression -> . Declares
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (2) AlphExpression -> . AlphConcat
     (12) StringExpression -> . StringConcat
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (37) ShowVal -> . Show expression
-    (51) Assigns -> . StringAssign
-    (52) Assigns -> . IntAssign
-    (53) Assigns -> . AlphAssign
-    (54) Assigns -> . LangAssign
-    (55) Assigns -> . BooleanAssign
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (36) ShowVal -> . Show expression
+    (52) Assigns -> . StringAssign
+    (53) Assigns -> . IntAssign
+    (54) Assigns -> . AlphAssign
+    (55) Assigns -> . LangAssign
+    (56) Assigns -> . BooleanAssign
     (44) Declares -> . StringDeclare
     (45) Declares -> . IntDeclare
     (46) Declares -> . AlphDeclare
     (47) Declares -> . LangDeclare
     (48) Declares -> . BooleanDeclare
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-    (60) StringAssign -> . VarName Eq StringExpression
-    (65) IntAssign -> . VarName Eq IntExpression
-    (70) AlphAssign -> . VarName Eq AlphExpression
-    (75) LangAssign -> . VarName Eq LangExpression
-    (80) BooleanAssign -> . VarName Eq BooleanExpression
-    (56) StringDeclare -> . StringType VarName
-    (57) StringDeclare -> . StringType VarName Eq StringExpression
-    (58) StringDeclare -> . StringDeclare Splitter VarName
-    (59) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
-    (61) IntDeclare -> . IntType VarName
-    (62) IntDeclare -> . IntType VarName Eq IntExpression
-    (63) IntDeclare -> . IntDeclare Splitter VarName
-    (64) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
-    (66) AlphDeclare -> . AlphType VarName
-    (67) AlphDeclare -> . AlphType VarName Eq AlphExpression
-    (68) AlphDeclare -> . AlphDeclare Splitter VarName
-    (69) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
-    (71) LangDeclare -> . LangType VarName
-    (72) LangDeclare -> . LangType VarName Eq LangExpression
-    (73) LangDeclare -> . LangDeclare Splitter VarName
-    (74) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
-    (76) BooleanDeclare -> . BooleanType VarName
-    (77) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
-    (78) BooleanDeclare -> . BooleanDeclare Splitter VarName
-    (79) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (67) StringAssign -> . VarName Eq StringExpression
+    (72) IntAssign -> . VarName Eq IntExpression
+    (77) AlphAssign -> . VarName Eq AlphExpression
+    (82) LangAssign -> . VarName Eq LangExpression
+    (87) BooleanAssign -> . VarName Eq BooleanExpression
+    (61) StringDeclare -> . StringType VarName
+    (62) StringDeclare -> . StringType VarName Eq StringExpression
+    (63) StringDeclare -> . StringDeclare Splitter VarName
+    (64) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
+    (68) IntDeclare -> . IntType VarName
+    (69) IntDeclare -> . IntType VarName Eq IntExpression
+    (70) IntDeclare -> . IntDeclare Splitter VarName
+    (71) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
+    (73) AlphDeclare -> . AlphType VarName
+    (74) AlphDeclare -> . AlphType VarName Eq AlphExpression
+    (75) AlphDeclare -> . AlphDeclare Splitter VarName
+    (76) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
+    (78) LangDeclare -> . LangType VarName
+    (79) LangDeclare -> . LangType VarName Eq LangExpression
+    (80) LangDeclare -> . LangDeclare Splitter VarName
+    (81) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
+    (83) BooleanDeclare -> . BooleanType VarName
+    (84) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
+    (85) BooleanDeclare -> . BooleanDeclare Splitter VarName
+    (86) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
     (41) StringGroup -> . LGroup StringExpression RGroup
     (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
+    (43) StringGroup -> . VString
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Int             shift and go to state 11
-    Show            shift and go to state 17
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 30
-    OpenStruct      shift and go to state 31
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-    StringType      shift and go to state 34
-    IntType         shift and go to state 35
-    AlphType        shift and go to state 36
-    LangType        shift and go to state 37
-    BooleanType     shift and go to state 38
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    VLang           shift and go to state 18
+    Show            shift and go to state 19
+    LenOp           shift and go to state 30
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    VarName         shift and go to state 35
+    StringType      shift and go to state 36
+    IntType         shift and go to state 37
+    AlphType        shift and go to state 38
+    LangType        shift and go to state 39
+    BooleanType     shift and go to state 40
+    LGroup          shift and go to state 43
+    VAlph           shift and go to state 45
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    OpenStruct      shift and go to state 48
 
-    expression                     shift and go to state 42
-    StringExpression               shift and go to state 3
-    IntExpression                  shift and go to state 4
-    AlphExpression                 shift and go to state 5
+    expression                     shift and go to state 49
+    IntExpression                  shift and go to state 3
+    AlphExpression                 shift and go to state 4
+    StringExpression               shift and go to state 5
     LangExpression                 shift and go to state 6
     ShowVal                        shift and go to state 7
     Assigns                        shift and go to state 8
     Declares                       shift and go to state 9
-    StringConcat                   shift and go to state 10
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 13
-    Alph                           shift and go to state 14
+    StringLen                      shift and go to state 11
+    AlphConcat                     shift and go to state 13
+    StringConcat                   shift and go to state 14
     StringPrefix                   shift and go to state 15
     StringSuffix                   shift and go to state 16
-    StringAssign                   shift and go to state 18
-    IntAssign                      shift and go to state 19
-    AlphAssign                     shift and go to state 20
-    LangAssign                     shift and go to state 21
-    BooleanAssign                  shift and go to state 22
-    StringDeclare                  shift and go to state 23
-    IntDeclare                     shift and go to state 24
-    AlphDeclare                    shift and go to state 25
-    LangDeclare                    shift and go to state 26
-    BooleanDeclare                 shift and go to state 27
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
+    AlphKleeneC                    shift and go to state 17
+    StringAssign                   shift and go to state 20
+    IntAssign                      shift and go to state 21
+    AlphAssign                     shift and go to state 22
+    LangAssign                     shift and go to state 23
+    BooleanAssign                  shift and go to state 24
+    StringDeclare                  shift and go to state 25
+    IntDeclare                     shift and go to state 26
+    AlphDeclare                    shift and go to state 27
+    LangDeclare                    shift and go to state 28
+    BooleanDeclare                 shift and go to state 29
+    AlphPow                        shift and go to state 31
+    StringPow                      shift and go to state 32
+    AlphGroup                      shift and go to state 41
+    StringGroup                    shift and go to state 42
+    Alph                           shift and go to state 44
 
 state 2
 
-    (24) expressions -> expression . Term
+    (21) expressions -> expression . Term
 
-    Term            shift and go to state 43
+    Term            shift and go to state 50
 
 
 state 3
 
-    (30) expression -> StringExpression .
+    (27) expression -> IntExpression .
 
-    Term            reduce using rule 30 (expression -> StringExpression .)
+    Term            reduce using rule 27 (expression -> IntExpression .)
 
 
 state 4
 
-    (31) expression -> IntExpression .
+    (28) expression -> AlphExpression .
+    (19) AlphKleeneC -> AlphExpression . KleeneC IntExpression
 
-    Term            reduce using rule 31 (expression -> IntExpression .)
+    Term            reduce using rule 28 (expression -> AlphExpression .)
+    KleeneC         shift and go to state 51
 
 
 state 5
 
-    (32) expression -> AlphExpression .
+    (29) expression -> StringExpression .
 
-    Term            reduce using rule 32 (expression -> AlphExpression .)
+    Term            reduce using rule 29 (expression -> StringExpression .)
 
 
 state 6
 
-    (33) expression -> LangExpression .
+    (30) expression -> LangExpression .
 
-    Term            reduce using rule 33 (expression -> LangExpression .)
+    Term            reduce using rule 30 (expression -> LangExpression .)
 
 
 state 7
 
-    (34) expression -> ShowVal .
+    (31) expression -> ShowVal .
 
-    Term            reduce using rule 34 (expression -> ShowVal .)
+    Term            reduce using rule 31 (expression -> ShowVal .)
 
 
 state 8
 
-    (35) expression -> Assigns .
+    (32) expression -> Assigns .
 
-    Term            reduce using rule 35 (expression -> Assigns .)
+    Term            reduce using rule 32 (expression -> Assigns .)
 
 
 state 9
 
-    (36) expression -> Declares .
+    (33) expression -> Declares .
 
-    Term            reduce using rule 36 (expression -> Declares .)
+    Term            reduce using rule 33 (expression -> Declares .)
 
 
 state 10
 
-    (12) StringExpression -> StringConcat .
-    (19) StringConcat -> StringConcat . Concat StringPow
+    (3) IntExpression -> Int .
 
-    Term            reduce using rule 12 (StringExpression -> StringConcat .)
-    LenOp           reduce using rule 12 (StringExpression -> StringConcat .)
-    On              reduce using rule 12 (StringExpression -> StringConcat .)
-    CloseStruct     reduce using rule 12 (StringExpression -> StringConcat .)
-    Splitter        reduce using rule 12 (StringExpression -> StringConcat .)
-    RGroup          reduce using rule 12 (StringExpression -> StringConcat .)
-    Concat          shift and go to state 44
+    Term            reduce using rule 3 (IntExpression -> Int .)
+    Splitter        reduce using rule 3 (IntExpression -> Int .)
+    Pow             reduce using rule 3 (IntExpression -> Int .)
+    Concat          reduce using rule 3 (IntExpression -> Int .)
+    KleeneC         reduce using rule 3 (IntExpression -> Int .)
+    RGroup          reduce using rule 3 (IntExpression -> Int .)
+    LenOp           reduce using rule 3 (IntExpression -> Int .)
+    On              reduce using rule 3 (IntExpression -> Int .)
+    CloseStruct     reduce using rule 3 (IntExpression -> Int .)
 
 
 state 11
 
-    (6) IntExpression -> Int .
+    (4) IntExpression -> StringLen .
 
-    Term            reduce using rule 6 (IntExpression -> Int .)
-    Pow             reduce using rule 6 (IntExpression -> Int .)
-    Concat          reduce using rule 6 (IntExpression -> Int .)
-    LenOp           reduce using rule 6 (IntExpression -> Int .)
-    On              reduce using rule 6 (IntExpression -> Int .)
-    CloseStruct     reduce using rule 6 (IntExpression -> Int .)
-    Splitter        reduce using rule 6 (IntExpression -> Int .)
-    RGroup          reduce using rule 6 (IntExpression -> Int .)
+    Term            reduce using rule 4 (IntExpression -> StringLen .)
+    Splitter        reduce using rule 4 (IntExpression -> StringLen .)
+    Pow             reduce using rule 4 (IntExpression -> StringLen .)
+    Concat          reduce using rule 4 (IntExpression -> StringLen .)
+    KleeneC         reduce using rule 4 (IntExpression -> StringLen .)
+    RGroup          reduce using rule 4 (IntExpression -> StringLen .)
+    LenOp           reduce using rule 4 (IntExpression -> StringLen .)
+    On              reduce using rule 4 (IntExpression -> StringLen .)
+    CloseStruct     reduce using rule 4 (IntExpression -> StringLen .)
 
 
 state 12
 
-    (7) IntExpression -> StringLen .
+    (5) IntExpression -> VInt .
 
-    Term            reduce using rule 7 (IntExpression -> StringLen .)
-    Pow             reduce using rule 7 (IntExpression -> StringLen .)
-    Concat          reduce using rule 7 (IntExpression -> StringLen .)
-    LenOp           reduce using rule 7 (IntExpression -> StringLen .)
-    On              reduce using rule 7 (IntExpression -> StringLen .)
-    CloseStruct     reduce using rule 7 (IntExpression -> StringLen .)
-    Splitter        reduce using rule 7 (IntExpression -> StringLen .)
-    RGroup          reduce using rule 7 (IntExpression -> StringLen .)
+    Term            reduce using rule 5 (IntExpression -> VInt .)
+    Splitter        reduce using rule 5 (IntExpression -> VInt .)
+    Pow             reduce using rule 5 (IntExpression -> VInt .)
+    Concat          reduce using rule 5 (IntExpression -> VInt .)
+    KleeneC         reduce using rule 5 (IntExpression -> VInt .)
+    RGroup          reduce using rule 5 (IntExpression -> VInt .)
+    LenOp           reduce using rule 5 (IntExpression -> VInt .)
+    On              reduce using rule 5 (IntExpression -> VInt .)
+    CloseStruct     reduce using rule 5 (IntExpression -> VInt .)
 
 
 state 13
 
-    (8) IntExpression -> VarValue .
-    (2) AlphExpression -> VarValue .
-    (43) StringGroup -> VarValue .
+    (2) AlphExpression -> AlphConcat .
+    (17) AlphConcat -> AlphConcat . Concat AlphPow
 
-  ! reduce/reduce conflict for Term resolved using rule 2 (AlphExpression -> VarValue .)
-  ! reduce/reduce conflict for Term resolved using rule 2 (AlphExpression -> VarValue .)
-    Term            reduce using rule 2 (AlphExpression -> VarValue .)
-    Pow             reduce using rule 43 (StringGroup -> VarValue .)
-    Concat          reduce using rule 43 (StringGroup -> VarValue .)
-
-  ! Term            [ reduce using rule 8 (IntExpression -> VarValue .) ]
-  ! Term            [ reduce using rule 43 (StringGroup -> VarValue .) ]
+    KleeneC         reduce using rule 2 (AlphExpression -> AlphConcat .)
+    Term            reduce using rule 2 (AlphExpression -> AlphConcat .)
+    RGroup          reduce using rule 2 (AlphExpression -> AlphConcat .)
+    LenOp           reduce using rule 2 (AlphExpression -> AlphConcat .)
+    Splitter        reduce using rule 2 (AlphExpression -> AlphConcat .)
+    Concat          shift and go to state 52
 
 
 state 14
 
-    (1) AlphExpression -> Alph .
+    (12) StringExpression -> StringConcat .
+    (13) StringConcat -> StringConcat . Concat StringPow
 
-    Term            reduce using rule 1 (AlphExpression -> Alph .)
-    LenOp           reduce using rule 1 (AlphExpression -> Alph .)
-    Splitter        reduce using rule 1 (AlphExpression -> Alph .)
+    Term            reduce using rule 12 (StringExpression -> StringConcat .)
+    LenOp           reduce using rule 12 (StringExpression -> StringConcat .)
+    On              reduce using rule 12 (StringExpression -> StringConcat .)
+    Splitter        reduce using rule 12 (StringExpression -> StringConcat .)
+    RGroup          reduce using rule 12 (StringExpression -> StringConcat .)
+    CloseStruct     reduce using rule 12 (StringExpression -> StringConcat .)
+    Concat          shift and go to state 53
 
 
 state 15
 
-    (4) LangExpression -> StringPrefix .
+    (6) LangExpression -> StringPrefix .
 
-    Term            reduce using rule 4 (LangExpression -> StringPrefix .)
-    Splitter        reduce using rule 4 (LangExpression -> StringPrefix .)
+    Term            reduce using rule 6 (LangExpression -> StringPrefix .)
+    Splitter        reduce using rule 6 (LangExpression -> StringPrefix .)
 
 
 state 16
 
-    (5) LangExpression -> StringSuffix .
+    (7) LangExpression -> StringSuffix .
 
-    Term            reduce using rule 5 (LangExpression -> StringSuffix .)
-    Splitter        reduce using rule 5 (LangExpression -> StringSuffix .)
+    Term            reduce using rule 7 (LangExpression -> StringSuffix .)
+    Splitter        reduce using rule 7 (LangExpression -> StringSuffix .)
 
 
 state 17
 
-    (37) ShowVal -> Show . expression
-    (30) expression -> . StringExpression
-    (31) expression -> . IntExpression
-    (32) expression -> . AlphExpression
-    (33) expression -> . LangExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (8) LangExpression -> AlphKleeneC .
+
+    Term            reduce using rule 8 (LangExpression -> AlphKleeneC .)
+    Splitter        reduce using rule 8 (LangExpression -> AlphKleeneC .)
+
+
+state 18
+
+    (9) LangExpression -> VLang .
+
+    Term            reduce using rule 9 (LangExpression -> VLang .)
+    Splitter        reduce using rule 9 (LangExpression -> VLang .)
+
+
+state 19
+
+    (36) ShowVal -> Show . expression
+    (27) expression -> . IntExpression
+    (28) expression -> . AlphExpression
+    (29) expression -> . StringExpression
+    (30) expression -> . LangExpression
+    (31) expression -> . ShowVal
+    (32) expression -> . Assigns
+    (33) expression -> . Declares
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (2) AlphExpression -> . AlphConcat
     (12) StringExpression -> . StringConcat
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (37) ShowVal -> . Show expression
-    (51) Assigns -> . StringAssign
-    (52) Assigns -> . IntAssign
-    (53) Assigns -> . AlphAssign
-    (54) Assigns -> . LangAssign
-    (55) Assigns -> . BooleanAssign
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (36) ShowVal -> . Show expression
+    (52) Assigns -> . StringAssign
+    (53) Assigns -> . IntAssign
+    (54) Assigns -> . AlphAssign
+    (55) Assigns -> . LangAssign
+    (56) Assigns -> . BooleanAssign
     (44) Declares -> . StringDeclare
     (45) Declares -> . IntDeclare
     (46) Declares -> . AlphDeclare
     (47) Declares -> . LangDeclare
     (48) Declares -> . BooleanDeclare
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-    (60) StringAssign -> . VarName Eq StringExpression
-    (65) IntAssign -> . VarName Eq IntExpression
-    (70) AlphAssign -> . VarName Eq AlphExpression
-    (75) LangAssign -> . VarName Eq LangExpression
-    (80) BooleanAssign -> . VarName Eq BooleanExpression
-    (56) StringDeclare -> . StringType VarName
-    (57) StringDeclare -> . StringType VarName Eq StringExpression
-    (58) StringDeclare -> . StringDeclare Splitter VarName
-    (59) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
-    (61) IntDeclare -> . IntType VarName
-    (62) IntDeclare -> . IntType VarName Eq IntExpression
-    (63) IntDeclare -> . IntDeclare Splitter VarName
-    (64) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
-    (66) AlphDeclare -> . AlphType VarName
-    (67) AlphDeclare -> . AlphType VarName Eq AlphExpression
-    (68) AlphDeclare -> . AlphDeclare Splitter VarName
-    (69) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
-    (71) LangDeclare -> . LangType VarName
-    (72) LangDeclare -> . LangType VarName Eq LangExpression
-    (73) LangDeclare -> . LangDeclare Splitter VarName
-    (74) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
-    (76) BooleanDeclare -> . BooleanType VarName
-    (77) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
-    (78) BooleanDeclare -> . BooleanDeclare Splitter VarName
-    (79) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (67) StringAssign -> . VarName Eq StringExpression
+    (72) IntAssign -> . VarName Eq IntExpression
+    (77) AlphAssign -> . VarName Eq AlphExpression
+    (82) LangAssign -> . VarName Eq LangExpression
+    (87) BooleanAssign -> . VarName Eq BooleanExpression
+    (61) StringDeclare -> . StringType VarName
+    (62) StringDeclare -> . StringType VarName Eq StringExpression
+    (63) StringDeclare -> . StringDeclare Splitter VarName
+    (64) StringDeclare -> . StringDeclare Splitter VarName Eq StringExpression
+    (68) IntDeclare -> . IntType VarName
+    (69) IntDeclare -> . IntType VarName Eq IntExpression
+    (70) IntDeclare -> . IntDeclare Splitter VarName
+    (71) IntDeclare -> . IntDeclare Splitter VarName Eq IntExpression
+    (73) AlphDeclare -> . AlphType VarName
+    (74) AlphDeclare -> . AlphType VarName Eq AlphExpression
+    (75) AlphDeclare -> . AlphDeclare Splitter VarName
+    (76) AlphDeclare -> . AlphDeclare Splitter VarName Eq AlphExpression
+    (78) LangDeclare -> . LangType VarName
+    (79) LangDeclare -> . LangType VarName Eq LangExpression
+    (80) LangDeclare -> . LangDeclare Splitter VarName
+    (81) LangDeclare -> . LangDeclare Splitter VarName Eq LangExpression
+    (83) BooleanDeclare -> . BooleanType VarName
+    (84) BooleanDeclare -> . BooleanType VarName Eq BooleanExpression
+    (85) BooleanDeclare -> . BooleanDeclare Splitter VarName
+    (86) BooleanDeclare -> . BooleanDeclare Splitter VarName Eq BooleanExpression
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
     (41) StringGroup -> . LGroup StringExpression RGroup
     (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
+    (43) StringGroup -> . VString
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Int             shift and go to state 11
-    Show            shift and go to state 17
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 30
-    OpenStruct      shift and go to state 31
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-    StringType      shift and go to state 34
-    IntType         shift and go to state 35
-    AlphType        shift and go to state 36
-    LangType        shift and go to state 37
-    BooleanType     shift and go to state 38
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    VLang           shift and go to state 18
+    Show            shift and go to state 19
+    LenOp           shift and go to state 30
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    VarName         shift and go to state 35
+    StringType      shift and go to state 36
+    IntType         shift and go to state 37
+    AlphType        shift and go to state 38
+    LangType        shift and go to state 39
+    BooleanType     shift and go to state 40
+    LGroup          shift and go to state 43
+    VAlph           shift and go to state 45
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    OpenStruct      shift and go to state 48
 
-    expression                     shift and go to state 45
-    StringExpression               shift and go to state 3
-    IntExpression                  shift and go to state 4
-    AlphExpression                 shift and go to state 5
+    expression                     shift and go to state 54
+    IntExpression                  shift and go to state 3
+    AlphExpression                 shift and go to state 4
+    StringExpression               shift and go to state 5
     LangExpression                 shift and go to state 6
     ShowVal                        shift and go to state 7
     Assigns                        shift and go to state 8
     Declares                       shift and go to state 9
-    StringConcat                   shift and go to state 10
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 13
-    Alph                           shift and go to state 14
+    StringLen                      shift and go to state 11
+    AlphConcat                     shift and go to state 13
+    StringConcat                   shift and go to state 14
     StringPrefix                   shift and go to state 15
     StringSuffix                   shift and go to state 16
-    StringAssign                   shift and go to state 18
-    IntAssign                      shift and go to state 19
-    AlphAssign                     shift and go to state 20
-    LangAssign                     shift and go to state 21
-    BooleanAssign                  shift and go to state 22
-    StringDeclare                  shift and go to state 23
-    IntDeclare                     shift and go to state 24
-    AlphDeclare                    shift and go to state 25
-    LangDeclare                    shift and go to state 26
-    BooleanDeclare                 shift and go to state 27
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-
-state 18
-
-    (51) Assigns -> StringAssign .
-
-    Term            reduce using rule 51 (Assigns -> StringAssign .)
-
-
-state 19
-
-    (52) Assigns -> IntAssign .
-
-    Term            reduce using rule 52 (Assigns -> IntAssign .)
-
+    AlphKleeneC                    shift and go to state 17
+    StringAssign                   shift and go to state 20
+    IntAssign                      shift and go to state 21
+    AlphAssign                     shift and go to state 22
+    LangAssign                     shift and go to state 23
+    BooleanAssign                  shift and go to state 24
+    StringDeclare                  shift and go to state 25
+    IntDeclare                     shift and go to state 26
+    AlphDeclare                    shift and go to state 27
+    LangDeclare                    shift and go to state 28
+    BooleanDeclare                 shift and go to state 29
+    AlphPow                        shift and go to state 31
+    StringPow                      shift and go to state 32
+    AlphGroup                      shift and go to state 41
+    StringGroup                    shift and go to state 42
+    Alph                           shift and go to state 44
 
 state 20
 
-    (53) Assigns -> AlphAssign .
+    (52) Assigns -> StringAssign .
 
-    Term            reduce using rule 53 (Assigns -> AlphAssign .)
+    Term            reduce using rule 52 (Assigns -> StringAssign .)
 
 
 state 21
 
-    (54) Assigns -> LangAssign .
+    (53) Assigns -> IntAssign .
 
-    Term            reduce using rule 54 (Assigns -> LangAssign .)
+    Term            reduce using rule 53 (Assigns -> IntAssign .)
 
 
 state 22
 
-    (55) Assigns -> BooleanAssign .
+    (54) Assigns -> AlphAssign .
 
-    Term            reduce using rule 55 (Assigns -> BooleanAssign .)
+    Term            reduce using rule 54 (Assigns -> AlphAssign .)
 
 
 state 23
 
-    (44) Declares -> StringDeclare .
-    (58) StringDeclare -> StringDeclare . Splitter VarName
-    (59) StringDeclare -> StringDeclare . Splitter VarName Eq StringExpression
+    (55) Assigns -> LangAssign .
 
-    Term            reduce using rule 44 (Declares -> StringDeclare .)
-    Splitter        shift and go to state 46
+    Term            reduce using rule 55 (Assigns -> LangAssign .)
 
 
 state 24
 
-    (45) Declares -> IntDeclare .
-    (63) IntDeclare -> IntDeclare . Splitter VarName
-    (64) IntDeclare -> IntDeclare . Splitter VarName Eq IntExpression
+    (56) Assigns -> BooleanAssign .
 
-    Term            reduce using rule 45 (Declares -> IntDeclare .)
-    Splitter        shift and go to state 47
+    Term            reduce using rule 56 (Assigns -> BooleanAssign .)
 
 
 state 25
 
-    (46) Declares -> AlphDeclare .
-    (68) AlphDeclare -> AlphDeclare . Splitter VarName
-    (69) AlphDeclare -> AlphDeclare . Splitter VarName Eq AlphExpression
+    (44) Declares -> StringDeclare .
+    (63) StringDeclare -> StringDeclare . Splitter VarName
+    (64) StringDeclare -> StringDeclare . Splitter VarName Eq StringExpression
 
-    Term            reduce using rule 46 (Declares -> AlphDeclare .)
-    Splitter        shift and go to state 48
+    Term            reduce using rule 44 (Declares -> StringDeclare .)
+    Splitter        shift and go to state 55
 
 
 state 26
 
-    (47) Declares -> LangDeclare .
-    (73) LangDeclare -> LangDeclare . Splitter VarName
-    (74) LangDeclare -> LangDeclare . Splitter VarName Eq LangExpression
+    (45) Declares -> IntDeclare .
+    (70) IntDeclare -> IntDeclare . Splitter VarName
+    (71) IntDeclare -> IntDeclare . Splitter VarName Eq IntExpression
 
-    Term            reduce using rule 47 (Declares -> LangDeclare .)
-    Splitter        shift and go to state 49
+    Term            reduce using rule 45 (Declares -> IntDeclare .)
+    Splitter        shift and go to state 56
 
 
 state 27
 
-    (48) Declares -> BooleanDeclare .
-    (78) BooleanDeclare -> BooleanDeclare . Splitter VarName
-    (79) BooleanDeclare -> BooleanDeclare . Splitter VarName Eq BooleanExpression
+    (46) Declares -> AlphDeclare .
+    (75) AlphDeclare -> AlphDeclare . Splitter VarName
+    (76) AlphDeclare -> AlphDeclare . Splitter VarName Eq AlphExpression
 
-    Term            reduce using rule 48 (Declares -> BooleanDeclare .)
-    Splitter        shift and go to state 50
+    Term            reduce using rule 46 (Declares -> AlphDeclare .)
+    Splitter        shift and go to state 57
 
 
 state 28
 
-    (20) StringConcat -> StringPow .
-    (28) StringPow -> StringPow . Pow IntExpression
+    (47) Declares -> LangDeclare .
+    (80) LangDeclare -> LangDeclare . Splitter VarName
+    (81) LangDeclare -> LangDeclare . Splitter VarName Eq LangExpression
 
-    Concat          reduce using rule 20 (StringConcat -> StringPow .)
-    Term            reduce using rule 20 (StringConcat -> StringPow .)
-    LenOp           reduce using rule 20 (StringConcat -> StringPow .)
-    On              reduce using rule 20 (StringConcat -> StringPow .)
-    CloseStruct     reduce using rule 20 (StringConcat -> StringPow .)
-    Splitter        reduce using rule 20 (StringConcat -> StringPow .)
-    RGroup          reduce using rule 20 (StringConcat -> StringPow .)
-    Pow             shift and go to state 51
+    Term            reduce using rule 47 (Declares -> LangDeclare .)
+    Splitter        shift and go to state 58
 
 
 state 29
 
-    (17) StringLen -> LenOp . StringExpression LenOp
-    (18) StringLen -> LenOp . StringExpression On AlphExpression LenOp
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (48) Declares -> BooleanDeclare .
+    (85) BooleanDeclare -> BooleanDeclare . Splitter VarName
+    (86) BooleanDeclare -> BooleanDeclare . Splitter VarName Eq BooleanExpression
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    Term            reduce using rule 48 (Declares -> BooleanDeclare .)
+    Splitter        shift and go to state 59
 
-    StringExpression               shift and go to state 52
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
 
 state 30
 
-    (9) VarValue -> VarName .
-    (60) StringAssign -> VarName . Eq StringExpression
-    (65) IntAssign -> VarName . Eq IntExpression
-    (70) AlphAssign -> VarName . Eq AlphExpression
-    (75) LangAssign -> VarName . Eq LangExpression
-    (80) BooleanAssign -> VarName . Eq BooleanExpression
+    (15) StringLen -> LenOp . StringExpression LenOp
+    (16) StringLen -> LenOp . StringExpression On AlphExpression LenOp
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    Term            reduce using rule 9 (VarValue -> VarName .)
-    Pow             reduce using rule 9 (VarValue -> VarName .)
-    Concat          reduce using rule 9 (VarValue -> VarName .)
-    Eq              shift and go to state 55
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 60
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 31
 
-    (13) Alph -> OpenStruct . StringList CloseStruct
-    (14) Alph -> OpenStruct . StringExpression CloseStruct
-    (21) StringList -> . StringList Splitter StringExpression
-    (22) StringList -> . StringExpression Splitter StringExpression
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (18) AlphConcat -> AlphPow .
+    (34) AlphPow -> AlphPow . Pow IntExpression
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    Concat          reduce using rule 18 (AlphConcat -> AlphPow .)
+    KleeneC         reduce using rule 18 (AlphConcat -> AlphPow .)
+    Term            reduce using rule 18 (AlphConcat -> AlphPow .)
+    RGroup          reduce using rule 18 (AlphConcat -> AlphPow .)
+    LenOp           reduce using rule 18 (AlphConcat -> AlphPow .)
+    Splitter        reduce using rule 18 (AlphConcat -> AlphPow .)
+    Pow             shift and go to state 62
 
-    StringList                     shift and go to state 56
-    StringExpression               shift and go to state 57
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
 
 state 32
 
-    (16) StringPrefix -> Prefix . StringExpression
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (14) StringConcat -> StringPow .
+    (25) StringPow -> StringPow . Pow IntExpression
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    Concat          reduce using rule 14 (StringConcat -> StringPow .)
+    Term            reduce using rule 14 (StringConcat -> StringPow .)
+    LenOp           reduce using rule 14 (StringConcat -> StringPow .)
+    On              reduce using rule 14 (StringConcat -> StringPow .)
+    Splitter        reduce using rule 14 (StringConcat -> StringPow .)
+    RGroup          reduce using rule 14 (StringConcat -> StringPow .)
+    CloseStruct     reduce using rule 14 (StringConcat -> StringPow .)
+    Pow             shift and go to state 63
 
-    StringExpression               shift and go to state 58
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
 
 state 33
 
-    (27) StringSuffix -> Suffix . StringExpression
+    (24) StringPrefix -> Prefix . StringExpression
     (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
     (41) StringGroup -> . LGroup StringExpression RGroup
     (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (43) StringGroup -> . VString
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
-    StringExpression               shift and go to state 59
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
+    StringExpression               shift and go to state 64
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 34
 
-    (56) StringDeclare -> StringType . VarName
-    (57) StringDeclare -> StringType . VarName Eq StringExpression
+    (37) StringSuffix -> Suffix . StringExpression
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    VarName         shift and go to state 60
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 65
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 35
 
-    (61) IntDeclare -> IntType . VarName
-    (62) IntDeclare -> IntType . VarName Eq IntExpression
+    (67) StringAssign -> VarName . Eq StringExpression
+    (72) IntAssign -> VarName . Eq IntExpression
+    (77) AlphAssign -> VarName . Eq AlphExpression
+    (82) LangAssign -> VarName . Eq LangExpression
+    (87) BooleanAssign -> VarName . Eq BooleanExpression
 
-    VarName         shift and go to state 61
+    Eq              shift and go to state 66
 
 
 state 36
 
-    (66) AlphDeclare -> AlphType . VarName
-    (67) AlphDeclare -> AlphType . VarName Eq AlphExpression
+    (61) StringDeclare -> StringType . VarName
+    (62) StringDeclare -> StringType . VarName Eq StringExpression
 
-    VarName         shift and go to state 62
+    VarName         shift and go to state 67
 
 
 state 37
 
-    (71) LangDeclare -> LangType . VarName
-    (72) LangDeclare -> LangType . VarName Eq LangExpression
+    (68) IntDeclare -> IntType . VarName
+    (69) IntDeclare -> IntType . VarName Eq IntExpression
 
-    VarName         shift and go to state 63
+    VarName         shift and go to state 68
 
 
 state 38
 
-    (76) BooleanDeclare -> BooleanType . VarName
-    (77) BooleanDeclare -> BooleanType . VarName Eq BooleanExpression
+    (73) AlphDeclare -> AlphType . VarName
+    (74) AlphDeclare -> AlphType . VarName Eq AlphExpression
 
-    VarName         shift and go to state 64
+    VarName         shift and go to state 69
 
 
 state 39
 
-    (29) StringPow -> StringGroup .
+    (78) LangDeclare -> LangType . VarName
+    (79) LangDeclare -> LangType . VarName Eq LangExpression
 
-    Pow             reduce using rule 29 (StringPow -> StringGroup .)
-    Concat          reduce using rule 29 (StringPow -> StringGroup .)
-    Term            reduce using rule 29 (StringPow -> StringGroup .)
-    LenOp           reduce using rule 29 (StringPow -> StringGroup .)
-    On              reduce using rule 29 (StringPow -> StringGroup .)
-    CloseStruct     reduce using rule 29 (StringPow -> StringGroup .)
-    Splitter        reduce using rule 29 (StringPow -> StringGroup .)
-    RGroup          reduce using rule 29 (StringPow -> StringGroup .)
+    VarName         shift and go to state 70
 
 
 state 40
 
-    (41) StringGroup -> LGroup . StringExpression RGroup
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (83) BooleanDeclare -> BooleanType . VarName
+    (84) BooleanDeclare -> BooleanType . VarName Eq BooleanExpression
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    VarName         shift and go to state 71
 
-    StringExpression               shift and go to state 65
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
 
 state 41
+
+    (35) AlphPow -> AlphGroup .
+
+    Pow             reduce using rule 35 (AlphPow -> AlphGroup .)
+    Concat          reduce using rule 35 (AlphPow -> AlphGroup .)
+    KleeneC         reduce using rule 35 (AlphPow -> AlphGroup .)
+    Term            reduce using rule 35 (AlphPow -> AlphGroup .)
+    RGroup          reduce using rule 35 (AlphPow -> AlphGroup .)
+    LenOp           reduce using rule 35 (AlphPow -> AlphGroup .)
+    Splitter        reduce using rule 35 (AlphPow -> AlphGroup .)
+
+
+state 42
+
+    (26) StringPow -> StringGroup .
+
+    Pow             reduce using rule 26 (StringPow -> StringGroup .)
+    Concat          reduce using rule 26 (StringPow -> StringGroup .)
+    Term            reduce using rule 26 (StringPow -> StringGroup .)
+    LenOp           reduce using rule 26 (StringPow -> StringGroup .)
+    On              reduce using rule 26 (StringPow -> StringGroup .)
+    Splitter        reduce using rule 26 (StringPow -> StringGroup .)
+    RGroup          reduce using rule 26 (StringPow -> StringGroup .)
+    CloseStruct     reduce using rule 26 (StringPow -> StringGroup .)
+
+
+state 43
+
+    (49) AlphGroup -> LGroup . AlphExpression RGroup
+    (41) StringGroup -> LGroup . StringExpression RGroup
+    (2) AlphExpression -> . AlphConcat
+    (12) StringExpression -> . StringConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
+
+    LGroup          shift and go to state 43
+    VAlph           shift and go to state 45
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    OpenStruct      shift and go to state 48
+
+    AlphExpression                 shift and go to state 72
+    StringExpression               shift and go to state 73
+    AlphConcat                     shift and go to state 13
+    StringConcat                   shift and go to state 14
+    AlphPow                        shift and go to state 31
+    StringPow                      shift and go to state 32
+    AlphGroup                      shift and go to state 41
+    StringGroup                    shift and go to state 42
+    Alph                           shift and go to state 44
+
+state 44
+
+    (50) AlphGroup -> Alph .
+
+    Pow             reduce using rule 50 (AlphGroup -> Alph .)
+    Concat          reduce using rule 50 (AlphGroup -> Alph .)
+    KleeneC         reduce using rule 50 (AlphGroup -> Alph .)
+    Term            reduce using rule 50 (AlphGroup -> Alph .)
+    RGroup          reduce using rule 50 (AlphGroup -> Alph .)
+    LenOp           reduce using rule 50 (AlphGroup -> Alph .)
+    Splitter        reduce using rule 50 (AlphGroup -> Alph .)
+
+
+state 45
+
+    (51) AlphGroup -> VAlph .
+
+    Pow             reduce using rule 51 (AlphGroup -> VAlph .)
+    Concat          reduce using rule 51 (AlphGroup -> VAlph .)
+    KleeneC         reduce using rule 51 (AlphGroup -> VAlph .)
+    Term            reduce using rule 51 (AlphGroup -> VAlph .)
+    RGroup          reduce using rule 51 (AlphGroup -> VAlph .)
+    LenOp           reduce using rule 51 (AlphGroup -> VAlph .)
+    Splitter        reduce using rule 51 (AlphGroup -> VAlph .)
+
+
+state 46
 
     (42) StringGroup -> String .
 
@@ -933,596 +1049,755 @@ state 41
     Term            reduce using rule 42 (StringGroup -> String .)
     LenOp           reduce using rule 42 (StringGroup -> String .)
     On              reduce using rule 42 (StringGroup -> String .)
-    CloseStruct     reduce using rule 42 (StringGroup -> String .)
     Splitter        reduce using rule 42 (StringGroup -> String .)
     RGroup          reduce using rule 42 (StringGroup -> String .)
-
-
-state 42
-
-    (23) expressions -> expressions expression . Term
-
-    Term            shift and go to state 66
-
-
-state 43
-
-    (24) expressions -> expression Term .
-
-    Int             reduce using rule 24 (expressions -> expression Term .)
-    Show            reduce using rule 24 (expressions -> expression Term .)
-    LenOp           reduce using rule 24 (expressions -> expression Term .)
-    VarName         reduce using rule 24 (expressions -> expression Term .)
-    OpenStruct      reduce using rule 24 (expressions -> expression Term .)
-    Prefix          reduce using rule 24 (expressions -> expression Term .)
-    Suffix          reduce using rule 24 (expressions -> expression Term .)
-    StringType      reduce using rule 24 (expressions -> expression Term .)
-    IntType         reduce using rule 24 (expressions -> expression Term .)
-    AlphType        reduce using rule 24 (expressions -> expression Term .)
-    LangType        reduce using rule 24 (expressions -> expression Term .)
-    BooleanType     reduce using rule 24 (expressions -> expression Term .)
-    LGroup          reduce using rule 24 (expressions -> expression Term .)
-    String          reduce using rule 24 (expressions -> expression Term .)
-    $end            reduce using rule 24 (expressions -> expression Term .)
-
-
-state 44
-
-    (19) StringConcat -> StringConcat Concat . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
-
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
-
-    StringPow                      shift and go to state 67
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
-
-state 45
-
-    (37) ShowVal -> Show expression .
-
-    Term            reduce using rule 37 (ShowVal -> Show expression .)
-
-
-state 46
-
-    (58) StringDeclare -> StringDeclare Splitter . VarName
-    (59) StringDeclare -> StringDeclare Splitter . VarName Eq StringExpression
-
-    VarName         shift and go to state 68
+    CloseStruct     reduce using rule 42 (StringGroup -> String .)
 
 
 state 47
 
-    (63) IntDeclare -> IntDeclare Splitter . VarName
-    (64) IntDeclare -> IntDeclare Splitter . VarName Eq IntExpression
+    (43) StringGroup -> VString .
 
-    VarName         shift and go to state 69
+    Pow             reduce using rule 43 (StringGroup -> VString .)
+    Concat          reduce using rule 43 (StringGroup -> VString .)
+    Term            reduce using rule 43 (StringGroup -> VString .)
+    LenOp           reduce using rule 43 (StringGroup -> VString .)
+    On              reduce using rule 43 (StringGroup -> VString .)
+    Splitter        reduce using rule 43 (StringGroup -> VString .)
+    RGroup          reduce using rule 43 (StringGroup -> VString .)
+    CloseStruct     reduce using rule 43 (StringGroup -> VString .)
 
 
 state 48
 
-    (68) AlphDeclare -> AlphDeclare Splitter . VarName
-    (69) AlphDeclare -> AlphDeclare Splitter . VarName Eq AlphExpression
+    (59) Alph -> OpenStruct . StringList CloseStruct
+    (60) Alph -> OpenStruct . StringExpression CloseStruct
+    (65) StringList -> . StringList Splitter StringExpression
+    (66) StringList -> . StringExpression Splitter StringExpression
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    VarName         shift and go to state 70
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringList                     shift and go to state 74
+    StringExpression               shift and go to state 75
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 49
 
-    (73) LangDeclare -> LangDeclare Splitter . VarName
-    (74) LangDeclare -> LangDeclare Splitter . VarName Eq LangExpression
+    (20) expressions -> expressions expression . Term
 
-    VarName         shift and go to state 71
+    Term            shift and go to state 76
 
 
 state 50
 
-    (78) BooleanDeclare -> BooleanDeclare Splitter . VarName
-    (79) BooleanDeclare -> BooleanDeclare Splitter . VarName Eq BooleanExpression
+    (21) expressions -> expression Term .
 
-    VarName         shift and go to state 72
+    Int             reduce using rule 21 (expressions -> expression Term .)
+    VInt            reduce using rule 21 (expressions -> expression Term .)
+    VLang           reduce using rule 21 (expressions -> expression Term .)
+    Show            reduce using rule 21 (expressions -> expression Term .)
+    LenOp           reduce using rule 21 (expressions -> expression Term .)
+    Prefix          reduce using rule 21 (expressions -> expression Term .)
+    Suffix          reduce using rule 21 (expressions -> expression Term .)
+    VarName         reduce using rule 21 (expressions -> expression Term .)
+    StringType      reduce using rule 21 (expressions -> expression Term .)
+    IntType         reduce using rule 21 (expressions -> expression Term .)
+    AlphType        reduce using rule 21 (expressions -> expression Term .)
+    LangType        reduce using rule 21 (expressions -> expression Term .)
+    BooleanType     reduce using rule 21 (expressions -> expression Term .)
+    LGroup          reduce using rule 21 (expressions -> expression Term .)
+    VAlph           reduce using rule 21 (expressions -> expression Term .)
+    String          reduce using rule 21 (expressions -> expression Term .)
+    VString         reduce using rule 21 (expressions -> expression Term .)
+    OpenStruct      reduce using rule 21 (expressions -> expression Term .)
+    $end            reduce using rule 21 (expressions -> expression Term .)
 
 
 state 51
 
-    (28) StringPow -> StringPow Pow . IntExpression
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
+    (19) AlphKleeneC -> AlphExpression KleeneC . IntExpression
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
 
-    Int             shift and go to state 11
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 54
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    LenOp           shift and go to state 30
 
-    IntExpression                  shift and go to state 73
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 74
+    IntExpression                  shift and go to state 77
+    StringLen                      shift and go to state 11
 
 state 52
 
-    (17) StringLen -> LenOp StringExpression . LenOp
-    (18) StringLen -> LenOp StringExpression . On AlphExpression LenOp
+    (17) AlphConcat -> AlphConcat Concat . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    LenOp           shift and go to state 75
-    On              shift and go to state 76
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
+    AlphPow                        shift and go to state 78
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
 state 53
 
-    (43) StringGroup -> VarValue .
+    (13) StringConcat -> StringConcat Concat . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    Pow             reduce using rule 43 (StringGroup -> VarValue .)
-    Concat          reduce using rule 43 (StringGroup -> VarValue .)
-    LenOp           reduce using rule 43 (StringGroup -> VarValue .)
-    On              reduce using rule 43 (StringGroup -> VarValue .)
-    CloseStruct     reduce using rule 43 (StringGroup -> VarValue .)
-    Splitter        reduce using rule 43 (StringGroup -> VarValue .)
-    Term            reduce using rule 43 (StringGroup -> VarValue .)
-    RGroup          reduce using rule 43 (StringGroup -> VarValue .)
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringPow                      shift and go to state 80
+    StringGroup                    shift and go to state 42
 
 state 54
 
-    (9) VarValue -> VarName .
+    (36) ShowVal -> Show expression .
 
-    Pow             reduce using rule 9 (VarValue -> VarName .)
-    Concat          reduce using rule 9 (VarValue -> VarName .)
-    LenOp           reduce using rule 9 (VarValue -> VarName .)
-    On              reduce using rule 9 (VarValue -> VarName .)
-    CloseStruct     reduce using rule 9 (VarValue -> VarName .)
-    Splitter        reduce using rule 9 (VarValue -> VarName .)
-    Term            reduce using rule 9 (VarValue -> VarName .)
-    RGroup          reduce using rule 9 (VarValue -> VarName .)
-    Or              reduce using rule 9 (VarValue -> VarName .)
-    And             reduce using rule 9 (VarValue -> VarName .)
+    Term            reduce using rule 36 (ShowVal -> Show expression .)
 
 
 state 55
 
-    (60) StringAssign -> VarName Eq . StringExpression
-    (65) IntAssign -> VarName Eq . IntExpression
-    (70) AlphAssign -> VarName Eq . AlphExpression
-    (75) LangAssign -> VarName Eq . LangExpression
-    (80) BooleanAssign -> VarName Eq . BooleanExpression
-    (12) StringExpression -> . StringConcat
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (3) BooleanExpression -> . BooleanOr
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
-    (11) BooleanOr -> . BooleanAnd
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
+    (63) StringDeclare -> StringDeclare Splitter . VarName
+    (64) StringDeclare -> StringDeclare Splitter . VarName Eq StringExpression
 
-    Int             shift and go to state 11
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 54
-    OpenStruct      shift and go to state 31
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-    LGroup          shift and go to state 86
-    String          shift and go to state 41
-    True            shift and go to state 88
-    False           shift and go to state 89
+    VarName         shift and go to state 81
 
-    StringExpression               shift and go to state 77
-    IntExpression                  shift and go to state 78
-    AlphExpression                 shift and go to state 79
-    LangExpression                 shift and go to state 80
-    BooleanExpression              shift and go to state 81
-    StringConcat                   shift and go to state 10
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 82
-    Alph                           shift and go to state 14
-    StringPrefix                   shift and go to state 15
-    StringSuffix                   shift and go to state 16
-    BooleanOr                      shift and go to state 83
-    StringPow                      shift and go to state 28
-    BooleanAnd                     shift and go to state 84
-    StringGroup                    shift and go to state 39
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
 
 state 56
 
-    (13) Alph -> OpenStruct StringList . CloseStruct
-    (21) StringList -> StringList . Splitter StringExpression
+    (70) IntDeclare -> IntDeclare Splitter . VarName
+    (71) IntDeclare -> IntDeclare Splitter . VarName Eq IntExpression
 
-    CloseStruct     shift and go to state 90
-    Splitter        shift and go to state 91
+    VarName         shift and go to state 82
 
 
 state 57
 
-    (14) Alph -> OpenStruct StringExpression . CloseStruct
-    (22) StringList -> StringExpression . Splitter StringExpression
+    (75) AlphDeclare -> AlphDeclare Splitter . VarName
+    (76) AlphDeclare -> AlphDeclare Splitter . VarName Eq AlphExpression
 
-    CloseStruct     shift and go to state 92
-    Splitter        shift and go to state 93
+    VarName         shift and go to state 83
 
 
 state 58
 
-    (16) StringPrefix -> Prefix StringExpression .
+    (80) LangDeclare -> LangDeclare Splitter . VarName
+    (81) LangDeclare -> LangDeclare Splitter . VarName Eq LangExpression
 
-    Term            reduce using rule 16 (StringPrefix -> Prefix StringExpression .)
-    Splitter        reduce using rule 16 (StringPrefix -> Prefix StringExpression .)
+    VarName         shift and go to state 84
 
 
 state 59
 
-    (27) StringSuffix -> Suffix StringExpression .
+    (85) BooleanDeclare -> BooleanDeclare Splitter . VarName
+    (86) BooleanDeclare -> BooleanDeclare Splitter . VarName Eq BooleanExpression
 
-    Term            reduce using rule 27 (StringSuffix -> Suffix StringExpression .)
-    Splitter        reduce using rule 27 (StringSuffix -> Suffix StringExpression .)
+    VarName         shift and go to state 85
 
 
 state 60
 
-    (56) StringDeclare -> StringType VarName .
-    (57) StringDeclare -> StringType VarName . Eq StringExpression
+    (15) StringLen -> LenOp StringExpression . LenOp
+    (16) StringLen -> LenOp StringExpression . On AlphExpression LenOp
 
-    Splitter        reduce using rule 56 (StringDeclare -> StringType VarName .)
-    Term            reduce using rule 56 (StringDeclare -> StringType VarName .)
-    Eq              shift and go to state 94
+    LenOp           shift and go to state 86
+    On              shift and go to state 87
 
 
 state 61
 
-    (61) IntDeclare -> IntType VarName .
-    (62) IntDeclare -> IntType VarName . Eq IntExpression
+    (41) StringGroup -> LGroup . StringExpression RGroup
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    Splitter        reduce using rule 61 (IntDeclare -> IntType VarName .)
-    Term            reduce using rule 61 (IntDeclare -> IntType VarName .)
-    Eq              shift and go to state 95
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 73
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 62
 
-    (66) AlphDeclare -> AlphType VarName .
-    (67) AlphDeclare -> AlphType VarName . Eq AlphExpression
+    (34) AlphPow -> AlphPow Pow . IntExpression
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
 
-    Splitter        reduce using rule 66 (AlphDeclare -> AlphType VarName .)
-    Term            reduce using rule 66 (AlphDeclare -> AlphType VarName .)
-    Eq              shift and go to state 96
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    LenOp           shift and go to state 30
 
+    IntExpression                  shift and go to state 88
+    StringLen                      shift and go to state 11
 
 state 63
 
-    (71) LangDeclare -> LangType VarName .
-    (72) LangDeclare -> LangType VarName . Eq LangExpression
+    (25) StringPow -> StringPow Pow . IntExpression
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
 
-    Splitter        reduce using rule 71 (LangDeclare -> LangType VarName .)
-    Term            reduce using rule 71 (LangDeclare -> LangType VarName .)
-    Eq              shift and go to state 97
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    LenOp           shift and go to state 30
 
+    IntExpression                  shift and go to state 89
+    StringLen                      shift and go to state 11
 
 state 64
 
-    (76) BooleanDeclare -> BooleanType VarName .
-    (77) BooleanDeclare -> BooleanType VarName . Eq BooleanExpression
+    (24) StringPrefix -> Prefix StringExpression .
 
-    Splitter        reduce using rule 76 (BooleanDeclare -> BooleanType VarName .)
-    Term            reduce using rule 76 (BooleanDeclare -> BooleanType VarName .)
-    Eq              shift and go to state 98
+    Term            reduce using rule 24 (StringPrefix -> Prefix StringExpression .)
+    Splitter        reduce using rule 24 (StringPrefix -> Prefix StringExpression .)
 
 
 state 65
 
-    (41) StringGroup -> LGroup StringExpression . RGroup
+    (37) StringSuffix -> Suffix StringExpression .
 
-    RGroup          shift and go to state 99
+    Term            reduce using rule 37 (StringSuffix -> Suffix StringExpression .)
+    Splitter        reduce using rule 37 (StringSuffix -> Suffix StringExpression .)
 
 
 state 66
 
-    (23) expressions -> expressions expression Term .
+    (67) StringAssign -> VarName Eq . StringExpression
+    (72) IntAssign -> VarName Eq . IntExpression
+    (77) AlphAssign -> VarName Eq . AlphExpression
+    (82) LangAssign -> VarName Eq . LangExpression
+    (87) BooleanAssign -> VarName Eq . BooleanExpression
+    (12) StringExpression -> . StringConcat
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (2) AlphExpression -> . AlphConcat
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (1) BooleanExpression -> . BooleanOr
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
+    (11) BooleanOr -> . BooleanAnd
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (39) BooleanGroup -> . Boolean
+    (40) BooleanGroup -> . VBoolean
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
+    (57) Boolean -> . True
+    (58) Boolean -> . False
 
-    Int             reduce using rule 23 (expressions -> expressions expression Term .)
-    Show            reduce using rule 23 (expressions -> expressions expression Term .)
-    LenOp           reduce using rule 23 (expressions -> expressions expression Term .)
-    VarName         reduce using rule 23 (expressions -> expressions expression Term .)
-    OpenStruct      reduce using rule 23 (expressions -> expressions expression Term .)
-    Prefix          reduce using rule 23 (expressions -> expressions expression Term .)
-    Suffix          reduce using rule 23 (expressions -> expressions expression Term .)
-    StringType      reduce using rule 23 (expressions -> expressions expression Term .)
-    IntType         reduce using rule 23 (expressions -> expressions expression Term .)
-    AlphType        reduce using rule 23 (expressions -> expressions expression Term .)
-    LangType        reduce using rule 23 (expressions -> expressions expression Term .)
-    BooleanType     reduce using rule 23 (expressions -> expressions expression Term .)
-    LGroup          reduce using rule 23 (expressions -> expressions expression Term .)
-    String          reduce using rule 23 (expressions -> expressions expression Term .)
-    $end            reduce using rule 23 (expressions -> expressions expression Term .)
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    VLang           shift and go to state 18
+    LenOp           shift and go to state 30
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    LGroup          shift and go to state 98
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    VAlph           shift and go to state 45
+    VBoolean        shift and go to state 100
+    OpenStruct      shift and go to state 48
+    True            shift and go to state 101
+    False           shift and go to state 102
 
+    StringExpression               shift and go to state 90
+    IntExpression                  shift and go to state 91
+    AlphExpression                 shift and go to state 92
+    LangExpression                 shift and go to state 93
+    BooleanExpression              shift and go to state 94
+    StringConcat                   shift and go to state 14
+    StringLen                      shift and go to state 11
+    AlphConcat                     shift and go to state 13
+    StringPrefix                   shift and go to state 15
+    StringSuffix                   shift and go to state 16
+    AlphKleeneC                    shift and go to state 17
+    BooleanOr                      shift and go to state 95
+    StringPow                      shift and go to state 32
+    AlphPow                        shift and go to state 31
+    BooleanAnd                     shift and go to state 96
+    StringGroup                    shift and go to state 42
+    AlphGroup                      shift and go to state 41
+    BooleanGroup                   shift and go to state 97
+    Alph                           shift and go to state 44
+    Boolean                        shift and go to state 99
 
 state 67
 
-    (19) StringConcat -> StringConcat Concat StringPow .
-    (28) StringPow -> StringPow . Pow IntExpression
+    (61) StringDeclare -> StringType VarName .
+    (62) StringDeclare -> StringType VarName . Eq StringExpression
 
-    Concat          reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    Term            reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    LenOp           reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    On              reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    CloseStruct     reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    Splitter        reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    RGroup          reduce using rule 19 (StringConcat -> StringConcat Concat StringPow .)
-    Pow             shift and go to state 51
+    Splitter        reduce using rule 61 (StringDeclare -> StringType VarName .)
+    Term            reduce using rule 61 (StringDeclare -> StringType VarName .)
+    Eq              shift and go to state 103
 
 
 state 68
 
-    (58) StringDeclare -> StringDeclare Splitter VarName .
-    (59) StringDeclare -> StringDeclare Splitter VarName . Eq StringExpression
+    (68) IntDeclare -> IntType VarName .
+    (69) IntDeclare -> IntType VarName . Eq IntExpression
 
-    Splitter        reduce using rule 58 (StringDeclare -> StringDeclare Splitter VarName .)
-    Term            reduce using rule 58 (StringDeclare -> StringDeclare Splitter VarName .)
-    Eq              shift and go to state 100
+    Splitter        reduce using rule 68 (IntDeclare -> IntType VarName .)
+    Term            reduce using rule 68 (IntDeclare -> IntType VarName .)
+    Eq              shift and go to state 104
 
 
 state 69
 
-    (63) IntDeclare -> IntDeclare Splitter VarName .
-    (64) IntDeclare -> IntDeclare Splitter VarName . Eq IntExpression
+    (73) AlphDeclare -> AlphType VarName .
+    (74) AlphDeclare -> AlphType VarName . Eq AlphExpression
 
-    Splitter        reduce using rule 63 (IntDeclare -> IntDeclare Splitter VarName .)
-    Term            reduce using rule 63 (IntDeclare -> IntDeclare Splitter VarName .)
-    Eq              shift and go to state 101
+    Splitter        reduce using rule 73 (AlphDeclare -> AlphType VarName .)
+    Term            reduce using rule 73 (AlphDeclare -> AlphType VarName .)
+    Eq              shift and go to state 105
 
 
 state 70
 
-    (68) AlphDeclare -> AlphDeclare Splitter VarName .
-    (69) AlphDeclare -> AlphDeclare Splitter VarName . Eq AlphExpression
+    (78) LangDeclare -> LangType VarName .
+    (79) LangDeclare -> LangType VarName . Eq LangExpression
 
-    Splitter        reduce using rule 68 (AlphDeclare -> AlphDeclare Splitter VarName .)
-    Term            reduce using rule 68 (AlphDeclare -> AlphDeclare Splitter VarName .)
-    Eq              shift and go to state 102
+    Splitter        reduce using rule 78 (LangDeclare -> LangType VarName .)
+    Term            reduce using rule 78 (LangDeclare -> LangType VarName .)
+    Eq              shift and go to state 106
 
 
 state 71
 
-    (73) LangDeclare -> LangDeclare Splitter VarName .
-    (74) LangDeclare -> LangDeclare Splitter VarName . Eq LangExpression
+    (83) BooleanDeclare -> BooleanType VarName .
+    (84) BooleanDeclare -> BooleanType VarName . Eq BooleanExpression
 
-    Splitter        reduce using rule 73 (LangDeclare -> LangDeclare Splitter VarName .)
-    Term            reduce using rule 73 (LangDeclare -> LangDeclare Splitter VarName .)
-    Eq              shift and go to state 103
+    Splitter        reduce using rule 83 (BooleanDeclare -> BooleanType VarName .)
+    Term            reduce using rule 83 (BooleanDeclare -> BooleanType VarName .)
+    Eq              shift and go to state 107
 
 
 state 72
 
-    (78) BooleanDeclare -> BooleanDeclare Splitter VarName .
-    (79) BooleanDeclare -> BooleanDeclare Splitter VarName . Eq BooleanExpression
+    (49) AlphGroup -> LGroup AlphExpression . RGroup
 
-    Splitter        reduce using rule 78 (BooleanDeclare -> BooleanDeclare Splitter VarName .)
-    Term            reduce using rule 78 (BooleanDeclare -> BooleanDeclare Splitter VarName .)
-    Eq              shift and go to state 104
+    RGroup          shift and go to state 108
 
 
 state 73
 
-    (28) StringPow -> StringPow Pow IntExpression .
+    (41) StringGroup -> LGroup StringExpression . RGroup
 
-    Pow             reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    Concat          reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    Term            reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    LenOp           reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    On              reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    CloseStruct     reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    Splitter        reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
-    RGroup          reduce using rule 28 (StringPow -> StringPow Pow IntExpression .)
+    RGroup          shift and go to state 109
 
 
 state 74
 
-    (8) IntExpression -> VarValue .
+    (59) Alph -> OpenStruct StringList . CloseStruct
+    (65) StringList -> StringList . Splitter StringExpression
 
-    Pow             reduce using rule 8 (IntExpression -> VarValue .)
-    Concat          reduce using rule 8 (IntExpression -> VarValue .)
-    Term            reduce using rule 8 (IntExpression -> VarValue .)
-    LenOp           reduce using rule 8 (IntExpression -> VarValue .)
-    On              reduce using rule 8 (IntExpression -> VarValue .)
-    CloseStruct     reduce using rule 8 (IntExpression -> VarValue .)
-    Splitter        reduce using rule 8 (IntExpression -> VarValue .)
-    RGroup          reduce using rule 8 (IntExpression -> VarValue .)
+    CloseStruct     shift and go to state 110
+    Splitter        shift and go to state 111
 
 
 state 75
 
-    (17) StringLen -> LenOp StringExpression LenOp .
+    (60) Alph -> OpenStruct StringExpression . CloseStruct
+    (66) StringList -> StringExpression . Splitter StringExpression
 
-    Term            reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    Pow             reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    Concat          reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    LenOp           reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    On              reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    CloseStruct     reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    Splitter        reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
-    RGroup          reduce using rule 17 (StringLen -> LenOp StringExpression LenOp .)
+    CloseStruct     shift and go to state 112
+    Splitter        shift and go to state 113
 
 
 state 76
 
-    (18) StringLen -> LenOp StringExpression On . AlphExpression LenOp
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (9) VarValue -> . VarName
+    (20) expressions -> expressions expression Term .
 
-    OpenStruct      shift and go to state 31
-    VarName         shift and go to state 54
+    Int             reduce using rule 20 (expressions -> expressions expression Term .)
+    VInt            reduce using rule 20 (expressions -> expressions expression Term .)
+    VLang           reduce using rule 20 (expressions -> expressions expression Term .)
+    Show            reduce using rule 20 (expressions -> expressions expression Term .)
+    LenOp           reduce using rule 20 (expressions -> expressions expression Term .)
+    Prefix          reduce using rule 20 (expressions -> expressions expression Term .)
+    Suffix          reduce using rule 20 (expressions -> expressions expression Term .)
+    VarName         reduce using rule 20 (expressions -> expressions expression Term .)
+    StringType      reduce using rule 20 (expressions -> expressions expression Term .)
+    IntType         reduce using rule 20 (expressions -> expressions expression Term .)
+    AlphType        reduce using rule 20 (expressions -> expressions expression Term .)
+    LangType        reduce using rule 20 (expressions -> expressions expression Term .)
+    BooleanType     reduce using rule 20 (expressions -> expressions expression Term .)
+    LGroup          reduce using rule 20 (expressions -> expressions expression Term .)
+    VAlph           reduce using rule 20 (expressions -> expressions expression Term .)
+    String          reduce using rule 20 (expressions -> expressions expression Term .)
+    VString         reduce using rule 20 (expressions -> expressions expression Term .)
+    OpenStruct      reduce using rule 20 (expressions -> expressions expression Term .)
+    $end            reduce using rule 20 (expressions -> expressions expression Term .)
 
-    AlphExpression                 shift and go to state 105
-    Alph                           shift and go to state 14
-    VarValue                       shift and go to state 106
 
 state 77
 
-    (60) StringAssign -> VarName Eq StringExpression .
+    (19) AlphKleeneC -> AlphExpression KleeneC IntExpression .
 
-    Term            reduce using rule 60 (StringAssign -> VarName Eq StringExpression .)
+    Term            reduce using rule 19 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    Splitter        reduce using rule 19 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
 
 
 state 78
 
-    (65) IntAssign -> VarName Eq IntExpression .
+    (17) AlphConcat -> AlphConcat Concat AlphPow .
+    (34) AlphPow -> AlphPow . Pow IntExpression
 
-    Term            reduce using rule 65 (IntAssign -> VarName Eq IntExpression .)
+    Concat          reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    KleeneC         reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    Term            reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    RGroup          reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    LenOp           reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    Splitter        reduce using rule 17 (AlphConcat -> AlphConcat Concat AlphPow .)
+    Pow             shift and go to state 62
 
 
 state 79
 
-    (70) AlphAssign -> VarName Eq AlphExpression .
+    (49) AlphGroup -> LGroup . AlphExpression RGroup
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Term            reduce using rule 70 (AlphAssign -> VarName Eq AlphExpression .)
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
+    AlphExpression                 shift and go to state 72
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
 state 80
 
-    (75) LangAssign -> VarName Eq LangExpression .
+    (13) StringConcat -> StringConcat Concat StringPow .
+    (25) StringPow -> StringPow . Pow IntExpression
 
-    Term            reduce using rule 75 (LangAssign -> VarName Eq LangExpression .)
+    Concat          reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    Term            reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    LenOp           reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    On              reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    Splitter        reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    RGroup          reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    CloseStruct     reduce using rule 13 (StringConcat -> StringConcat Concat StringPow .)
+    Pow             shift and go to state 63
 
 
 state 81
 
-    (80) BooleanAssign -> VarName Eq BooleanExpression .
+    (63) StringDeclare -> StringDeclare Splitter VarName .
+    (64) StringDeclare -> StringDeclare Splitter VarName . Eq StringExpression
 
-    Term            reduce using rule 80 (BooleanAssign -> VarName Eq BooleanExpression .)
+    Splitter        reduce using rule 63 (StringDeclare -> StringDeclare Splitter VarName .)
+    Term            reduce using rule 63 (StringDeclare -> StringDeclare Splitter VarName .)
+    Eq              shift and go to state 114
 
 
 state 82
 
-    (8) IntExpression -> VarValue .
-    (2) AlphExpression -> VarValue .
-    (43) StringGroup -> VarValue .
-    (40) BooleanGroup -> VarValue .
+    (70) IntDeclare -> IntDeclare Splitter VarName .
+    (71) IntDeclare -> IntDeclare Splitter VarName . Eq IntExpression
 
-  ! reduce/reduce conflict for Term resolved using rule 2 (AlphExpression -> VarValue .)
-  ! reduce/reduce conflict for Term resolved using rule 2 (AlphExpression -> VarValue .)
-  ! reduce/reduce conflict for Term resolved using rule 2 (AlphExpression -> VarValue .)
-    Term            reduce using rule 2 (AlphExpression -> VarValue .)
-    Pow             reduce using rule 43 (StringGroup -> VarValue .)
-    Concat          reduce using rule 43 (StringGroup -> VarValue .)
-    Or              reduce using rule 40 (BooleanGroup -> VarValue .)
-    And             reduce using rule 40 (BooleanGroup -> VarValue .)
-
-  ! Term            [ reduce using rule 8 (IntExpression -> VarValue .) ]
-  ! Term            [ reduce using rule 43 (StringGroup -> VarValue .) ]
-  ! Term            [ reduce using rule 40 (BooleanGroup -> VarValue .) ]
+    Splitter        reduce using rule 70 (IntDeclare -> IntDeclare Splitter VarName .)
+    Term            reduce using rule 70 (IntDeclare -> IntDeclare Splitter VarName .)
+    Eq              shift and go to state 115
 
 
 state 83
 
-    (3) BooleanExpression -> BooleanOr .
+    (75) AlphDeclare -> AlphDeclare Splitter VarName .
+    (76) AlphDeclare -> AlphDeclare Splitter VarName . Eq AlphExpression
 
-    Term            reduce using rule 3 (BooleanExpression -> BooleanOr .)
-    RGroup          reduce using rule 3 (BooleanExpression -> BooleanOr .)
-    Splitter        reduce using rule 3 (BooleanExpression -> BooleanOr .)
+    Splitter        reduce using rule 75 (AlphDeclare -> AlphDeclare Splitter VarName .)
+    Term            reduce using rule 75 (AlphDeclare -> AlphDeclare Splitter VarName .)
+    Eq              shift and go to state 116
 
 
 state 84
 
-    (10) BooleanOr -> BooleanAnd . Or BooleanAnd
-    (11) BooleanOr -> BooleanAnd .
-    (25) BooleanAnd -> BooleanAnd . And BooleanAnd
+    (80) LangDeclare -> LangDeclare Splitter VarName .
+    (81) LangDeclare -> LangDeclare Splitter VarName . Eq LangExpression
 
-    Or              shift and go to state 107
-    Term            reduce using rule 11 (BooleanOr -> BooleanAnd .)
-    RGroup          reduce using rule 11 (BooleanOr -> BooleanAnd .)
-    Splitter        reduce using rule 11 (BooleanOr -> BooleanAnd .)
-    And             shift and go to state 108
+    Splitter        reduce using rule 80 (LangDeclare -> LangDeclare Splitter VarName .)
+    Term            reduce using rule 80 (LangDeclare -> LangDeclare Splitter VarName .)
+    Eq              shift and go to state 117
 
 
 state 85
 
-    (26) BooleanAnd -> BooleanGroup .
+    (85) BooleanDeclare -> BooleanDeclare Splitter VarName .
+    (86) BooleanDeclare -> BooleanDeclare Splitter VarName . Eq BooleanExpression
 
-    Or              reduce using rule 26 (BooleanAnd -> BooleanGroup .)
-    And             reduce using rule 26 (BooleanAnd -> BooleanGroup .)
-    Term            reduce using rule 26 (BooleanAnd -> BooleanGroup .)
-    RGroup          reduce using rule 26 (BooleanAnd -> BooleanGroup .)
-    Splitter        reduce using rule 26 (BooleanAnd -> BooleanGroup .)
+    Splitter        reduce using rule 85 (BooleanDeclare -> BooleanDeclare Splitter VarName .)
+    Term            reduce using rule 85 (BooleanDeclare -> BooleanDeclare Splitter VarName .)
+    Eq              shift and go to state 118
 
 
 state 86
 
-    (41) StringGroup -> LGroup . StringExpression RGroup
-    (38) BooleanGroup -> LGroup . BooleanExpression RGroup
-    (12) StringExpression -> . StringConcat
-    (3) BooleanExpression -> . BooleanOr
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
-    (11) BooleanOr -> . BooleanAnd
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (9) VarValue -> . VarName
-    (49) Boolean -> . True
-    (50) Boolean -> . False
+    (15) StringLen -> LenOp StringExpression LenOp .
 
-    LGroup          shift and go to state 86
-    String          shift and go to state 41
-    VarName         shift and go to state 54
-    True            shift and go to state 88
-    False           shift and go to state 89
+    Term            reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    Splitter        reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    Pow             reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    Concat          reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    KleeneC         reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    RGroup          reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    LenOp           reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    On              reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
+    CloseStruct     reduce using rule 15 (StringLen -> LenOp StringExpression LenOp .)
 
-    StringExpression               shift and go to state 65
-    BooleanExpression              shift and go to state 109
-    StringConcat                   shift and go to state 10
-    BooleanOr                      shift and go to state 83
-    StringPow                      shift and go to state 28
-    BooleanAnd                     shift and go to state 84
-    StringGroup                    shift and go to state 39
-    BooleanGroup                   shift and go to state 85
-    VarValue                       shift and go to state 110
-    Boolean                        shift and go to state 87
 
 state 87
+
+    (16) StringLen -> LenOp StringExpression On . AlphExpression LenOp
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
+
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
+
+    AlphExpression                 shift and go to state 119
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
+
+state 88
+
+    (34) AlphPow -> AlphPow Pow IntExpression .
+
+    Pow             reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    Concat          reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    KleeneC         reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    Term            reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    RGroup          reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    LenOp           reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+    Splitter        reduce using rule 34 (AlphPow -> AlphPow Pow IntExpression .)
+
+
+state 89
+
+    (25) StringPow -> StringPow Pow IntExpression .
+
+    Pow             reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    Concat          reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    Term            reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    LenOp           reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    On              reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    Splitter        reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    RGroup          reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+    CloseStruct     reduce using rule 25 (StringPow -> StringPow Pow IntExpression .)
+
+
+state 90
+
+    (67) StringAssign -> VarName Eq StringExpression .
+
+    Term            reduce using rule 67 (StringAssign -> VarName Eq StringExpression .)
+
+
+state 91
+
+    (72) IntAssign -> VarName Eq IntExpression .
+
+    Term            reduce using rule 72 (IntAssign -> VarName Eq IntExpression .)
+
+
+state 92
+
+    (77) AlphAssign -> VarName Eq AlphExpression .
+    (19) AlphKleeneC -> AlphExpression . KleeneC IntExpression
+
+    Term            reduce using rule 77 (AlphAssign -> VarName Eq AlphExpression .)
+    KleeneC         shift and go to state 51
+
+
+state 93
+
+    (82) LangAssign -> VarName Eq LangExpression .
+
+    Term            reduce using rule 82 (LangAssign -> VarName Eq LangExpression .)
+
+
+state 94
+
+    (87) BooleanAssign -> VarName Eq BooleanExpression .
+
+    Term            reduce using rule 87 (BooleanAssign -> VarName Eq BooleanExpression .)
+
+
+state 95
+
+    (1) BooleanExpression -> BooleanOr .
+
+    Term            reduce using rule 1 (BooleanExpression -> BooleanOr .)
+    RGroup          reduce using rule 1 (BooleanExpression -> BooleanOr .)
+    Splitter        reduce using rule 1 (BooleanExpression -> BooleanOr .)
+
+
+state 96
+
+    (10) BooleanOr -> BooleanAnd . Or BooleanAnd
+    (11) BooleanOr -> BooleanAnd .
+    (22) BooleanAnd -> BooleanAnd . And BooleanAnd
+
+    Or              shift and go to state 120
+    Term            reduce using rule 11 (BooleanOr -> BooleanAnd .)
+    RGroup          reduce using rule 11 (BooleanOr -> BooleanAnd .)
+    Splitter        reduce using rule 11 (BooleanOr -> BooleanAnd .)
+    And             shift and go to state 121
+
+
+state 97
+
+    (23) BooleanAnd -> BooleanGroup .
+
+    Or              reduce using rule 23 (BooleanAnd -> BooleanGroup .)
+    And             reduce using rule 23 (BooleanAnd -> BooleanGroup .)
+    Term            reduce using rule 23 (BooleanAnd -> BooleanGroup .)
+    RGroup          reduce using rule 23 (BooleanAnd -> BooleanGroup .)
+    Splitter        reduce using rule 23 (BooleanAnd -> BooleanGroup .)
+
+
+state 98
+
+    (41) StringGroup -> LGroup . StringExpression RGroup
+    (49) AlphGroup -> LGroup . AlphExpression RGroup
+    (38) BooleanGroup -> LGroup . BooleanExpression RGroup
+    (12) StringExpression -> . StringConcat
+    (2) AlphExpression -> . AlphConcat
+    (1) BooleanExpression -> . BooleanOr
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
+    (11) BooleanOr -> . BooleanAnd
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (39) BooleanGroup -> . Boolean
+    (40) BooleanGroup -> . VBoolean
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
+    (57) Boolean -> . True
+    (58) Boolean -> . False
+
+    LGroup          shift and go to state 98
+    String          shift and go to state 46
+    VString         shift and go to state 47
+    VAlph           shift and go to state 45
+    VBoolean        shift and go to state 100
+    OpenStruct      shift and go to state 48
+    True            shift and go to state 101
+    False           shift and go to state 102
+
+    StringExpression               shift and go to state 73
+    AlphExpression                 shift and go to state 72
+    BooleanExpression              shift and go to state 122
+    StringConcat                   shift and go to state 14
+    AlphConcat                     shift and go to state 13
+    BooleanOr                      shift and go to state 95
+    StringPow                      shift and go to state 32
+    AlphPow                        shift and go to state 31
+    BooleanAnd                     shift and go to state 96
+    StringGroup                    shift and go to state 42
+    AlphGroup                      shift and go to state 41
+    BooleanGroup                   shift and go to state 97
+    Alph                           shift and go to state 44
+    Boolean                        shift and go to state 99
+
+state 99
 
     (39) BooleanGroup -> Boolean .
 
@@ -1533,192 +1808,177 @@ state 87
     Splitter        reduce using rule 39 (BooleanGroup -> Boolean .)
 
 
-state 88
+state 100
 
-    (49) Boolean -> True .
+    (40) BooleanGroup -> VBoolean .
 
-    Or              reduce using rule 49 (Boolean -> True .)
-    And             reduce using rule 49 (Boolean -> True .)
-    Term            reduce using rule 49 (Boolean -> True .)
-    RGroup          reduce using rule 49 (Boolean -> True .)
-    Splitter        reduce using rule 49 (Boolean -> True .)
-
-
-state 89
-
-    (50) Boolean -> False .
-
-    Or              reduce using rule 50 (Boolean -> False .)
-    And             reduce using rule 50 (Boolean -> False .)
-    Term            reduce using rule 50 (Boolean -> False .)
-    RGroup          reduce using rule 50 (Boolean -> False .)
-    Splitter        reduce using rule 50 (Boolean -> False .)
+    Or              reduce using rule 40 (BooleanGroup -> VBoolean .)
+    And             reduce using rule 40 (BooleanGroup -> VBoolean .)
+    Term            reduce using rule 40 (BooleanGroup -> VBoolean .)
+    RGroup          reduce using rule 40 (BooleanGroup -> VBoolean .)
+    Splitter        reduce using rule 40 (BooleanGroup -> VBoolean .)
 
 
-state 90
+state 101
 
-    (13) Alph -> OpenStruct StringList CloseStruct .
+    (57) Boolean -> True .
 
-    Term            reduce using rule 13 (Alph -> OpenStruct StringList CloseStruct .)
-    LenOp           reduce using rule 13 (Alph -> OpenStruct StringList CloseStruct .)
-    Splitter        reduce using rule 13 (Alph -> OpenStruct StringList CloseStruct .)
+    Or              reduce using rule 57 (Boolean -> True .)
+    And             reduce using rule 57 (Boolean -> True .)
+    Term            reduce using rule 57 (Boolean -> True .)
+    RGroup          reduce using rule 57 (Boolean -> True .)
+    Splitter        reduce using rule 57 (Boolean -> True .)
 
 
-state 91
+state 102
 
-    (21) StringList -> StringList Splitter . StringExpression
+    (58) Boolean -> False .
+
+    Or              reduce using rule 58 (Boolean -> False .)
+    And             reduce using rule 58 (Boolean -> False .)
+    Term            reduce using rule 58 (Boolean -> False .)
+    RGroup          reduce using rule 58 (Boolean -> False .)
+    Splitter        reduce using rule 58 (Boolean -> False .)
+
+
+state 103
+
+    (62) StringDeclare -> StringType VarName Eq . StringExpression
     (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
     (41) StringGroup -> . LGroup StringExpression RGroup
     (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (43) StringGroup -> . VString
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
-    StringExpression               shift and go to state 111
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
+    StringExpression               shift and go to state 123
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
-state 92
+state 104
 
-    (14) Alph -> OpenStruct StringExpression CloseStruct .
+    (69) IntDeclare -> IntType VarName Eq . IntExpression
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
 
-    Term            reduce using rule 14 (Alph -> OpenStruct StringExpression CloseStruct .)
-    LenOp           reduce using rule 14 (Alph -> OpenStruct StringExpression CloseStruct .)
-    Splitter        reduce using rule 14 (Alph -> OpenStruct StringExpression CloseStruct .)
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    LenOp           shift and go to state 30
 
+    IntExpression                  shift and go to state 124
+    StringLen                      shift and go to state 11
 
-state 93
+state 105
 
-    (22) StringList -> StringExpression Splitter . StringExpression
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (74) AlphDeclare -> AlphType VarName Eq . AlphExpression
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
-    StringExpression               shift and go to state 112
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
+    AlphExpression                 shift and go to state 125
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
-state 94
+state 106
 
-    (57) StringDeclare -> StringType VarName Eq . StringExpression
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
+    (79) LangDeclare -> LangType VarName Eq . LangExpression
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
+    VLang           shift and go to state 18
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
-    StringExpression               shift and go to state 113
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
-
-state 95
-
-    (62) IntDeclare -> IntType VarName Eq . IntExpression
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-
-    Int             shift and go to state 11
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 54
-
-    IntExpression                  shift and go to state 114
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 74
-
-state 96
-
-    (67) AlphDeclare -> AlphType VarName Eq . AlphExpression
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (9) VarValue -> . VarName
-
-    OpenStruct      shift and go to state 31
-    VarName         shift and go to state 54
-
-    AlphExpression                 shift and go to state 115
-    Alph                           shift and go to state 14
-    VarValue                       shift and go to state 106
-
-state 97
-
-    (72) LangDeclare -> LangType VarName Eq . LangExpression
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-
-    LangExpression                 shift and go to state 116
+    LangExpression                 shift and go to state 126
     StringPrefix                   shift and go to state 15
     StringSuffix                   shift and go to state 16
+    AlphKleeneC                    shift and go to state 17
+    AlphExpression                 shift and go to state 127
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
-state 98
+state 107
 
-    (77) BooleanDeclare -> BooleanType VarName Eq . BooleanExpression
-    (3) BooleanExpression -> . BooleanOr
+    (84) BooleanDeclare -> BooleanType VarName Eq . BooleanExpression
+    (1) BooleanExpression -> . BooleanOr
     (10) BooleanOr -> . BooleanAnd Or BooleanAnd
     (11) BooleanOr -> . BooleanAnd
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
     (38) BooleanGroup -> . LGroup BooleanExpression RGroup
     (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
-    (9) VarValue -> . VarName
+    (40) BooleanGroup -> . VBoolean
+    (57) Boolean -> . True
+    (58) Boolean -> . False
 
-    LGroup          shift and go to state 118
-    True            shift and go to state 88
-    False           shift and go to state 89
-    VarName         shift and go to state 54
+    LGroup          shift and go to state 129
+    VBoolean        shift and go to state 100
+    True            shift and go to state 101
+    False           shift and go to state 102
 
-    BooleanExpression              shift and go to state 117
-    BooleanOr                      shift and go to state 83
-    BooleanAnd                     shift and go to state 84
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
-    VarValue                       shift and go to state 119
+    BooleanExpression              shift and go to state 128
+    BooleanOr                      shift and go to state 95
+    BooleanAnd                     shift and go to state 96
+    BooleanGroup                   shift and go to state 97
+    Boolean                        shift and go to state 99
 
-state 99
+state 108
+
+    (49) AlphGroup -> LGroup AlphExpression RGroup .
+
+    Pow             reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    Concat          reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    KleeneC         reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    Term            reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    RGroup          reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    LenOp           reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+    Splitter        reduce using rule 49 (AlphGroup -> LGroup AlphExpression RGroup .)
+
+
+state 109
 
     (41) StringGroup -> LGroup StringExpression RGroup .
 
@@ -1727,367 +1987,427 @@ state 99
     Term            reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
     LenOp           reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
     On              reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
-    CloseStruct     reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
     Splitter        reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
     RGroup          reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
-
-
-state 100
-
-    (59) StringDeclare -> StringDeclare Splitter VarName Eq . StringExpression
-    (12) StringExpression -> . StringConcat
-    (19) StringConcat -> . StringConcat Concat StringPow
-    (20) StringConcat -> . StringPow
-    (28) StringPow -> . StringPow Pow IntExpression
-    (29) StringPow -> . StringGroup
-    (41) StringGroup -> . LGroup StringExpression RGroup
-    (42) StringGroup -> . String
-    (43) StringGroup -> . VarValue
-    (9) VarValue -> . VarName
-
-    LGroup          shift and go to state 40
-    String          shift and go to state 41
-    VarName         shift and go to state 54
-
-    StringExpression               shift and go to state 120
-    StringConcat                   shift and go to state 10
-    StringPow                      shift and go to state 28
-    StringGroup                    shift and go to state 39
-    VarValue                       shift and go to state 53
-
-state 101
-
-    (64) IntDeclare -> IntDeclare Splitter VarName Eq . IntExpression
-    (6) IntExpression -> . Int
-    (7) IntExpression -> . StringLen
-    (8) IntExpression -> . VarValue
-    (17) StringLen -> . LenOp StringExpression LenOp
-    (18) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (9) VarValue -> . VarName
-
-    Int             shift and go to state 11
-    LenOp           shift and go to state 29
-    VarName         shift and go to state 54
-
-    IntExpression                  shift and go to state 121
-    StringLen                      shift and go to state 12
-    VarValue                       shift and go to state 74
-
-state 102
-
-    (69) AlphDeclare -> AlphDeclare Splitter VarName Eq . AlphExpression
-    (1) AlphExpression -> . Alph
-    (2) AlphExpression -> . VarValue
-    (13) Alph -> . OpenStruct StringList CloseStruct
-    (14) Alph -> . OpenStruct StringExpression CloseStruct
-    (9) VarValue -> . VarName
-
-    OpenStruct      shift and go to state 31
-    VarName         shift and go to state 54
-
-    AlphExpression                 shift and go to state 122
-    Alph                           shift and go to state 14
-    VarValue                       shift and go to state 106
-
-state 103
-
-    (74) LangDeclare -> LangDeclare Splitter VarName Eq . LangExpression
-    (4) LangExpression -> . StringPrefix
-    (5) LangExpression -> . StringSuffix
-    (16) StringPrefix -> . Prefix StringExpression
-    (27) StringSuffix -> . Suffix StringExpression
-
-    Prefix          shift and go to state 32
-    Suffix          shift and go to state 33
-
-    LangExpression                 shift and go to state 123
-    StringPrefix                   shift and go to state 15
-    StringSuffix                   shift and go to state 16
-
-state 104
-
-    (79) BooleanDeclare -> BooleanDeclare Splitter VarName Eq . BooleanExpression
-    (3) BooleanExpression -> . BooleanOr
-    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
-    (11) BooleanOr -> . BooleanAnd
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
-    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
-    (9) VarValue -> . VarName
-
-    LGroup          shift and go to state 118
-    True            shift and go to state 88
-    False           shift and go to state 89
-    VarName         shift and go to state 54
-
-    BooleanExpression              shift and go to state 124
-    BooleanOr                      shift and go to state 83
-    BooleanAnd                     shift and go to state 84
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
-    VarValue                       shift and go to state 119
-
-state 105
-
-    (18) StringLen -> LenOp StringExpression On AlphExpression . LenOp
-
-    LenOp           shift and go to state 125
-
-
-state 106
-
-    (2) AlphExpression -> VarValue .
-
-    LenOp           reduce using rule 2 (AlphExpression -> VarValue .)
-    Splitter        reduce using rule 2 (AlphExpression -> VarValue .)
-    Term            reduce using rule 2 (AlphExpression -> VarValue .)
-
-
-state 107
-
-    (10) BooleanOr -> BooleanAnd Or . BooleanAnd
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
-    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
-    (9) VarValue -> . VarName
-
-    LGroup          shift and go to state 118
-    True            shift and go to state 88
-    False           shift and go to state 89
-    VarName         shift and go to state 54
-
-    BooleanAnd                     shift and go to state 126
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
-    VarValue                       shift and go to state 119
-
-state 108
-
-    (25) BooleanAnd -> BooleanAnd And . BooleanAnd
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
-    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
-    (9) VarValue -> . VarName
-
-    LGroup          shift and go to state 118
-    True            shift and go to state 88
-    False           shift and go to state 89
-    VarName         shift and go to state 54
-
-    BooleanAnd                     shift and go to state 127
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
-    VarValue                       shift and go to state 119
-
-state 109
-
-    (38) BooleanGroup -> LGroup BooleanExpression . RGroup
-
-    RGroup          shift and go to state 128
+    CloseStruct     reduce using rule 41 (StringGroup -> LGroup StringExpression RGroup .)
 
 
 state 110
 
-    (43) StringGroup -> VarValue .
-    (40) BooleanGroup -> VarValue .
+    (59) Alph -> OpenStruct StringList CloseStruct .
 
-  ! reduce/reduce conflict for RGroup resolved using rule 43 (StringGroup -> VarValue .)
-    Pow             reduce using rule 43 (StringGroup -> VarValue .)
-    Concat          reduce using rule 43 (StringGroup -> VarValue .)
-    RGroup          reduce using rule 43 (StringGroup -> VarValue .)
-    Or              reduce using rule 40 (BooleanGroup -> VarValue .)
-    And             reduce using rule 40 (BooleanGroup -> VarValue .)
-
-  ! RGroup          [ reduce using rule 40 (BooleanGroup -> VarValue .) ]
+    Pow             reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    Concat          reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    KleeneC         reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    Term            reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    RGroup          reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    LenOp           reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
+    Splitter        reduce using rule 59 (Alph -> OpenStruct StringList CloseStruct .)
 
 
 state 111
 
-    (21) StringList -> StringList Splitter StringExpression .
+    (65) StringList -> StringList Splitter . StringExpression
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    CloseStruct     reduce using rule 21 (StringList -> StringList Splitter StringExpression .)
-    Splitter        reduce using rule 21 (StringList -> StringList Splitter StringExpression .)
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 130
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 112
 
-    (22) StringList -> StringExpression Splitter StringExpression .
+    (60) Alph -> OpenStruct StringExpression CloseStruct .
 
-    CloseStruct     reduce using rule 22 (StringList -> StringExpression Splitter StringExpression .)
-    Splitter        reduce using rule 22 (StringList -> StringExpression Splitter StringExpression .)
+    Pow             reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    Concat          reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    KleeneC         reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    Term            reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    RGroup          reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    LenOp           reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
+    Splitter        reduce using rule 60 (Alph -> OpenStruct StringExpression CloseStruct .)
 
 
 state 113
 
-    (57) StringDeclare -> StringType VarName Eq StringExpression .
+    (66) StringList -> StringExpression Splitter . StringExpression
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    Splitter        reduce using rule 57 (StringDeclare -> StringType VarName Eq StringExpression .)
-    Term            reduce using rule 57 (StringDeclare -> StringType VarName Eq StringExpression .)
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 131
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 114
 
-    (62) IntDeclare -> IntType VarName Eq IntExpression .
+    (64) StringDeclare -> StringDeclare Splitter VarName Eq . StringExpression
+    (12) StringExpression -> . StringConcat
+    (13) StringConcat -> . StringConcat Concat StringPow
+    (14) StringConcat -> . StringPow
+    (25) StringPow -> . StringPow Pow IntExpression
+    (26) StringPow -> . StringGroup
+    (41) StringGroup -> . LGroup StringExpression RGroup
+    (42) StringGroup -> . String
+    (43) StringGroup -> . VString
 
-    Splitter        reduce using rule 62 (IntDeclare -> IntType VarName Eq IntExpression .)
-    Term            reduce using rule 62 (IntDeclare -> IntType VarName Eq IntExpression .)
+    LGroup          shift and go to state 61
+    String          shift and go to state 46
+    VString         shift and go to state 47
 
+    StringExpression               shift and go to state 132
+    StringConcat                   shift and go to state 14
+    StringPow                      shift and go to state 32
+    StringGroup                    shift and go to state 42
 
 state 115
 
-    (67) AlphDeclare -> AlphType VarName Eq AlphExpression .
+    (71) IntDeclare -> IntDeclare Splitter VarName Eq . IntExpression
+    (3) IntExpression -> . Int
+    (4) IntExpression -> . StringLen
+    (5) IntExpression -> . VInt
+    (15) StringLen -> . LenOp StringExpression LenOp
+    (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
 
-    Splitter        reduce using rule 67 (AlphDeclare -> AlphType VarName Eq AlphExpression .)
-    Term            reduce using rule 67 (AlphDeclare -> AlphType VarName Eq AlphExpression .)
+    Int             shift and go to state 10
+    VInt            shift and go to state 12
+    LenOp           shift and go to state 30
 
+    IntExpression                  shift and go to state 133
+    StringLen                      shift and go to state 11
 
 state 116
 
-    (72) LangDeclare -> LangType VarName Eq LangExpression .
+    (76) AlphDeclare -> AlphDeclare Splitter VarName Eq . AlphExpression
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Splitter        reduce using rule 72 (LangDeclare -> LangType VarName Eq LangExpression .)
-    Term            reduce using rule 72 (LangDeclare -> LangType VarName Eq LangExpression .)
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
+    AlphExpression                 shift and go to state 134
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
 state 117
 
-    (77) BooleanDeclare -> BooleanType VarName Eq BooleanExpression .
+    (81) LangDeclare -> LangDeclare Splitter VarName Eq . LangExpression
+    (6) LangExpression -> . StringPrefix
+    (7) LangExpression -> . StringSuffix
+    (8) LangExpression -> . AlphKleeneC
+    (9) LangExpression -> . VLang
+    (24) StringPrefix -> . Prefix StringExpression
+    (37) StringSuffix -> . Suffix StringExpression
+    (19) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (2) AlphExpression -> . AlphConcat
+    (17) AlphConcat -> . AlphConcat Concat AlphPow
+    (18) AlphConcat -> . AlphPow
+    (34) AlphPow -> . AlphPow Pow IntExpression
+    (35) AlphPow -> . AlphGroup
+    (49) AlphGroup -> . LGroup AlphExpression RGroup
+    (50) AlphGroup -> . Alph
+    (51) AlphGroup -> . VAlph
+    (59) Alph -> . OpenStruct StringList CloseStruct
+    (60) Alph -> . OpenStruct StringExpression CloseStruct
 
-    Splitter        reduce using rule 77 (BooleanDeclare -> BooleanType VarName Eq BooleanExpression .)
-    Term            reduce using rule 77 (BooleanDeclare -> BooleanType VarName Eq BooleanExpression .)
+    VLang           shift and go to state 18
+    Prefix          shift and go to state 33
+    Suffix          shift and go to state 34
+    LGroup          shift and go to state 79
+    VAlph           shift and go to state 45
+    OpenStruct      shift and go to state 48
 
+    LangExpression                 shift and go to state 135
+    StringPrefix                   shift and go to state 15
+    StringSuffix                   shift and go to state 16
+    AlphKleeneC                    shift and go to state 17
+    AlphExpression                 shift and go to state 127
+    AlphConcat                     shift and go to state 13
+    AlphPow                        shift and go to state 31
+    AlphGroup                      shift and go to state 41
+    Alph                           shift and go to state 44
 
 state 118
 
-    (38) BooleanGroup -> LGroup . BooleanExpression RGroup
-    (3) BooleanExpression -> . BooleanOr
+    (86) BooleanDeclare -> BooleanDeclare Splitter VarName Eq . BooleanExpression
+    (1) BooleanExpression -> . BooleanOr
     (10) BooleanOr -> . BooleanAnd Or BooleanAnd
     (11) BooleanOr -> . BooleanAnd
-    (25) BooleanAnd -> . BooleanAnd And BooleanAnd
-    (26) BooleanAnd -> . BooleanGroup
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
     (38) BooleanGroup -> . LGroup BooleanExpression RGroup
     (39) BooleanGroup -> . Boolean
-    (40) BooleanGroup -> . VarValue
-    (49) Boolean -> . True
-    (50) Boolean -> . False
-    (9) VarValue -> . VarName
+    (40) BooleanGroup -> . VBoolean
+    (57) Boolean -> . True
+    (58) Boolean -> . False
 
-    LGroup          shift and go to state 118
-    True            shift and go to state 88
-    False           shift and go to state 89
-    VarName         shift and go to state 54
+    LGroup          shift and go to state 129
+    VBoolean        shift and go to state 100
+    True            shift and go to state 101
+    False           shift and go to state 102
 
-    BooleanExpression              shift and go to state 109
-    BooleanOr                      shift and go to state 83
-    BooleanAnd                     shift and go to state 84
-    BooleanGroup                   shift and go to state 85
-    Boolean                        shift and go to state 87
-    VarValue                       shift and go to state 119
+    BooleanExpression              shift and go to state 136
+    BooleanOr                      shift and go to state 95
+    BooleanAnd                     shift and go to state 96
+    BooleanGroup                   shift and go to state 97
+    Boolean                        shift and go to state 99
 
 state 119
 
-    (40) BooleanGroup -> VarValue .
+    (16) StringLen -> LenOp StringExpression On AlphExpression . LenOp
 
-    Or              reduce using rule 40 (BooleanGroup -> VarValue .)
-    And             reduce using rule 40 (BooleanGroup -> VarValue .)
-    Splitter        reduce using rule 40 (BooleanGroup -> VarValue .)
-    Term            reduce using rule 40 (BooleanGroup -> VarValue .)
-    RGroup          reduce using rule 40 (BooleanGroup -> VarValue .)
+    LenOp           shift and go to state 137
 
 
 state 120
 
-    (59) StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .
+    (10) BooleanOr -> BooleanAnd Or . BooleanAnd
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
+    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (39) BooleanGroup -> . Boolean
+    (40) BooleanGroup -> . VBoolean
+    (57) Boolean -> . True
+    (58) Boolean -> . False
 
-    Splitter        reduce using rule 59 (StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .)
-    Term            reduce using rule 59 (StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .)
+    LGroup          shift and go to state 129
+    VBoolean        shift and go to state 100
+    True            shift and go to state 101
+    False           shift and go to state 102
 
+    BooleanAnd                     shift and go to state 138
+    BooleanGroup                   shift and go to state 97
+    Boolean                        shift and go to state 99
 
 state 121
 
-    (64) IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .
+    (22) BooleanAnd -> BooleanAnd And . BooleanAnd
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
+    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (39) BooleanGroup -> . Boolean
+    (40) BooleanGroup -> . VBoolean
+    (57) Boolean -> . True
+    (58) Boolean -> . False
 
-    Splitter        reduce using rule 64 (IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .)
-    Term            reduce using rule 64 (IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .)
+    LGroup          shift and go to state 129
+    VBoolean        shift and go to state 100
+    True            shift and go to state 101
+    False           shift and go to state 102
 
+    BooleanAnd                     shift and go to state 139
+    BooleanGroup                   shift and go to state 97
+    Boolean                        shift and go to state 99
 
 state 122
 
-    (69) AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .
+    (38) BooleanGroup -> LGroup BooleanExpression . RGroup
 
-    Splitter        reduce using rule 69 (AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .)
-    Term            reduce using rule 69 (AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .)
+    RGroup          shift and go to state 140
 
 
 state 123
 
-    (74) LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .
+    (62) StringDeclare -> StringType VarName Eq StringExpression .
 
-    Splitter        reduce using rule 74 (LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .)
-    Term            reduce using rule 74 (LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .)
+    Splitter        reduce using rule 62 (StringDeclare -> StringType VarName Eq StringExpression .)
+    Term            reduce using rule 62 (StringDeclare -> StringType VarName Eq StringExpression .)
 
 
 state 124
 
-    (79) BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .
+    (69) IntDeclare -> IntType VarName Eq IntExpression .
 
-    Splitter        reduce using rule 79 (BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .)
-    Term            reduce using rule 79 (BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .)
+    Splitter        reduce using rule 69 (IntDeclare -> IntType VarName Eq IntExpression .)
+    Term            reduce using rule 69 (IntDeclare -> IntType VarName Eq IntExpression .)
 
 
 state 125
 
-    (18) StringLen -> LenOp StringExpression On AlphExpression LenOp .
+    (74) AlphDeclare -> AlphType VarName Eq AlphExpression .
 
-    Term            reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    Pow             reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    Concat          reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    LenOp           reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    On              reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    CloseStruct     reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    Splitter        reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
-    RGroup          reduce using rule 18 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    Splitter        reduce using rule 74 (AlphDeclare -> AlphType VarName Eq AlphExpression .)
+    Term            reduce using rule 74 (AlphDeclare -> AlphType VarName Eq AlphExpression .)
 
 
 state 126
 
-    (10) BooleanOr -> BooleanAnd Or BooleanAnd .
-    (25) BooleanAnd -> BooleanAnd . And BooleanAnd
+    (79) LangDeclare -> LangType VarName Eq LangExpression .
 
-    Term            reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
-    RGroup          reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
-    Splitter        reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
-    And             shift and go to state 108
+    Splitter        reduce using rule 79 (LangDeclare -> LangType VarName Eq LangExpression .)
+    Term            reduce using rule 79 (LangDeclare -> LangType VarName Eq LangExpression .)
 
 
 state 127
 
-    (25) BooleanAnd -> BooleanAnd And BooleanAnd .
-    (25) BooleanAnd -> BooleanAnd . And BooleanAnd
+    (19) AlphKleeneC -> AlphExpression . KleeneC IntExpression
 
-  ! shift/reduce conflict for And resolved as shift
-    Or              reduce using rule 25 (BooleanAnd -> BooleanAnd And BooleanAnd .)
-    Term            reduce using rule 25 (BooleanAnd -> BooleanAnd And BooleanAnd .)
-    RGroup          reduce using rule 25 (BooleanAnd -> BooleanAnd And BooleanAnd .)
-    Splitter        reduce using rule 25 (BooleanAnd -> BooleanAnd And BooleanAnd .)
-    And             shift and go to state 108
-
-  ! And             [ reduce using rule 25 (BooleanAnd -> BooleanAnd And BooleanAnd .) ]
+    KleeneC         shift and go to state 51
 
 
 state 128
+
+    (84) BooleanDeclare -> BooleanType VarName Eq BooleanExpression .
+
+    Splitter        reduce using rule 84 (BooleanDeclare -> BooleanType VarName Eq BooleanExpression .)
+    Term            reduce using rule 84 (BooleanDeclare -> BooleanType VarName Eq BooleanExpression .)
+
+
+state 129
+
+    (38) BooleanGroup -> LGroup . BooleanExpression RGroup
+    (1) BooleanExpression -> . BooleanOr
+    (10) BooleanOr -> . BooleanAnd Or BooleanAnd
+    (11) BooleanOr -> . BooleanAnd
+    (22) BooleanAnd -> . BooleanAnd And BooleanAnd
+    (23) BooleanAnd -> . BooleanGroup
+    (38) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (39) BooleanGroup -> . Boolean
+    (40) BooleanGroup -> . VBoolean
+    (57) Boolean -> . True
+    (58) Boolean -> . False
+
+    LGroup          shift and go to state 129
+    VBoolean        shift and go to state 100
+    True            shift and go to state 101
+    False           shift and go to state 102
+
+    BooleanExpression              shift and go to state 122
+    BooleanOr                      shift and go to state 95
+    BooleanAnd                     shift and go to state 96
+    BooleanGroup                   shift and go to state 97
+    Boolean                        shift and go to state 99
+
+state 130
+
+    (65) StringList -> StringList Splitter StringExpression .
+
+    CloseStruct     reduce using rule 65 (StringList -> StringList Splitter StringExpression .)
+    Splitter        reduce using rule 65 (StringList -> StringList Splitter StringExpression .)
+
+
+state 131
+
+    (66) StringList -> StringExpression Splitter StringExpression .
+
+    CloseStruct     reduce using rule 66 (StringList -> StringExpression Splitter StringExpression .)
+    Splitter        reduce using rule 66 (StringList -> StringExpression Splitter StringExpression .)
+
+
+state 132
+
+    (64) StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .
+
+    Splitter        reduce using rule 64 (StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .)
+    Term            reduce using rule 64 (StringDeclare -> StringDeclare Splitter VarName Eq StringExpression .)
+
+
+state 133
+
+    (71) IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .
+
+    Splitter        reduce using rule 71 (IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .)
+    Term            reduce using rule 71 (IntDeclare -> IntDeclare Splitter VarName Eq IntExpression .)
+
+
+state 134
+
+    (76) AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .
+
+    Splitter        reduce using rule 76 (AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .)
+    Term            reduce using rule 76 (AlphDeclare -> AlphDeclare Splitter VarName Eq AlphExpression .)
+
+
+state 135
+
+    (81) LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .
+
+    Splitter        reduce using rule 81 (LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .)
+    Term            reduce using rule 81 (LangDeclare -> LangDeclare Splitter VarName Eq LangExpression .)
+
+
+state 136
+
+    (86) BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .
+
+    Splitter        reduce using rule 86 (BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .)
+    Term            reduce using rule 86 (BooleanDeclare -> BooleanDeclare Splitter VarName Eq BooleanExpression .)
+
+
+state 137
+
+    (16) StringLen -> LenOp StringExpression On AlphExpression LenOp .
+
+    Term            reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    Splitter        reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    Pow             reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    Concat          reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    KleeneC         reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    RGroup          reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    LenOp           reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    On              reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+    CloseStruct     reduce using rule 16 (StringLen -> LenOp StringExpression On AlphExpression LenOp .)
+
+
+state 138
+
+    (10) BooleanOr -> BooleanAnd Or BooleanAnd .
+    (22) BooleanAnd -> BooleanAnd . And BooleanAnd
+
+    Term            reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
+    RGroup          reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
+    Splitter        reduce using rule 10 (BooleanOr -> BooleanAnd Or BooleanAnd .)
+    And             shift and go to state 121
+
+
+state 139
+
+    (22) BooleanAnd -> BooleanAnd And BooleanAnd .
+    (22) BooleanAnd -> BooleanAnd . And BooleanAnd
+
+  ! shift/reduce conflict for And resolved as shift
+    Or              reduce using rule 22 (BooleanAnd -> BooleanAnd And BooleanAnd .)
+    Term            reduce using rule 22 (BooleanAnd -> BooleanAnd And BooleanAnd .)
+    RGroup          reduce using rule 22 (BooleanAnd -> BooleanAnd And BooleanAnd .)
+    Splitter        reduce using rule 22 (BooleanAnd -> BooleanAnd And BooleanAnd .)
+    And             shift and go to state 121
+
+  ! And             [ reduce using rule 22 (BooleanAnd -> BooleanAnd And BooleanAnd .) ]
+
+
+state 140
 
     (38) BooleanGroup -> LGroup BooleanExpression RGroup .
 
@@ -2100,16 +2420,4 @@ state 128
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for And in state 127 resolved as shift
-WARNING: reduce/reduce conflict in state 13 resolved using rule (AlphExpression -> VarValue)
-WARNING: rejected rule (IntExpression -> VarValue) in state 13
-WARNING: reduce/reduce conflict in state 13 resolved using rule (AlphExpression -> VarValue)
-WARNING: rejected rule (StringGroup -> VarValue) in state 13
-WARNING: reduce/reduce conflict in state 82 resolved using rule (AlphExpression -> VarValue)
-WARNING: rejected rule (IntExpression -> VarValue) in state 82
-WARNING: reduce/reduce conflict in state 82 resolved using rule (AlphExpression -> VarValue)
-WARNING: rejected rule (StringGroup -> VarValue) in state 82
-WARNING: reduce/reduce conflict in state 82 resolved using rule (AlphExpression -> VarValue)
-WARNING: rejected rule (BooleanGroup -> VarValue) in state 82
-WARNING: reduce/reduce conflict in state 110 resolved using rule (StringGroup -> VarValue)
-WARNING: rejected rule (BooleanGroup -> VarValue) in state 110
+WARNING: shift/reduce conflict for And in state 139 resolved as shift

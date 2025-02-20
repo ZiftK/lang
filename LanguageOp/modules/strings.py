@@ -30,7 +30,7 @@ def p_StringPow(p):
 def p_StringGroup(p):
     """StringGroup : LGroup StringExpression RGroup
                     | String
-                    | VarValue"""
+                    | VString"""
 
     if len(p) > 2:
         p[0] = p[2]

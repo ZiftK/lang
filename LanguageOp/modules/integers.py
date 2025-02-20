@@ -1,10 +1,11 @@
 import re
+from modules.object_types.alph_object import Alph
 
 
 def p_IntegerExpression(p):
     """IntExpression : Int
         | StringLen
-        | VarValue"""
+        | VInt"""
     p[0] = p[1]
 
 
@@ -16,9 +17,6 @@ def p_StringLen(p):
         p[0] = len(p[2])
         return
 
-    pattern = "(" + ")|(".join(p[4]) + ")"
-    pattern = re.compile(pattern)
-    matches = re.findall(pattern, p[2])
+    alph: Alph = p[4]
 
-    p[0] = len(matches)
-
+    p[0] = alph.len_on(p[2])

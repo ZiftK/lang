@@ -1,8 +1,13 @@
-Boolean a, b, c;
+Alph alp1 = {"a", "b"};
+Alph alp2 = {"cd"};
+show alp2;
 
-a = true;
-b = false;
+Alph alp3 = alp1*alp2;
 
-c = a or b;
+show alp3;
 
-show c;
+show alp3^2;
+
+Lang l1 = alp3**2;
+
+show l1;

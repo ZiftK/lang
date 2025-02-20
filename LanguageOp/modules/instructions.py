@@ -25,13 +25,9 @@ def assign_var(*, name: str, value, type: str):
 
 def p_ShowVal(p):
     r"""ShowVal : Show expression"""
-    if p.slice[2].type == "VarName":
-        if not p[2] in vars:
-            raise Exception(f"Undefined variable {p[2]}")
-        print(vars.get(p[2])[0])
-    else:
-        print(p[2])
-    p[0] = p[2]
+
+    print(p[2])
+    p[0] = p[1]
 
 
 def p_Declares(p):
@@ -59,13 +55,13 @@ def p_StringDeclare(p):
                 | StringDeclare Splitter VarName Eq StringExpression"""
 
     if len(p) <= 4:
-        declare_var(name=p[len(p) - 1], type="String")
+        declare_var(name=p[len(p) - 1], type="VString")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="String", value=p[4])
+        declare_var(name=p[2], type="VString", value=p[4])
 
     if len(p) == 6:
-        declare_var(name=p[3], type="String", value=p[5])
+        declare_var(name=p[3], type="VString", value=p[5])
 
     p[0] = p[2]
 
@@ -73,7 +69,7 @@ def p_StringDeclare(p):
 def p_StringAssign(p):
     """StringAssign : VarName Eq StringExpression"""
 
-    assign_var(name=p[1], value=p[3], type="String")
+    assign_var(name=p[1], value=p[3], type="VString")
 
     p[0] = p[3]
 
@@ -84,13 +80,13 @@ def p_IntDeclare(p):
         | IntDeclare Splitter VarName
         | IntDeclare Splitter VarName Eq IntExpression"""
     if len(p) <= 4:
-        declare_var(name=p[len(p) - 1], type="Int")
+        declare_var(name=p[len(p) - 1], type="VInt")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="Int", value=p[4])
+        declare_var(name=p[2], type="VInt", value=p[4])
 
     if len(p) == 6:
-        declare_var(name=p[3], type="Int", value=p[5])
+        declare_var(name=p[3], type="VInt", value=p[5])
 
     p[0] = p[2]
 
@@ -98,7 +94,7 @@ def p_IntDeclare(p):
 def p_IntAssign(p):
     """IntAssign : VarName Eq IntExpression"""
 
-    assign_var(name=p[1], value=p[3], type="Int")
+    assign_var(name=p[1], value=p[3], type="VInt")
 
     p[0] = p[3]
 
@@ -109,13 +105,13 @@ def p_AlphDeclare(p):
         | AlphDeclare Splitter VarName
         | AlphDeclare Splitter VarName Eq AlphExpression"""
     if len(p) <= 4:
-        declare_var(name=p[len(p) - 1], type="Alph")
+        declare_var(name=p[len(p) - 1], type="VAlph")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="String", value=p[4])
+        declare_var(name=p[2], type="VAlph", value=p[4])
 
     if len(p) == 6:
-        declare_var(name=p[3], type="Alph", value=p[5])
+        declare_var(name=p[3], type="VAlph", value=p[5])
 
     p[0] = p[2]
 
@@ -123,7 +119,7 @@ def p_AlphDeclare(p):
 def p_AlphAssign(p):
     """AlphAssign : VarName Eq AlphExpression"""
 
-    assign_var(name=p[1], value=p[3], type="Alph")
+    assign_var(name=p[1], value=p[3], type="VAlph")
 
     p[0] = p[3]
 
@@ -134,13 +130,13 @@ def p_LangDeclare(p):
         | LangDeclare Splitter VarName
         | LangDeclare Splitter VarName Eq LangExpression"""
     if len(p) <= 4:
-        declare_var(name=p[len(p) - 1], type="Alph")
+        declare_var(name=p[len(p) - 1], type="VLang")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="String", value=p[4])
+        declare_var(name=p[2], type="VLang", value=p[4])
 
     if len(p) == 6:
-        declare_var(name=p[3], type="Alph", value=p[5])
+        declare_var(name=p[3], type="VLang", value=p[5])
 
     p[0] = p[2]
 
@@ -148,7 +144,7 @@ def p_LangDeclare(p):
 def p_LangAssign(p):
     """LangAssign : VarName Eq LangExpression"""
 
-    assign_var(name=p[1], value=p[3], type="Alph")
+    assign_var(name=p[1], value=p[3], type="VLang")
 
     p[0] = p[3]
 
@@ -160,13 +156,13 @@ def p_BooleanDeclare(p):
                 | BooleanDeclare Splitter VarName Eq BooleanExpression"""
 
     if len(p) <= 4:
-        declare_var(name=p[len(p) - 1], type="Boolean")
+        declare_var(name=p[len(p) - 1], type="VBoolean")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="Boolean", value=p[4])
+        declare_var(name=p[2], type="VBoolean", value=p[4])
 
     if len(p) == 6:
-        declare_var(name=p[3], type="Boolean", value=p[5])
+        declare_var(name=p[3], type="VBoolean", value=p[5])
 
     p[0] = p[2]
 
@@ -174,6 +170,6 @@ def p_BooleanDeclare(p):
 def p_BooleanAssign(p):
     """BooleanAssign : VarName Eq BooleanExpression"""
 
-    assign_var(name=p[1], value=p[3], type="Boolean")
+    assign_var(name=p[1], value=p[3], type="VBoolean")
 
     p[0] = p[3]

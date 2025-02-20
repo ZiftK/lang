@@ -30,7 +30,7 @@ def p_BooleanAnd(p):
 def p_BooleanGroup(p):
     """BooleanGroup : LGroup BooleanExpression RGroup
                     | Boolean
-                    | VarValue"""
+                    | VBoolean"""
     match (len(p)):
         case 4:
             p[0] = p[2]

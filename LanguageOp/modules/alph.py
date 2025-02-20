@@ -1,13 +1,54 @@
+from modules.object_types.alph_object import Alph
+
+
 def p_AlphExpression(p):
-    """AlphExpression : Alph
-    | VarValue"""
-    p[0] = p[1]
+    """AlphExpression : AlphConcat"""
+    if not p[1].__class__ is set:
+        p[0] = p[1]
+        return
+
+    p[0] = Alph(p[1])
+
+
+def p_AlphConcat(p):
+    """AlphConcat : AlphConcat Concat AlphPow
+        | AlphPow"""
+
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            lalph: Alph = p[1]
+            ralph: Alph = p[3]
+            p[0] = lalph.concat(ralph)
+
+
+def p_AlphPow(p):
+    """AlphPow : AlphPow Pow IntExpression
+            | AlphGroup"""
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            lalph: Alph = p[1]
+            p[0] = lalph.pow(p[3])
+
+
+def p_AlphGroup(p):
+    """AlphGroup : LGroup AlphExpression RGroup
+    | Alph
+    | VAlph"""
+    match len(p):
+        case 4:
+            p[0] = p[2]
+        case 2:
+            p[0] = p[1]
 
 
 def p_Alph(p):
     r"""Alph : OpenStruct StringList CloseStruct
             | OpenStruct StringExpression CloseStruct"""
-    if p.slice[2] == "SuperString":
+    if p[2].__class__ is str:
         p[0] = {p[2]}
     else:
         p[0] = set(p[2])
@@ -24,4 +65,3 @@ def p_StringList(p):
 
     else:
         p[0] = [p[1], p[3]]
-
