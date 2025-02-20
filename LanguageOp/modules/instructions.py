@@ -1,4 +1,6 @@
 from modules.variables import vars
+from modules.object_types.lang_object import Lang
+from modules.object_types.alph_object import Alph
 
 types_eq = {
     "SuperString": "String",
@@ -133,18 +135,24 @@ def p_LangDeclare(p):
         declare_var(name=p[len(p) - 1], type="VLang")
 
     if len(p) == 5:
-        declare_var(name=p[2], type="VLang", value=p[4])
+        lang: Lang = p[4]
+        lang.name = p[2]
+        declare_var(name=lang.name, type="VLang", value=lang)
 
     if len(p) == 6:
-        declare_var(name=p[3], type="VLang", value=p[5])
+        lang: Lang = p[4]
+        lang.name = p[3]
+        declare_var(name=lang.name, type="VLang", value=lang)
 
     p[0] = p[2]
 
 
 def p_LangAssign(p):
-    """LangAssign : VarName Eq LangExpression"""
+    """LangAssign : VLang Eq LangExpression"""
 
-    assign_var(name=p[1], value=p[3], type="VLang")
+    lang: Lang = p[1]
+
+    assign_var(name=lang.name, value=lang, type="VLang")
 
     p[0] = p[3]
 

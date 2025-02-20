@@ -2,7 +2,8 @@ from itertools import chain
 
 
 class Lang:
-    def __init__(self, content: list | set):
+    def __init__(self, content: list | set, name: str = ""):
+        self.name = name
         self._content: set = set(content) if content.__class__ is list else content
         self.__kleene_clau = [[""]]
         self.__len_pattern = ""
