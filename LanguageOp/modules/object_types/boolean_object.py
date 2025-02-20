@@ -8,3 +8,10 @@ class Boolean(Object):
 
     def __str__(self):
         return str(self.content)
+
+    def __or__(self, other):
+        return self.content or other.content
+
+    def __and__(self, other):
+        return self.content and other.content
+

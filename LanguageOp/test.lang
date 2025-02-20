@@ -1,3 +1,3 @@
-Boolean a = true, b = false;
+Int a = 2;
 
 show a;

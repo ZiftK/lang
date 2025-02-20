@@ -8,6 +8,7 @@ def p_IntegerExpression(p):
         | AddSub"""
     if not (p[1].__class__ is Int):
         p[0] = Int(p[1])
+        return 
 
     p[0] = p[1]
 

@@ -10,7 +10,7 @@ def p_BooleanExpression(p):
 
 
 def p_BooleanOr(p):
-    """BooleanOr : BooleanAnd Or BooleanAnd
+    """BooleanOr : BooleanOr Or BooleanAnd
                 | BooleanAnd"""
     match (len(p)):
         case 2:
@@ -22,7 +22,7 @@ def p_BooleanOr(p):
 
 
 def p_BooleanAnd(p):
-    """BooleanAnd : BooleanAnd And BooleanAnd
+    """BooleanAnd : BooleanAnd And BooleanGroup
                     | BooleanGroup"""
     match (len(p)):
         case 2:
