@@ -13,6 +13,20 @@ def p_LangExpression(p):
     p[0] = p[1]
 
 
+def p_LangUnion(p):
+    """LangUnion : LangUnion Add LangConcat
+                | LangConcat"""
+
+
+def p_LangConcat(p):
+    """LangConcat : LangConcat Concat LangGroup
+                | LangGroup"""
+
+
+def p_LangGroup(p):
+    """LangGroup : LGroup LangExpression RGroup"""
+
+
 def p_AlphKleeneC(p):
     """AlphKleeneC : AlphExpression KleeneC IntExpression"""
     alph: Alph = p[1]

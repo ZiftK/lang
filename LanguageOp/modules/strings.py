@@ -1,6 +1,6 @@
 import re
 
-from modules.object_types.string_object import String
+from modules.variables import vars
 
 
 def p_StringExpression(p):
