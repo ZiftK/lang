@@ -1,7 +1,7 @@
-String a = "abcd";
+    String a = "abcd";
 
-show a;
+    show a;
 
-a = "b";
+    a = "b";
 
-show a;
+    show a;

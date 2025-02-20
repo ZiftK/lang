@@ -10,8 +10,9 @@ from modules.boolean import *
 
 
 precedence = (
-    ("left", "Concat"),
-    ("right", "Pow"),
+    ("left", "Add", "Sub"),
+    ("left", "Concat", "Div"),
+    ("right", "Pow")
 )
 
 
