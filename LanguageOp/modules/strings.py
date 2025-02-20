@@ -6,9 +6,6 @@ from modules.object_types.string_object import String
 
 def p_StringExpression(p):
     """StringExpression : StringConcat"""
-    if not (p[1].__class__ is String):
-        p[0] = String(content=p[1])
-        return
     p[0] = p[1]
 
 
@@ -37,6 +34,10 @@ def p_StringGroup(p):
                     | VString"""
 
     if len(p) > 2:
-        p[0] = p[2]
+        val = p[2]
+    else:
+        val = p[1]
+    if not (val.__class__ is String):
+        p[0] = String(content=p[1])
         return
-    p[0] = p[1]
+    p[0] = val

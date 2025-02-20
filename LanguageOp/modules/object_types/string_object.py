@@ -20,5 +20,5 @@ class String(Object):
 
     def __mul__(self, other):
         other: int
-        self.content *= other
+        self.content = self.content*other.content
         return self

@@ -15,3 +15,9 @@ class Boolean(Object):
     def __and__(self, other):
         return self.content and other.content
 
+    def lor(self, other):
+        return self.content or other.content
+
+    def land(self, other):
+        return self.content and other.content
+

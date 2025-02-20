@@ -6,10 +6,6 @@ from modules.object_types.int_object import Int
 def p_IntegerExpression(p):
     """IntExpression : StringLen
         | AddSub"""
-    if not (p[1].__class__ is Int):
-        p[0] = Int(p[1])
-        return 
-
     p[0] = p[1]
 
 
@@ -25,14 +21,15 @@ def p_StringLen(p):
 
     p[0] = alph.len_on(p[2])
 
+
 def p_IntAddSub(p):
-    """AddSub : MultDiv Add AddSub
-                | MultDiv Sub AddSub
+    """AddSub : AddSub Add MultDiv
+                | AddSub Sub MultDiv
                 | MultDiv"""
     match (len(p)):
         case 2:
             p[0] = p[1]
-        case 4 :
+        case 4:
             if p.slice[2].type == "Add":
                 p[0] = p[1] + p[3]
         case 4:
@@ -71,7 +68,11 @@ def p_IntPrimary(p):
                 | VInt
                 | Int"""
     match (len(p)):
-        case 4:
+        case 4 if (p[2].__class__ is Int):
             p[0] = p[2]
-        case 2:
+        case 4 if not (p[2].__class__ is Int):
+            p[0] = Int(content=p[2])
+        case 2 if (p[1].__class__ is Int):
             p[0] = p[1]
+        case 2 if not (p[1].__class__ is Int):
+            p[0] = Int(content=p[1])
