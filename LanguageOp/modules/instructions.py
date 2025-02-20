@@ -1,10 +1,10 @@
-from lang.LanguageOp.modules.object_types.lang_object import Lang
-from lang.LanguageOp.modules.variables import vars
-from lang.LanguageOp.modules.object_types.alph_object import Alph
-from lang.LanguageOp.modules.object_types.string_object import String
-from lang.LanguageOp.modules.object_types.int_object import Int
-from lang.LanguageOp.modules.object_types.object import Object
-from lang.LanguageOp.modules.object_types.boolean_object import Boolean
+from modules.object_types.lang_object import Lang
+from modules.variables import vars
+from modules.object_types.alph_object import Alph
+from modules.object_types.string_object import String
+from modules.object_types.int_object import Int
+from modules.object_types.object import Object
+from modules.object_types.boolean_object import Boolean
 
 types_eq = {
     "SuperString": "String",

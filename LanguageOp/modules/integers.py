@@ -1,6 +1,6 @@
 import re
-from lang.LanguageOp.modules.object_types.alph_object import Alph
-from lang.LanguageOp.modules.object_types.int_object import Int
+from modules.object_types.alph_object import Alph
+from modules.object_types.int_object import Int
 
 
 def p_IntegerExpression(p):
@@ -69,7 +69,7 @@ def p_IntUnary(p):
 
 def p_IntPrimary(p):
     """Primary : LGroup IntExpression RGroup
-                | VarValue
+                | VInt
                 | Int"""
     match (len(p)):
         case 4:

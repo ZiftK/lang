@@ -1,5 +1,5 @@
-from lang.LanguageOp.modules.object_types.lang_object import Lang
-from lang.LanguageOp.modules.object_types.alph_object import Alph
+from modules.object_types.lang_object import Lang
+from modules.object_types.alph_object import Alph
 
 
 def p_LangExpression(p):

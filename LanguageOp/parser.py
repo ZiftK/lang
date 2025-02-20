@@ -8,7 +8,6 @@ from modules.lang import *
 from modules.strings import *
 from modules.boolean import *
 
-
 precedence = (
     ("left", "Add", "Sub"),
     ("left", "Concat", "Div"),
@@ -34,7 +33,6 @@ def p_expression(p):
     p[0] = p[1]
 
 
-
 def p_error(p):
     if p:
         print(f"Error de sintaxis en '{p.value}' (Línea {p.lineno})")
@@ -44,15 +42,12 @@ def p_error(p):
 
 
 if __name__ == "__main__":
-
     parser = yacc.yacc(start="expressions")
 
     with open("./test.lang", "r") as file:
         content = file.read()
 
-    print(content)
     result = parser.parse(content, debug=False)
 
     # print(result)
     # print(f"{vars=}")
-
