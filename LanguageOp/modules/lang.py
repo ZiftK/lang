@@ -9,22 +9,42 @@ def p_LangExpression(p):
     | AlphPositiveC
     | LangKleeneC
     | LangPositiveC
-    | VLang"""
+    | LangUnion"""
     p[0] = p[1]
 
 
 def p_LangUnion(p):
     """LangUnion : LangUnion Add LangConcat
                 | LangConcat"""
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            left_lang: Lang = p[1]
+            right_lang: Lang = p[3]
+            p[0] = left_lang.union(right_lang)
 
 
 def p_LangConcat(p):
     """LangConcat : LangConcat Concat LangGroup
                 | LangGroup"""
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            left_lang: Lang = p[1]
+            right_lang: Lang = p[3]
+            p[0] = left_lang.concat(right_lang)
 
 
 def p_LangGroup(p):
-    """LangGroup : LGroup LangExpression RGroup"""
+    """LangGroup : LGroup LangExpression RGroup
+    | VLang"""
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            p[0] = p[2]
 
 
 def p_AlphKleeneC(p):

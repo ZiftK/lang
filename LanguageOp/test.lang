@@ -1,7 +1,3 @@
-String a = "abcd";
+String a = "abc";
 
-show a;
-
-a = "b";
-
-show a;
+show a^20;
