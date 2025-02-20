@@ -58,13 +58,17 @@ class Lang:
 
     def pow(self, count: int):
 
-        aux_lang = Lang([])
+        if len(self.__kleene_clau) >= count:
+            return Lang(self.__kleene_clau[count])
+
+        aux_lang = Lang([""])
 
         def _pow(lang: Lang, _count: int):
+
             if _count == 0:
                 return lang
 
-            lang.concat(self)
+            lang = lang.concat(self)
             return _pow(lang, _count - 1)
 
         return _pow(aux_lang, count)

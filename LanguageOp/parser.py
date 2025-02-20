@@ -50,5 +50,5 @@ if __name__ == "__main__":
     result = parser.parse(content, debug=False)
 
     # print(result)
-    print(f"{vars=}")
+    # print(f"{vars=}")
 
