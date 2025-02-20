@@ -1,11 +1,15 @@
 import re
 from modules.object_types.alph_object import Alph
+from modules.object_types.int_object import Int
 
 
 def p_IntegerExpression(p):
     """IntExpression : Int
         | StringLen
         | VInt"""
+    if not (p[1].__class__ is Int):
+        p[0] = Int(p[1])
+
     p[0] = p[1]
 
 

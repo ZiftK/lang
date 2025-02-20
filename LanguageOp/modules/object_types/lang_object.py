@@ -1,18 +1,22 @@
 from itertools import chain
+from modules.object_types.object import Object
 
 
-class Lang:
-    def __init__(self, content: list | set, name: str = ""):
-        self.name = name
-        self._content: set = set(content) if content.__class__ is list else content
+class Lang(Object):
+    def __init__(self, content: list | set = None, name: str = ""):
+
+        if not content:
+            content = []
+        content: set = set(content) if content.__class__ is list else content
+        super().__init__(content, name)
         self.__kleene_clau = [[""]]
         self.__len_pattern = ""
 
     def has(self, value: str):
-        return value in self._content
+        return value in self.content
 
     def get_content(self) -> set:
-        return self._content
+        return self.content
 
     def _get_flat_kleene_clau(self):
         return list(chain(*self.__kleene_clau))
@@ -45,10 +49,10 @@ class Lang:
 
         aux = []
         if current == [""]:
-            aux = [x for x in self._content]
+            aux = [x for x in self.content]
         else:
-            for word in self._content:
-                for word2 in self._content:
+            for word in self.content:
+                for word2 in self.content:
                     aux.append(word + word2)
 
         self.__kleene_clau.append(aux)
@@ -56,7 +60,7 @@ class Lang:
         return self.calc_kleene_clau(steps - 1, include_lambda=include_lambda)
 
     def __str__(self):
-        cont = list(self._content)
+        cont = list(self.content)
         cont.sort()
         string = "', '".join(cont)
         string = "{'" + string + "'}"
@@ -64,14 +68,14 @@ class Lang:
 
     def union(self, lang):
         lang: Lang
-        return Lang(self._content | lang.get_content())
+        return Lang(self.content | lang.get_content())
 
     def concat(self, lang):
         lang: Lang
         other_content: set = lang.get_content()
 
         new_content = []
-        for word in self._content:
+        for word in self.content:
             for word2 in other_content:
                 new_content.append(word + word2)
         return Lang(new_content)

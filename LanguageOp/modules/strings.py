@@ -1,10 +1,13 @@
 import re
 
-from modules.variables import vars
+from modules.object_types.string_object import String
 
 
 def p_StringExpression(p):
     """StringExpression : StringConcat"""
+    if not (p[1].__class__ is String):
+        p[0] = String(content=p[1])
+        return
     p[0] = p[1]
 
 
@@ -22,7 +25,7 @@ def p_StringPow(p):
                 | StringGroup """
 
     if len(p) > 2:
-        p[0] = p[1]*p[3]
+        p[0] = p[1] * p[3]
         return
     p[0] = p[1]
 
@@ -36,4 +39,3 @@ def p_StringGroup(p):
         p[0] = p[2]
         return
     p[0] = p[1]
-

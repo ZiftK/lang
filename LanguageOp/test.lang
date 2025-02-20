@@ -1,22 +1,7 @@
-Alph alp1 = {"a", "b"};
-Alph alp2 = {"cd"};
+String a = "abcd";
 
-show "Alp2: ";
-show alp2;
-show "";
+show a;
 
-Alph alp3 = alp1*alp2;
+a = "b";
 
-show "Alp3: ";
-show alp3;
-show "";
-
-show "Alp3^2: ";
-show alp3^2;
-show "";
-
-
-Lang l1 = alp3*+2;
-
-l1 = l1*+3;
-show l1;
+show a;
