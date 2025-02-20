@@ -202,7 +202,7 @@ def p_BooleanDeclare(p):
 
 
 def p_BooleanAssign(p):
-    """BooleanAssign : VarName Eq BooleanExpression"""
+    """BooleanAssign : VBoolean Eq BooleanExpression"""
 
     assign_var(left_object=p[1], right_object=p[3])
 

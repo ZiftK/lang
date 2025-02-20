@@ -89,6 +89,7 @@ def t_VarName(t):
     if val in vars:
         t.value = vars.get(val).get("value")
         t.type = vars.get(val).get("type")
+
     if val in reserved_words:
         t.type = reserved_words.get(val)
 

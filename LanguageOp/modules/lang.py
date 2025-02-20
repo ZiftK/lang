@@ -10,7 +10,10 @@ def p_LangExpression(p):
     | LangKleeneC
     | LangPositiveC
     | LangUnion"""
-    p[0] = p[1]
+    if not (p[0].__class__ is Lang):
+        p[0] = Lang(content=p[1])
+        return
+    p[0] =p[1]
 
 
 def p_LangUnion(p):

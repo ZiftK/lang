@@ -1,7 +1,3 @@
-    String a = "abcd";
+Boolean a = true, b = false;
 
-    show a;
-
-    a = "b";
-
-    show a;
+show a;

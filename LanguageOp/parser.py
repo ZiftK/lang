@@ -27,6 +27,7 @@ def p_expression(p):
                     | AlphExpression
                     | StringExpression
                     | LangExpression
+                    | BooleanExpression
                     | ShowVal
                     | Assigns
                     | Declares"""

@@ -4,9 +4,7 @@ from modules.object_types.int_object import Int
 
 
 def p_IntegerExpression(p):
-    """IntExpression : Int
-        | StringLen
-        | VInt
+    """IntExpression : StringLen
         | AddSub"""
     if not (p[1].__class__ is Int):
         p[0] = Int(p[1])

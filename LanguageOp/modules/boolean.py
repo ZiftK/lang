@@ -1,5 +1,11 @@
+from modules.object_types.boolean_object import Boolean
+
+
 def p_BooleanExpression(p):
     """BooleanExpression : BooleanOr"""
+    if not (p[0].__class__ is Boolean):
+        p[0] = Boolean(content=p[1])
+        return
     p[0] = p[1]
 
 
@@ -50,4 +56,3 @@ def p_Boolean(p):
             return
         case "True":
             p[0] = True
-
