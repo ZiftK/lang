@@ -1,4 +1,5 @@
 import copy
+import re
 
 from ply import lex
 
@@ -40,30 +41,30 @@ reserved_words = {
 }
 
 tokens = [
-    "Eq",
-    "String",
-    "Int",
-    "OpenStruct",
-    "CloseStruct",
-    "Splitter",
-    "Concat",
-    "Pow",
-    "LenOp",
-    "VarName",
-    "Term",
-    "NextLine",
-    "LGroup",
-    "RGroup",
-    "SuchThat",
-    "KleeneC",
-    "PositiveC",
-    "Add",
-    "Sub",
-    "Div"
+             "Eq",
+             "String",
+             "Int",
+             "OpenStruct",
+             "CloseStruct",
+             "Splitter",
+             "Concat",
+             "Pow",
+             "LenOp",
+             "VarName",
+             "Term",
+             "NextLine",
+             "LGroup",
+             "RGroup",
+             "SuchThat",
+             "KleeneC",
+             "PositiveC",
+             "Add",
+             "Sub",
+             "Div"
 
-] + list(reserved_words.values())
+         ] + list(reserved_words.values())
 
-t_ignore = r"[ ]+"
+t_ignore = r"[ ]"
 t_Eq = r"="
 t_OpenStruct = r"{"
 t_CloseStruct = r"}"
@@ -75,11 +76,15 @@ t_Term = r";"
 t_LGroup = r"\("
 t_RGroup = r"\)"
 t_SuchThat = r":"
-t_KleeneC = r"\*\*"
-t_PositiveC = r"\*\+"
-t_Add = r'\+'
-t_Sub = r'-'
+t_KleeneC = r"(\*c)"
+t_PositiveC = r"(\*p)"
+t_Sub = r"-"
 t_Div = r"/"
+
+
+def t_Add(t):
+    r"""\+"""
+    return t
 
 
 def t_VarName(t):
@@ -127,11 +132,11 @@ if __name__ == "__main__":
 
     token = lexer.token()
 
-    while True:
+    while token:
         print(token)
 
         try:
-            token = lexer.next()
+            token = lexer.token()
         except StopIteration:
             print("Fin...")
             break

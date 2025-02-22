@@ -32,15 +32,14 @@ def p_IntAddSub(p):
         case 4:
             if p.slice[2].type == "Add":
                 p[0] = p[1] + p[3]
-        case 4:
             if p.slice[2].type == "Sub":
                 p[0] = p[1] - p[3]
 
 
 def p_IntMultDiv(p):
-    """MultDiv : MultDiv Concat Unary
-                | MultDiv Div Unary
-                | Unary"""
+    """MultDiv : MultDiv Concat IntPow
+                | MultDiv Div IntPow
+                | IntPow"""
     match (len(p)):
         case 2:
             p[0] = p[1]
@@ -49,14 +48,24 @@ def p_IntMultDiv(p):
             if p.slice[2].type == "Concat":
                 p[0] = p[1] * p[3]
                 return
-        case 4 if p.slice[2].type == "Div":
-            p[0] = p[1] // p[3]
-            return
+            if p.slice[2].type == "Div":
+                p[0] = p[1] // p[3]
+                return
+
+
+def p_IntPow(p):
+    """IntPow : IntPow Pow Unary
+                | Unary"""
+    match len(p):
+        case 2:
+            p[0] = p[1]
+        case 4:
+            p[0] = p[1] ** p[3]
 
 
 def p_IntUnary(p):
     """Unary : Sub Primary
-               | Primary"""
+            | Primary"""
     if len(p) > 2:
         p[0] = - p[2]
     else:
@@ -68,11 +77,15 @@ def p_IntPrimary(p):
                 | VInt
                 | Int"""
     match (len(p)):
+
         case 4 if (p[2].__class__ is Int):
             p[0] = p[2]
+
         case 4 if not (p[2].__class__ is Int):
             p[0] = Int(content=p[2])
+
         case 2 if (p[1].__class__ is Int):
             p[0] = p[1]
+
         case 2 if not (p[1].__class__ is Int):
             p[0] = Int(content=p[1])
