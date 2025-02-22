@@ -48,10 +48,12 @@ def p_AlphGroup(p):
 def p_Alph(p):
     r"""Alph : OpenStruct StringList CloseStruct
             | OpenStruct StringExpression CloseStruct"""
+
     if p[2].__class__ is str:
         p[0] = {p[2]}
     else:
-        p[0] = set(p[2])
+        real_content = [x.content for x in p[2]]
+        p[0] = set(real_content)
 
 
 def p_StringList(p):

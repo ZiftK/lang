@@ -24,6 +24,7 @@ types = {
 instructions = {
     "on": "On",
     "show": "Show",
+    "showil": "ShowInLine",
     "prefixof": "Prefix",
     "suffixof": "Suffix",
     "true": "True",
@@ -76,8 +77,8 @@ t_Term = r";"
 t_LGroup = r"\("
 t_RGroup = r"\)"
 t_SuchThat = r":"
-t_KleeneC = r"(\*c)"
-t_PositiveC = r"(\*p)"
+t_KleeneC = r"(\*\*)"
+t_PositiveC = r"(\*\+)"
 t_Sub = r"-"
 t_Div = r"/"
 

@@ -14,12 +14,12 @@ def p_StringLen(p):
         | LenOp StringExpression On AlphExpression LenOp"""
 
     if len(p) == 4:
-        p[0] = len(p[2])
+        p[0] = Int(content=len(p[2]))
         return
 
     alph: Alph = p[4]
 
-    p[0] = alph.len_on(p[2])
+    p[0] = Int(content=alph.len_on(p[2].content))
 
 
 def p_IntAddSub(p):

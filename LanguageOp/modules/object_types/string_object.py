@@ -20,5 +20,11 @@ class String(Object):
 
     def __mul__(self, other):
         other: int
-        self.content = self.content*other.content
+        if other.content < 0:
+            self.content = self.content[::-1]
+
+        self.content = self.content * abs(other.content)
         return self
+
+    def __len__(self):
+        return len(self.content)

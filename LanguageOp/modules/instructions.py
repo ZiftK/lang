@@ -32,9 +32,13 @@ def assign_var(left_object: Object, right_object: Object):
 
 
 def p_ShowVal(p):
-    r"""ShowVal : Show expression"""
+    r"""ShowVal : Show expression
+                | ShowInLine expression"""
 
-    print(p[2])
+    end_char = "\n"
+    if p.slice[1].type == "ShowInLine":
+        end_char = ""
+    print(p[2], end=end_char)
     p[0] = p[1]
 
 
