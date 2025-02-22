@@ -1,4 +1,5 @@
 from modules.object_types.object import Object
+from modules.object_types.alph_object import Alph
 
 
 class String(Object):
@@ -28,3 +29,18 @@ class String(Object):
 
     def __len__(self):
         return len(self.content)
+
+    def calc_prefix(self, alph: Alph = None, include_lamba: bool = True):
+        if not alph:
+            init_count = 0 if include_lamba else 1
+            return [self.content[0:n] for n in range(init_count, len(self.content) + 1)]
+
+    def calc_suffix(self, alph: Alph = None, include_lambda: bool = True):
+        if not alph:
+            include = [self.content, ""] if include_lambda else [self.content]
+            return include + [self.content[-n:] for n in range(1, len(self.content) + 1)]
+
+    def calc_sub_sequences(self, alp: Alph = None):
+        suffix = self.calc_suffix(alp)
+        prefix = self.calc_prefix(alp)
+        return suffix + prefix

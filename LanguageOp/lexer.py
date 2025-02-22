@@ -31,6 +31,8 @@ instructions = {
     "showil": "ShowInLine",
     "prefixof": "Prefix",
     "suffixof": "Suffix",
+    "substringof": "SubString",
+    "subsequenceof": "SubSequence",
     "true": "True",
     "false": "False",
     "or": "Or",

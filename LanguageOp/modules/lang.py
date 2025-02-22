@@ -1,5 +1,6 @@
 from modules.object_types.lang_object import Lang
 from modules.object_types.alph_object import Alph
+from modules.object_types.string_object import String
 
 
 def p_LangExpression(p):
@@ -9,11 +10,12 @@ def p_LangExpression(p):
     | AlphPositiveC
     | LangKleeneC
     | LangPositiveC
-    | LangUnion"""
+    | LangUnion
+    | StringSubSequence"""
     if not (p[1].__class__ is Lang):
         p[0] = Lang(content=p[1])
         return
-    p[0] =p[1]
+    p[0] = p[1]
 
 
 def p_LangUnion(p):
@@ -77,14 +79,19 @@ def p_LangPositiveC(p):
 def p_StringPrefix(p):
     """StringPrefix : Prefix StringExpression"""
 
-    str_val = p[2]
+    str_val: String = p[2]
 
-    p[0] = [str_val[0:n] for n in range(len(str_val) + 1)]
+    p[0] = str_val.calc_prefix()
 
 
 def p_StringSuffix(p):
     """StringSuffix : Suffix StringExpression"""
-    str_val = p[2]
+    str_val: String = p[2]
 
-    p[0] = [str_val[:-n] for n in range(1, len(str_val) + 1)]
-    p[0] = [str_val] + p[0]
+    p[0] = str_val.calc_suffix()
+
+
+def p_StringSubSequence(p):
+    """StringSubSequence : SubSequence StringExpression"""
+    string: String = p[2]
+    p[0] = string.calc_sub_sequences()

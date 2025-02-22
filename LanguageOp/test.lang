@@ -26,6 +26,18 @@ showil "Longitud de palabra 2: ";
 show longitud_palabra2;
 show "";
 
+showil "Prefijos de palabra 1: ";
+show prefixof palabra1;
+show "";
+
+showil "Sufijos de palabra 1: ";
+show suffixof palabra1;
+show "";
+
+showil "Sub secuencias de palabra 1: ";
+show subsequenceof palabra1;
+show "";
+
 //(
 ----------- OPERACIONES CON ALFABETOS
 )
