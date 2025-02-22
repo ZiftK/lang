@@ -14,12 +14,10 @@ types_eq = {
 
 
 def declare_var(obj: Object):
-
     vars[obj.name] = {"value": obj, "type": "V" + obj.__class__.__name__}
 
 
 def assign_var(left_object: Object, right_object: Object):
-
     if not (left_object.name in vars):
         raise Exception(f"Unknown variable {left_object.name}")
 
@@ -175,7 +173,6 @@ def p_LangDeclare(p):
 
 def p_LangAssign(p):
     """LangAssign : VLang Eq LangExpression"""
-
 
     assign_var(left_object=p[1], right_object=p[3])
 

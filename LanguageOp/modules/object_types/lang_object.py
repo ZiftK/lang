@@ -1,5 +1,6 @@
 from itertools import chain
 from modules.object_types.object import Object
+from modules.object_types.int_object import Int
 
 
 class Lang(Object):
@@ -18,29 +19,31 @@ class Lang(Object):
     def get_content(self) -> set:
         return self.content
 
-    def _get_flat_kleene_clau(self):
-        return list(chain(*self.__kleene_clau))
+    def _get_flat_kleene_clau(self, length=None):
+        if not length:
+            length = len(self.__kleene_clau)-1
+        return list(chain(*(self.__kleene_clau[:length+1])))
 
-    def get_kleene_clau(self, steps: int):
-        if len(self.__kleene_clau) >= steps:
-            flat_list = self._get_flat_kleene_clau()[:steps]
+    def get_kleene_clau(self, steps: Int):
+        if len(self.__kleene_clau) >= steps.content:
+            flat_list = self._get_flat_kleene_clau(steps.content)
             return Lang(flat_list)
 
         steps -= len(self.__kleene_clau)
         return self.calc_kleene_clau(steps)
 
-    def get_positive_clau(self, steps: int):
+    def get_positive_clau(self, steps: Int):
         steps += 1
-        if len(self.__kleene_clau) >= steps:
+        if len(self.__kleene_clau) >= steps.content:
             flat_list = self._get_flat_kleene_clau()[1:steps]
             return Lang(flat_list)
 
         steps -= len(self.__kleene_clau)
         return self.calc_kleene_clau(steps, include_lambda=False)
 
-    def calc_kleene_clau(self, steps: int, include_lambda=True):
+    def calc_kleene_clau(self, steps: Int, include_lambda=True):
 
-        if steps == 0:
+        if steps.content == 0:
             result = self._get_flat_kleene_clau()
             result = result if include_lambda else result[1:]
             return Lang(result)
@@ -51,7 +54,7 @@ class Lang(Object):
         if current == [""]:
             aux = [x for x in self.content]
         else:
-            for word in self.content:
+            for word in current:
                 for word2 in self.content:
                     aux.append(word + word2)
 
@@ -80,10 +83,10 @@ class Lang(Object):
                 new_content.append(word + word2)
         return Lang(new_content)
 
-    def pow(self, count: int):
+    def pow(self, count: Int):
 
-        if len(self.__kleene_clau) >= count:
-            return Lang(self.__kleene_clau[count])
+        if len(self.__kleene_clau) >= count.content:
+            return Lang(self.__kleene_clau[count.content])
 
         aux_lang = Lang([""])
 

@@ -12,6 +12,10 @@ code
 comments
 """
 
+states = (
+    ("comment", "exclusive"),
+)
+
 # object types
 types = {
     "String": "StringType",
@@ -61,11 +65,14 @@ tokens = [
              "PositiveC",
              "Add",
              "Sub",
-             "Div"
+             "Div",
+             "InitComment",
+             "EndComment",
+             "CommentText"
 
          ] + list(reserved_words.values())
 
-t_ignore = r"[ ]"
+t_ANY_ignore = r"[ ]"
 t_Eq = r"="
 t_OpenStruct = r"{"
 t_CloseStruct = r"}"
@@ -81,6 +88,20 @@ t_KleeneC = r"(\*\*)"
 t_PositiveC = r"(\*\+)"
 t_Sub = r"-"
 t_Div = r"/"
+
+
+def t_InitComment(t):
+    r"""//\("""
+    t.lexer.begin("comment")
+
+
+def t_comment_EndComment(t):
+    r"""\)"""
+    t.lexer.begin("INITIAL")
+
+
+def t_comment_CommentText(t):
+    r"""[^)]"""
 
 
 def t_Add(t):
@@ -114,13 +135,14 @@ def t_Int(t):
     return t
 
 
-def t_NextLine(t):
+def t_ANY_NextLine(t):
     r"""\n+"""
     t.lexer.lineno += t.value.count("\n")
 
 
-def t_error(t):
-    print("Salaverga")
+def t_ANY_error(t):
+    print(f"Unknown token value at line {t.lexer.lineno}: ", end="")
+    print(t.value)
 
 
 lexer = lex.lex()

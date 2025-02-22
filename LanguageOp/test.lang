@@ -1,12 +1,56 @@
+//(
+----------- DEFINICIONES
+)
+
 String palabra1 = "abcd", palabra2 = "efgh";
 
-Alph alp1 = {"ef", "gh"};
+Alph alp1 = {"ab", "cd", "ef", "gh"};
+
+
+//(
+----------- OPERACIONES CON STRINGS
+)
+
+
+show "----------- OPERACIONES CON STRINGS";
+show "";
 
 Int longitud_palabra1 = |palabra1|;
 Int longitud_palabra2 = |palabra2 on alp1|;
 
 showil "Longitud de palabra 1: ";
 show longitud_palabra1;
+show "";
 
 showil "Longitud de palabra 2: ";
 show longitud_palabra2;
+show "";
+
+//(
+----------- OPERACIONES CON ALFABETOS
+)
+
+show "----------- OPERACIONES CON ALFABETOS";
+show "";
+
+
+
+show "";
+show "Potencia de alfabeto 1: ";
+show alp1^3;
+
+Lang clausura_positiva = alp1*+3;
+
+show "";
+show "Clausura positiva de alfabeto 1 :";
+show clausura_positiva;
+show "";
+
+Lang clausura_kleene = alp1**3;
+
+show "";
+show "Clausura de kleene de alfabeto 1: ";
+show clausura_kleene;
+show "";
+
+

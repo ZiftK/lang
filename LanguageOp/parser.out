@@ -2,6 +2,9 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
+    CommentText
+    EndComment
+    InitComment
     NextLine
     SuchThat
 
@@ -54,34 +57,34 @@ Rule 43    LangConcat -> LangGroup
 Rule 44    StringGroup -> LGroup StringExpression RGroup
 Rule 45    StringGroup -> String
 Rule 46    StringGroup -> VString
-Rule 47    BooleanGroup -> LGroup BooleanExpression RGroup
-Rule 48    BooleanGroup -> Boolean
-Rule 49    BooleanGroup -> VBoolean
-Rule 50    ShowVal -> Show expression
-Rule 51    ShowVal -> ShowInLine expression
+Rule 47    ShowVal -> Show expression
+Rule 48    ShowVal -> ShowInLine expression
+Rule 49    BooleanGroup -> LGroup BooleanExpression RGroup
+Rule 50    BooleanGroup -> Boolean
+Rule 51    BooleanGroup -> VBoolean
 Rule 52    AlphGroup -> LGroup AlphExpression RGroup
 Rule 53    AlphGroup -> Alph
 Rule 54    AlphGroup -> VAlph
 Rule 55    MultDiv -> MultDiv Concat IntPow
 Rule 56    MultDiv -> MultDiv Div IntPow
 Rule 57    MultDiv -> IntPow
-Rule 58    LangGroup -> LGroup LangExpression RGroup
-Rule 59    LangGroup -> VLang
-Rule 60    Declares -> StringDeclare
-Rule 61    Declares -> IntDeclare
-Rule 62    Declares -> AlphDeclare
-Rule 63    Declares -> LangDeclare
-Rule 64    Declares -> BooleanDeclare
+Rule 58    Declares -> StringDeclare
+Rule 59    Declares -> IntDeclare
+Rule 60    Declares -> AlphDeclare
+Rule 61    Declares -> LangDeclare
+Rule 62    Declares -> BooleanDeclare
+Rule 63    LangGroup -> LGroup LangExpression RGroup
+Rule 64    LangGroup -> VLang
 Rule 65    Boolean -> True
 Rule 66    Boolean -> False
 Rule 67    Alph -> OpenStruct StringList CloseStruct
 Rule 68    Alph -> OpenStruct StringExpression CloseStruct
-Rule 69    AlphKleeneC -> AlphExpression KleeneC IntExpression
-Rule 70    Assigns -> StringAssign
-Rule 71    Assigns -> IntAssign
-Rule 72    Assigns -> AlphAssign
-Rule 73    Assigns -> LangAssign
-Rule 74    Assigns -> BooleanAssign
+Rule 69    Assigns -> StringAssign
+Rule 70    Assigns -> IntAssign
+Rule 71    Assigns -> AlphAssign
+Rule 72    Assigns -> LangAssign
+Rule 73    Assigns -> BooleanAssign
+Rule 74    AlphKleeneC -> AlphExpression KleeneC IntExpression
 Rule 75    IntPow -> IntPow Pow Unary
 Rule 76    IntPow -> Unary
 Rule 77    StringList -> StringList Splitter StringExpression
@@ -99,8 +102,8 @@ Rule 88    Primary -> LGroup IntExpression RGroup
 Rule 89    Primary -> VInt
 Rule 90    Primary -> Int
 Rule 91    StringPrefix -> Prefix StringExpression
-Rule 92    StringSuffix -> Suffix StringExpression
-Rule 93    StringAssign -> VString Eq StringExpression
+Rule 92    StringAssign -> VString Eq StringExpression
+Rule 93    StringSuffix -> Suffix StringExpression
 Rule 94    IntDeclare -> IntType VarName
 Rule 95    IntDeclare -> IntType VarName Eq IntExpression
 Rule 96    IntDeclare -> IntDeclare Splitter VarName
@@ -129,14 +132,17 @@ AlphType             : 99 100
 And                  : 25
 BooleanType          : 109 110
 CloseStruct          : 67 68
+CommentText          : 
 Concat               : 17 19 42 55
 Div                  : 56
-Eq                   : 81 83 93 95 97 98 100 102 103 105 107 108 110 112 113
+EndComment           : 
+Eq                   : 81 83 92 95 97 98 100 102 103 105 107 108 110 112 113
 False                : 66
+InitComment          : 
 Int                  : 90
 IntType              : 94 95
-KleeneC              : 69 84
-LGroup               : 44 47 52 58 88
+KleeneC              : 74 84
+LGroup               : 44 49 52 63 88
 LangType             : 104 105
 LenOp                : 15 15 16 16
 NextLine             : 
@@ -146,22 +152,22 @@ Or                   : 13
 PositiveC            : 79 87
 Pow                  : 27 40 75
 Prefix               : 91
-RGroup               : 44 47 52 58 88
-Show                 : 50
-ShowInLine           : 51
+RGroup               : 44 49 52 63 88
+Show                 : 47
+ShowInLine           : 48
 Splitter             : 77 78 82 83 96 97 101 102 106 107 111 112
 String               : 45
 StringType           : 80 81
 Sub                  : 38 85
 SuchThat             : 
-Suffix               : 92
+Suffix               : 93
 Term                 : 21 22
 True                 : 65
 VAlph                : 54
-VBoolean             : 49 113
+VBoolean             : 51 113
 VInt                 : 89
-VLang                : 59 108
-VString              : 46 93
+VLang                : 64 108
+VString              : 46 92
 VarName              : 80 81 82 83 94 95 96 97 98 99 100 101 102 103 104 105 106 107 109 110 111 112
 error                : 
 
@@ -169,31 +175,31 @@ Nonterminals, with rules where they appear
 
 AddSub               : 11 37 38
 Alph                 : 53
-AlphAssign           : 72
+AlphAssign           : 71
 AlphConcat           : 1 19
-AlphDeclare          : 62 101 102
-AlphExpression       : 16 30 52 69 79 100 102 103
+AlphDeclare          : 60 101 102
+AlphExpression       : 16 30 52 74 79 100 102 103
 AlphGroup            : 41
 AlphKleeneC          : 5
 AlphPositiveC        : 6
 AlphPow              : 19 20 40
 Assigns              : 35
-Boolean              : 48
+Boolean              : 50
 BooleanAnd           : 13 14 25
-BooleanAssign        : 74
-BooleanDeclare       : 64 111 112
-BooleanExpression    : 33 47 110 112 113
+BooleanAssign        : 73
+BooleanDeclare       : 62 111 112
+BooleanExpression    : 33 49 110 112 113
 BooleanGroup         : 25 26
 BooleanOr            : 2 13
 Declares             : 36
-IntAssign            : 71
-IntDeclare           : 61 96 97
-IntExpression        : 27 29 40 69 79 84 87 88 95 97 98
+IntAssign            : 70
+IntDeclare           : 59 96 97
+IntExpression        : 27 29 40 74 79 84 87 88 95 97 98
 IntPow               : 55 56 57 75
-LangAssign           : 73
+LangAssign           : 72
 LangConcat           : 23 24 42
-LangDeclare          : 63 106 107
-LangExpression       : 32 58 84 87 105 107 108
+LangDeclare          : 61 106 107
+LangExpression       : 32 63 84 87 105 107 108
 LangGroup            : 42 43
 LangKleeneC          : 7
 LangPositiveC        : 8
@@ -201,9 +207,9 @@ LangUnion            : 9 23
 MultDiv              : 37 38 39 55 56
 Primary              : 85 86
 ShowVal              : 34
-StringAssign         : 70
+StringAssign         : 69
 StringConcat         : 12 17
-StringDeclare        : 60 82 83
+StringDeclare        : 58 82 83
 StringExpression     : 15 16 31 44 68 77 78 78 81 83 91 92 93
 StringGroup          : 28
 StringLen            : 10
@@ -212,7 +218,7 @@ StringPow            : 17 18 27
 StringPrefix         : 3
 StringSuffix         : 4
 Unary                : 75 76
-expression           : 21 22 50 51
+expression           : 21 22 47 48
 expressions          : 21 0
 
 Parsing method: LALR
@@ -242,18 +248,18 @@ state 0
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (2) BooleanExpression -> . BooleanOr
-    (50) ShowVal -> . Show expression
-    (51) ShowVal -> . ShowInLine expression
-    (70) Assigns -> . StringAssign
-    (71) Assigns -> . IntAssign
-    (72) Assigns -> . AlphAssign
-    (73) Assigns -> . LangAssign
-    (74) Assigns -> . BooleanAssign
-    (60) Declares -> . StringDeclare
-    (61) Declares -> . IntDeclare
-    (62) Declares -> . AlphDeclare
-    (63) Declares -> . LangDeclare
-    (64) Declares -> . BooleanDeclare
+    (47) ShowVal -> . Show expression
+    (48) ShowVal -> . ShowInLine expression
+    (69) Assigns -> . StringAssign
+    (70) Assigns -> . IntAssign
+    (71) Assigns -> . AlphAssign
+    (72) Assigns -> . LangAssign
+    (73) Assigns -> . BooleanAssign
+    (58) Declares -> . StringDeclare
+    (59) Declares -> . IntDeclare
+    (60) Declares -> . AlphDeclare
+    (61) Declares -> . LangDeclare
+    (62) Declares -> . BooleanDeclare
     (15) StringLen -> . LenOp StringExpression LenOp
     (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
     (37) AddSub -> . AddSub Add MultDiv
@@ -264,8 +270,8 @@ state 0
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -273,7 +279,7 @@ state 0
     (24) LangUnion -> . LangConcat
     (13) BooleanOr -> . BooleanOr Or BooleanAnd
     (14) BooleanOr -> . BooleanAnd
-    (93) StringAssign -> . VString Eq StringExpression
+    (92) StringAssign -> . VString Eq StringExpression
     (98) IntAssign -> . VarName Eq IntExpression
     (103) AlphAssign -> . VarName Eq AlphExpression
     (108) LangAssign -> . VLang Eq LangExpression
@@ -317,11 +323,11 @@ state 0
     (44) StringGroup -> . LGroup StringExpression RGroup
     (45) StringGroup -> . String
     (46) StringGroup -> . VString
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (85) Unary -> . Sub Primary
     (86) Unary -> . Primary
     (67) Alph -> . OpenStruct StringList CloseStruct
@@ -427,18 +433,18 @@ state 1
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (2) BooleanExpression -> . BooleanOr
-    (50) ShowVal -> . Show expression
-    (51) ShowVal -> . ShowInLine expression
-    (70) Assigns -> . StringAssign
-    (71) Assigns -> . IntAssign
-    (72) Assigns -> . AlphAssign
-    (73) Assigns -> . LangAssign
-    (74) Assigns -> . BooleanAssign
-    (60) Declares -> . StringDeclare
-    (61) Declares -> . IntDeclare
-    (62) Declares -> . AlphDeclare
-    (63) Declares -> . LangDeclare
-    (64) Declares -> . BooleanDeclare
+    (47) ShowVal -> . Show expression
+    (48) ShowVal -> . ShowInLine expression
+    (69) Assigns -> . StringAssign
+    (70) Assigns -> . IntAssign
+    (71) Assigns -> . AlphAssign
+    (72) Assigns -> . LangAssign
+    (73) Assigns -> . BooleanAssign
+    (58) Declares -> . StringDeclare
+    (59) Declares -> . IntDeclare
+    (60) Declares -> . AlphDeclare
+    (61) Declares -> . LangDeclare
+    (62) Declares -> . BooleanDeclare
     (15) StringLen -> . LenOp StringExpression LenOp
     (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
     (37) AddSub -> . AddSub Add MultDiv
@@ -449,8 +455,8 @@ state 1
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -458,7 +464,7 @@ state 1
     (24) LangUnion -> . LangConcat
     (13) BooleanOr -> . BooleanOr Or BooleanAnd
     (14) BooleanOr -> . BooleanAnd
-    (93) StringAssign -> . VString Eq StringExpression
+    (92) StringAssign -> . VString Eq StringExpression
     (98) IntAssign -> . VarName Eq IntExpression
     (103) AlphAssign -> . VarName Eq AlphExpression
     (108) LangAssign -> . VLang Eq LangExpression
@@ -502,11 +508,11 @@ state 1
     (44) StringGroup -> . LGroup StringExpression RGroup
     (45) StringGroup -> . String
     (46) StringGroup -> . VString
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (85) Unary -> . Sub Primary
     (86) Unary -> . Primary
     (67) Alph -> . OpenStruct StringList CloseStruct
@@ -604,7 +610,7 @@ state 3
 state 4
 
     (30) expression -> AlphExpression .
-    (69) AlphKleeneC -> AlphExpression . KleeneC IntExpression
+    (74) AlphKleeneC -> AlphExpression . KleeneC IntExpression
     (79) AlphPositiveC -> AlphExpression . PositiveC IntExpression
 
     Term            reduce using rule 30 (expression -> AlphExpression .)
@@ -816,7 +822,7 @@ state 22
 
 state 23
 
-    (50) ShowVal -> Show . expression
+    (47) ShowVal -> Show . expression
     (29) expression -> . IntExpression
     (30) expression -> . AlphExpression
     (31) expression -> . StringExpression
@@ -837,18 +843,18 @@ state 23
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (2) BooleanExpression -> . BooleanOr
-    (50) ShowVal -> . Show expression
-    (51) ShowVal -> . ShowInLine expression
-    (70) Assigns -> . StringAssign
-    (71) Assigns -> . IntAssign
-    (72) Assigns -> . AlphAssign
-    (73) Assigns -> . LangAssign
-    (74) Assigns -> . BooleanAssign
-    (60) Declares -> . StringDeclare
-    (61) Declares -> . IntDeclare
-    (62) Declares -> . AlphDeclare
-    (63) Declares -> . LangDeclare
-    (64) Declares -> . BooleanDeclare
+    (47) ShowVal -> . Show expression
+    (48) ShowVal -> . ShowInLine expression
+    (69) Assigns -> . StringAssign
+    (70) Assigns -> . IntAssign
+    (71) Assigns -> . AlphAssign
+    (72) Assigns -> . LangAssign
+    (73) Assigns -> . BooleanAssign
+    (58) Declares -> . StringDeclare
+    (59) Declares -> . IntDeclare
+    (60) Declares -> . AlphDeclare
+    (61) Declares -> . LangDeclare
+    (62) Declares -> . BooleanDeclare
     (15) StringLen -> . LenOp StringExpression LenOp
     (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
     (37) AddSub -> . AddSub Add MultDiv
@@ -859,8 +865,8 @@ state 23
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -868,7 +874,7 @@ state 23
     (24) LangUnion -> . LangConcat
     (13) BooleanOr -> . BooleanOr Or BooleanAnd
     (14) BooleanOr -> . BooleanAnd
-    (93) StringAssign -> . VString Eq StringExpression
+    (92) StringAssign -> . VString Eq StringExpression
     (98) IntAssign -> . VarName Eq IntExpression
     (103) AlphAssign -> . VarName Eq AlphExpression
     (108) LangAssign -> . VLang Eq LangExpression
@@ -912,11 +918,11 @@ state 23
     (44) StringGroup -> . LGroup StringExpression RGroup
     (45) StringGroup -> . String
     (46) StringGroup -> . VString
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (85) Unary -> . Sub Primary
     (86) Unary -> . Primary
     (67) Alph -> . OpenStruct StringList CloseStruct
@@ -999,7 +1005,7 @@ state 23
 
 state 24
 
-    (51) ShowVal -> ShowInLine . expression
+    (48) ShowVal -> ShowInLine . expression
     (29) expression -> . IntExpression
     (30) expression -> . AlphExpression
     (31) expression -> . StringExpression
@@ -1020,18 +1026,18 @@ state 24
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (2) BooleanExpression -> . BooleanOr
-    (50) ShowVal -> . Show expression
-    (51) ShowVal -> . ShowInLine expression
-    (70) Assigns -> . StringAssign
-    (71) Assigns -> . IntAssign
-    (72) Assigns -> . AlphAssign
-    (73) Assigns -> . LangAssign
-    (74) Assigns -> . BooleanAssign
-    (60) Declares -> . StringDeclare
-    (61) Declares -> . IntDeclare
-    (62) Declares -> . AlphDeclare
-    (63) Declares -> . LangDeclare
-    (64) Declares -> . BooleanDeclare
+    (47) ShowVal -> . Show expression
+    (48) ShowVal -> . ShowInLine expression
+    (69) Assigns -> . StringAssign
+    (70) Assigns -> . IntAssign
+    (71) Assigns -> . AlphAssign
+    (72) Assigns -> . LangAssign
+    (73) Assigns -> . BooleanAssign
+    (58) Declares -> . StringDeclare
+    (59) Declares -> . IntDeclare
+    (60) Declares -> . AlphDeclare
+    (61) Declares -> . LangDeclare
+    (62) Declares -> . BooleanDeclare
     (15) StringLen -> . LenOp StringExpression LenOp
     (16) StringLen -> . LenOp StringExpression On AlphExpression LenOp
     (37) AddSub -> . AddSub Add MultDiv
@@ -1042,8 +1048,8 @@ state 24
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -1051,7 +1057,7 @@ state 24
     (24) LangUnion -> . LangConcat
     (13) BooleanOr -> . BooleanOr Or BooleanAnd
     (14) BooleanOr -> . BooleanAnd
-    (93) StringAssign -> . VString Eq StringExpression
+    (92) StringAssign -> . VString Eq StringExpression
     (98) IntAssign -> . VarName Eq IntExpression
     (103) AlphAssign -> . VarName Eq AlphExpression
     (108) LangAssign -> . VLang Eq LangExpression
@@ -1095,11 +1101,11 @@ state 24
     (44) StringGroup -> . LGroup StringExpression RGroup
     (45) StringGroup -> . String
     (46) StringGroup -> . VString
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (85) Unary -> . Sub Primary
     (86) Unary -> . Primary
     (67) Alph -> . OpenStruct StringList CloseStruct
@@ -1182,86 +1188,86 @@ state 24
 
 state 25
 
-    (70) Assigns -> StringAssign .
+    (69) Assigns -> StringAssign .
 
-    Term            reduce using rule 70 (Assigns -> StringAssign .)
+    Term            reduce using rule 69 (Assigns -> StringAssign .)
 
 
 state 26
 
-    (71) Assigns -> IntAssign .
+    (70) Assigns -> IntAssign .
 
-    Term            reduce using rule 71 (Assigns -> IntAssign .)
+    Term            reduce using rule 70 (Assigns -> IntAssign .)
 
 
 state 27
 
-    (72) Assigns -> AlphAssign .
+    (71) Assigns -> AlphAssign .
 
-    Term            reduce using rule 72 (Assigns -> AlphAssign .)
+    Term            reduce using rule 71 (Assigns -> AlphAssign .)
 
 
 state 28
 
-    (73) Assigns -> LangAssign .
+    (72) Assigns -> LangAssign .
 
-    Term            reduce using rule 73 (Assigns -> LangAssign .)
+    Term            reduce using rule 72 (Assigns -> LangAssign .)
 
 
 state 29
 
-    (74) Assigns -> BooleanAssign .
+    (73) Assigns -> BooleanAssign .
 
-    Term            reduce using rule 74 (Assigns -> BooleanAssign .)
+    Term            reduce using rule 73 (Assigns -> BooleanAssign .)
 
 
 state 30
 
-    (60) Declares -> StringDeclare .
+    (58) Declares -> StringDeclare .
     (82) StringDeclare -> StringDeclare . Splitter VarName
     (83) StringDeclare -> StringDeclare . Splitter VarName Eq StringExpression
 
-    Term            reduce using rule 60 (Declares -> StringDeclare .)
+    Term            reduce using rule 58 (Declares -> StringDeclare .)
     Splitter        shift and go to state 84
 
 
 state 31
 
-    (61) Declares -> IntDeclare .
+    (59) Declares -> IntDeclare .
     (96) IntDeclare -> IntDeclare . Splitter VarName
     (97) IntDeclare -> IntDeclare . Splitter VarName Eq IntExpression
 
-    Term            reduce using rule 61 (Declares -> IntDeclare .)
+    Term            reduce using rule 59 (Declares -> IntDeclare .)
     Splitter        shift and go to state 85
 
 
 state 32
 
-    (62) Declares -> AlphDeclare .
+    (60) Declares -> AlphDeclare .
     (101) AlphDeclare -> AlphDeclare . Splitter VarName
     (102) AlphDeclare -> AlphDeclare . Splitter VarName Eq AlphExpression
 
-    Term            reduce using rule 62 (Declares -> AlphDeclare .)
+    Term            reduce using rule 60 (Declares -> AlphDeclare .)
     Splitter        shift and go to state 86
 
 
 state 33
 
-    (63) Declares -> LangDeclare .
+    (61) Declares -> LangDeclare .
     (106) LangDeclare -> LangDeclare . Splitter VarName
     (107) LangDeclare -> LangDeclare . Splitter VarName Eq LangExpression
 
-    Term            reduce using rule 63 (Declares -> LangDeclare .)
+    Term            reduce using rule 61 (Declares -> LangDeclare .)
     Splitter        shift and go to state 87
 
 
 state 34
 
-    (64) Declares -> BooleanDeclare .
+    (62) Declares -> BooleanDeclare .
     (111) BooleanDeclare -> BooleanDeclare . Splitter VarName
     (112) BooleanDeclare -> BooleanDeclare . Splitter VarName Eq BooleanExpression
 
-    Term            reduce using rule 64 (Declares -> BooleanDeclare .)
+    Term            reduce using rule 62 (Declares -> BooleanDeclare .)
     Splitter        shift and go to state 88
 
 
@@ -1379,7 +1385,7 @@ state 40
 
 state 41
 
-    (92) StringSuffix -> Suffix . StringExpression
+    (93) StringSuffix -> Suffix . StringExpression
     (12) StringExpression -> . StringConcat
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
@@ -1426,7 +1432,7 @@ state 43
 
 state 44
 
-    (93) StringAssign -> VString . Eq StringExpression
+    (92) StringAssign -> VString . Eq StringExpression
     (46) StringGroup -> VString .
 
     Eq              shift and go to state 102
@@ -1446,25 +1452,25 @@ state 45
 state 46
 
     (108) LangAssign -> VLang . Eq LangExpression
-    (59) LangGroup -> VLang .
+    (64) LangGroup -> VLang .
 
     Eq              shift and go to state 104
-    Concat          reduce using rule 59 (LangGroup -> VLang .)
-    Add             reduce using rule 59 (LangGroup -> VLang .)
-    KleeneC         reduce using rule 59 (LangGroup -> VLang .)
-    PositiveC       reduce using rule 59 (LangGroup -> VLang .)
-    Term            reduce using rule 59 (LangGroup -> VLang .)
+    Concat          reduce using rule 64 (LangGroup -> VLang .)
+    Add             reduce using rule 64 (LangGroup -> VLang .)
+    KleeneC         reduce using rule 64 (LangGroup -> VLang .)
+    PositiveC       reduce using rule 64 (LangGroup -> VLang .)
+    Term            reduce using rule 64 (LangGroup -> VLang .)
 
 
 state 47
 
     (113) BooleanAssign -> VBoolean . Eq BooleanExpression
-    (49) BooleanGroup -> VBoolean .
+    (51) BooleanGroup -> VBoolean .
 
     Eq              shift and go to state 105
-    And             reduce using rule 49 (BooleanGroup -> VBoolean .)
-    Or              reduce using rule 49 (BooleanGroup -> VBoolean .)
-    Term            reduce using rule 49 (BooleanGroup -> VBoolean .)
+    And             reduce using rule 51 (BooleanGroup -> VBoolean .)
+    Or              reduce using rule 51 (BooleanGroup -> VBoolean .)
+    Term            reduce using rule 51 (BooleanGroup -> VBoolean .)
 
 
 state 48
@@ -1607,8 +1613,8 @@ state 59
 
     (52) AlphGroup -> LGroup . AlphExpression RGroup
     (44) StringGroup -> LGroup . StringExpression RGroup
-    (58) LangGroup -> LGroup . LangExpression RGroup
-    (47) BooleanGroup -> LGroup . BooleanExpression RGroup
+    (63) LangGroup -> LGroup . LangExpression RGroup
+    (49) BooleanGroup -> LGroup . BooleanExpression RGroup
     (88) Primary -> LGroup . IntExpression RGroup
     (1) AlphExpression -> . AlphConcat
     (12) StringExpression -> . StringConcat
@@ -1627,8 +1633,8 @@ state 59
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -1658,11 +1664,11 @@ state 59
     (44) StringGroup -> . LGroup StringExpression RGroup
     (45) StringGroup -> . String
     (46) StringGroup -> . VString
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (75) IntPow -> . IntPow Pow Unary
     (76) IntPow -> . Unary
     (67) Alph -> . OpenStruct StringList CloseStruct
@@ -1769,13 +1775,13 @@ state 62
 
 state 63
 
-    (48) BooleanGroup -> Boolean .
+    (50) BooleanGroup -> Boolean .
 
-    And             reduce using rule 48 (BooleanGroup -> Boolean .)
-    Or              reduce using rule 48 (BooleanGroup -> Boolean .)
-    Term            reduce using rule 48 (BooleanGroup -> Boolean .)
-    RGroup          reduce using rule 48 (BooleanGroup -> Boolean .)
-    Splitter        reduce using rule 48 (BooleanGroup -> Boolean .)
+    And             reduce using rule 50 (BooleanGroup -> Boolean .)
+    Or              reduce using rule 50 (BooleanGroup -> Boolean .)
+    Term            reduce using rule 50 (BooleanGroup -> Boolean .)
+    RGroup          reduce using rule 50 (BooleanGroup -> Boolean .)
+    Splitter        reduce using rule 50 (BooleanGroup -> Boolean .)
 
 
 state 64
@@ -1921,7 +1927,7 @@ state 71
 
 state 72
 
-    (69) AlphKleeneC -> AlphExpression KleeneC . IntExpression
+    (74) AlphKleeneC -> AlphExpression KleeneC . IntExpression
     (10) IntExpression -> . StringLen
     (11) IntExpression -> . AddSub
     (15) StringLen -> . LenOp StringExpression LenOp
@@ -2147,8 +2153,8 @@ state 80
     (23) LangUnion -> LangUnion Add . LangConcat
     (42) LangConcat -> . LangConcat Concat LangGroup
     (43) LangConcat -> . LangGroup
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
 
     LGroup          shift and go to state 132
     VLang           shift and go to state 117
@@ -2161,9 +2167,9 @@ state 81
     (13) BooleanOr -> BooleanOr Or . BooleanAnd
     (25) BooleanAnd -> . BooleanAnd And BooleanGroup
     (26) BooleanAnd -> . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
@@ -2178,16 +2184,16 @@ state 81
 
 state 82
 
-    (50) ShowVal -> Show expression .
+    (47) ShowVal -> Show expression .
 
-    Term            reduce using rule 50 (ShowVal -> Show expression .)
+    Term            reduce using rule 47 (ShowVal -> Show expression .)
 
 
 state 83
 
-    (51) ShowVal -> ShowInLine expression .
+    (48) ShowVal -> ShowInLine expression .
 
-    Term            reduce using rule 51 (ShowVal -> ShowInLine expression .)
+    Term            reduce using rule 48 (ShowVal -> ShowInLine expression .)
 
 
 state 84
@@ -2453,20 +2459,20 @@ state 98
 
 state 99
 
-    (92) StringSuffix -> Suffix StringExpression .
+    (93) StringSuffix -> Suffix StringExpression .
 
-    KleeneC         reduce using rule 92 (StringSuffix -> Suffix StringExpression .)
-    PositiveC       reduce using rule 92 (StringSuffix -> Suffix StringExpression .)
-    Term            reduce using rule 92 (StringSuffix -> Suffix StringExpression .)
-    RGroup          reduce using rule 92 (StringSuffix -> Suffix StringExpression .)
-    Splitter        reduce using rule 92 (StringSuffix -> Suffix StringExpression .)
+    KleeneC         reduce using rule 93 (StringSuffix -> Suffix StringExpression .)
+    PositiveC       reduce using rule 93 (StringSuffix -> Suffix StringExpression .)
+    Term            reduce using rule 93 (StringSuffix -> Suffix StringExpression .)
+    RGroup          reduce using rule 93 (StringSuffix -> Suffix StringExpression .)
+    Splitter        reduce using rule 93 (StringSuffix -> Suffix StringExpression .)
 
 
 state 100
 
     (42) LangConcat -> LangConcat Concat . LangGroup
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
 
     LGroup          shift and go to state 132
     VLang           shift and go to state 117
@@ -2476,9 +2482,9 @@ state 100
 state 101
 
     (25) BooleanAnd -> BooleanAnd And . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
@@ -2492,7 +2498,7 @@ state 101
 
 state 102
 
-    (93) StringAssign -> VString Eq . StringExpression
+    (92) StringAssign -> VString Eq . StringExpression
     (12) StringExpression -> . StringConcat
     (17) StringConcat -> . StringConcat Concat StringPow
     (18) StringConcat -> . StringPow
@@ -2575,8 +2581,8 @@ state 104
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -2587,8 +2593,8 @@ state 104
     (43) LangConcat -> . LangGroup
     (19) AlphConcat -> . AlphConcat Concat AlphPow
     (20) AlphConcat -> . AlphPow
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
     (40) AlphPow -> . AlphPow Pow IntExpression
     (41) AlphPow -> . AlphGroup
     (52) AlphGroup -> . LGroup AlphExpression RGroup
@@ -2628,9 +2634,9 @@ state 105
     (14) BooleanOr -> . BooleanAnd
     (25) BooleanAnd -> . BooleanAnd And BooleanGroup
     (26) BooleanAnd -> . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
@@ -2715,7 +2721,7 @@ state 111
 state 112
 
     (52) AlphGroup -> LGroup AlphExpression . RGroup
-    (69) AlphKleeneC -> AlphExpression . KleeneC IntExpression
+    (74) AlphKleeneC -> AlphExpression . KleeneC IntExpression
     (79) AlphPositiveC -> AlphExpression . PositiveC IntExpression
 
     RGroup          shift and go to state 162
@@ -2732,7 +2738,7 @@ state 113
 
 state 114
 
-    (58) LangGroup -> LGroup LangExpression . RGroup
+    (63) LangGroup -> LGroup LangExpression . RGroup
     (84) LangKleeneC -> LangExpression . KleeneC IntExpression
     (87) LangPositiveC -> LangExpression . PositiveC IntExpression
 
@@ -2743,7 +2749,7 @@ state 114
 
 state 115
 
-    (47) BooleanGroup -> LGroup BooleanExpression . RGroup
+    (49) BooleanGroup -> LGroup BooleanExpression . RGroup
 
     RGroup          shift and go to state 165
 
@@ -2757,26 +2763,26 @@ state 116
 
 state 117
 
-    (59) LangGroup -> VLang .
+    (64) LangGroup -> VLang .
 
-    Concat          reduce using rule 59 (LangGroup -> VLang .)
-    Add             reduce using rule 59 (LangGroup -> VLang .)
-    RGroup          reduce using rule 59 (LangGroup -> VLang .)
-    KleeneC         reduce using rule 59 (LangGroup -> VLang .)
-    PositiveC       reduce using rule 59 (LangGroup -> VLang .)
-    Term            reduce using rule 59 (LangGroup -> VLang .)
-    Splitter        reduce using rule 59 (LangGroup -> VLang .)
+    Concat          reduce using rule 64 (LangGroup -> VLang .)
+    Add             reduce using rule 64 (LangGroup -> VLang .)
+    RGroup          reduce using rule 64 (LangGroup -> VLang .)
+    KleeneC         reduce using rule 64 (LangGroup -> VLang .)
+    PositiveC       reduce using rule 64 (LangGroup -> VLang .)
+    Term            reduce using rule 64 (LangGroup -> VLang .)
+    Splitter        reduce using rule 64 (LangGroup -> VLang .)
 
 
 state 118
 
-    (49) BooleanGroup -> VBoolean .
+    (51) BooleanGroup -> VBoolean .
 
-    And             reduce using rule 49 (BooleanGroup -> VBoolean .)
-    Or              reduce using rule 49 (BooleanGroup -> VBoolean .)
-    RGroup          reduce using rule 49 (BooleanGroup -> VBoolean .)
-    Term            reduce using rule 49 (BooleanGroup -> VBoolean .)
-    Splitter        reduce using rule 49 (BooleanGroup -> VBoolean .)
+    And             reduce using rule 51 (BooleanGroup -> VBoolean .)
+    Or              reduce using rule 51 (BooleanGroup -> VBoolean .)
+    RGroup          reduce using rule 51 (BooleanGroup -> VBoolean .)
+    Term            reduce using rule 51 (BooleanGroup -> VBoolean .)
+    Splitter        reduce using rule 51 (BooleanGroup -> VBoolean .)
 
 
 state 119
@@ -2829,13 +2835,13 @@ state 121
 
 state 122
 
-    (69) AlphKleeneC -> AlphExpression KleeneC IntExpression .
+    (74) AlphKleeneC -> AlphExpression KleeneC IntExpression .
 
-    KleeneC         reduce using rule 69 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
-    PositiveC       reduce using rule 69 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
-    Term            reduce using rule 69 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
-    RGroup          reduce using rule 69 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
-    Splitter        reduce using rule 69 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    KleeneC         reduce using rule 74 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    PositiveC       reduce using rule 74 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    Term            reduce using rule 74 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    RGroup          reduce using rule 74 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
+    Splitter        reduce using rule 74 (AlphKleeneC -> AlphExpression KleeneC IntExpression .)
 
 
 state 123
@@ -2989,7 +2995,7 @@ state 131
 
 state 132
 
-    (58) LangGroup -> LGroup . LangExpression RGroup
+    (63) LangGroup -> LGroup . LangExpression RGroup
     (3) LangExpression -> . StringPrefix
     (4) LangExpression -> . StringSuffix
     (5) LangExpression -> . AlphKleeneC
@@ -2998,8 +3004,8 @@ state 132
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -3010,8 +3016,8 @@ state 132
     (43) LangConcat -> . LangGroup
     (19) AlphConcat -> . AlphConcat Concat AlphPow
     (20) AlphConcat -> . AlphPow
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
     (40) AlphPow -> . AlphPow Pow IntExpression
     (41) AlphPow -> . AlphGroup
     (52) AlphGroup -> . LGroup AlphExpression RGroup
@@ -3057,15 +3063,15 @@ state 133
 
 state 134
 
-    (47) BooleanGroup -> LGroup . BooleanExpression RGroup
+    (49) BooleanGroup -> LGroup . BooleanExpression RGroup
     (2) BooleanExpression -> . BooleanOr
     (13) BooleanOr -> . BooleanOr Or BooleanAnd
     (14) BooleanOr -> . BooleanAnd
     (25) BooleanAnd -> . BooleanAnd And BooleanGroup
     (26) BooleanAnd -> . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
@@ -3270,9 +3276,9 @@ state 147
 
 state 148
 
-    (93) StringAssign -> VString Eq StringExpression .
+    (92) StringAssign -> VString Eq StringExpression .
 
-    Term            reduce using rule 93 (StringAssign -> VString Eq StringExpression .)
+    Term            reduce using rule 92 (StringAssign -> VString Eq StringExpression .)
 
 
 state 149
@@ -3355,7 +3361,7 @@ state 152
 
 state 153
 
-    (69) AlphKleeneC -> AlphExpression . KleeneC IntExpression
+    (74) AlphKleeneC -> AlphExpression . KleeneC IntExpression
     (79) AlphPositiveC -> AlphExpression . PositiveC IntExpression
 
     KleeneC         shift and go to state 72
@@ -3364,7 +3370,7 @@ state 153
 
 state 154
 
-    (58) LangGroup -> LGroup . LangExpression RGroup
+    (63) LangGroup -> LGroup . LangExpression RGroup
     (52) AlphGroup -> LGroup . AlphExpression RGroup
     (3) LangExpression -> . StringPrefix
     (4) LangExpression -> . StringSuffix
@@ -3375,8 +3381,8 @@ state 154
     (9) LangExpression -> . LangUnion
     (1) AlphExpression -> . AlphConcat
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -3388,8 +3394,8 @@ state 154
     (43) LangConcat -> . LangGroup
     (40) AlphPow -> . AlphPow Pow IntExpression
     (41) AlphPow -> . AlphGroup
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
     (52) AlphGroup -> . LGroup AlphExpression RGroup
     (53) AlphGroup -> . Alph
     (54) AlphGroup -> . VAlph
@@ -3517,8 +3523,8 @@ state 159
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -3529,8 +3535,8 @@ state 159
     (43) LangConcat -> . LangGroup
     (19) AlphConcat -> . AlphConcat Concat AlphPow
     (20) AlphConcat -> . AlphPow
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
     (40) AlphPow -> . AlphPow Pow IntExpression
     (41) AlphPow -> . AlphGroup
     (52) AlphGroup -> . LGroup AlphExpression RGroup
@@ -3570,9 +3576,9 @@ state 160
     (14) BooleanOr -> . BooleanAnd
     (25) BooleanAnd -> . BooleanAnd And BooleanGroup
     (26) BooleanAnd -> . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
@@ -3638,26 +3644,26 @@ state 163
 
 state 164
 
-    (58) LangGroup -> LGroup LangExpression RGroup .
+    (63) LangGroup -> LGroup LangExpression RGroup .
 
-    Concat          reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    Add             reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    KleeneC         reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    PositiveC       reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    Term            reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    RGroup          reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
-    Splitter        reduce using rule 58 (LangGroup -> LGroup LangExpression RGroup .)
+    Concat          reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    Add             reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    KleeneC         reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    PositiveC       reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    Term            reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    RGroup          reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
+    Splitter        reduce using rule 63 (LangGroup -> LGroup LangExpression RGroup .)
 
 
 state 165
 
-    (47) BooleanGroup -> LGroup BooleanExpression RGroup .
+    (49) BooleanGroup -> LGroup BooleanExpression RGroup .
 
-    And             reduce using rule 47 (BooleanGroup -> LGroup BooleanExpression RGroup .)
-    Or              reduce using rule 47 (BooleanGroup -> LGroup BooleanExpression RGroup .)
-    Term            reduce using rule 47 (BooleanGroup -> LGroup BooleanExpression RGroup .)
-    RGroup          reduce using rule 47 (BooleanGroup -> LGroup BooleanExpression RGroup .)
-    Splitter        reduce using rule 47 (BooleanGroup -> LGroup BooleanExpression RGroup .)
+    And             reduce using rule 49 (BooleanGroup -> LGroup BooleanExpression RGroup .)
+    Or              reduce using rule 49 (BooleanGroup -> LGroup BooleanExpression RGroup .)
+    Term            reduce using rule 49 (BooleanGroup -> LGroup BooleanExpression RGroup .)
+    RGroup          reduce using rule 49 (BooleanGroup -> LGroup BooleanExpression RGroup .)
+    Splitter        reduce using rule 49 (BooleanGroup -> LGroup BooleanExpression RGroup .)
 
 
 state 166
@@ -3847,8 +3853,8 @@ state 175
     (8) LangExpression -> . LangPositiveC
     (9) LangExpression -> . LangUnion
     (91) StringPrefix -> . Prefix StringExpression
-    (92) StringSuffix -> . Suffix StringExpression
-    (69) AlphKleeneC -> . AlphExpression KleeneC IntExpression
+    (93) StringSuffix -> . Suffix StringExpression
+    (74) AlphKleeneC -> . AlphExpression KleeneC IntExpression
     (79) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (84) LangKleeneC -> . LangExpression KleeneC IntExpression
     (87) LangPositiveC -> . LangExpression PositiveC IntExpression
@@ -3859,8 +3865,8 @@ state 175
     (43) LangConcat -> . LangGroup
     (19) AlphConcat -> . AlphConcat Concat AlphPow
     (20) AlphConcat -> . AlphPow
-    (58) LangGroup -> . LGroup LangExpression RGroup
-    (59) LangGroup -> . VLang
+    (63) LangGroup -> . LGroup LangExpression RGroup
+    (64) LangGroup -> . VLang
     (40) AlphPow -> . AlphPow Pow IntExpression
     (41) AlphPow -> . AlphGroup
     (52) AlphGroup -> . LGroup AlphExpression RGroup
@@ -3900,9 +3906,9 @@ state 176
     (14) BooleanOr -> . BooleanAnd
     (25) BooleanAnd -> . BooleanAnd And BooleanGroup
     (26) BooleanAnd -> . BooleanGroup
-    (47) BooleanGroup -> . LGroup BooleanExpression RGroup
-    (48) BooleanGroup -> . Boolean
-    (49) BooleanGroup -> . VBoolean
+    (49) BooleanGroup -> . LGroup BooleanExpression RGroup
+    (50) BooleanGroup -> . Boolean
+    (51) BooleanGroup -> . VBoolean
     (65) Boolean -> . True
     (66) Boolean -> . False
 
