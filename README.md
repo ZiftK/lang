@@ -1,4 +1,4 @@
-# Lenguaje .lang
+# Lenguaje .lang 🔠
 ## ¿Qué es lang?
 Es un lenguaje interpretado que permite realizar operaciones con los objetos matemáticos:
   - palabra
@@ -85,3 +85,5 @@ Lang lan1 = {"a", "b", "c"}, lan2 = {"ef", "gh"};
   4. `*+` -> Operador de clausura positiva; se usa a pasos para lidiar con los infinitos; `alp2**10` calcula los 10 primeros elementos de la clausura positiva
 
 
+# Recomendaciones
+Para probarlo te recomendamos ejecutar los archivos de ejemplo incluidos en la raíz del proyecto 🧐
