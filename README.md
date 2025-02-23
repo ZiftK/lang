@@ -1,4 +1,4 @@
-#Lenguaje .lang
+# Lenguaje .lang
 ## ¿Qué es lang?
 Es un lenguaje interpretado que permite realizar operaciones con los objetos matemáticos:
   - palabra
