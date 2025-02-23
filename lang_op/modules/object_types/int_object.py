@@ -64,7 +64,8 @@ class Int(Object):
 
     def __floordiv__(self, other):
         if isinstance(other, Int):
-            return Int(self.content // other.content)
+            val = self.content // other.content
+            return Int(val)
         elif isinstance(other, int):
             return Int(self.content // other)
         return NotImplemented

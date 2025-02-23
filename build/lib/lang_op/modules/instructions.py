@@ -17,8 +17,10 @@ def assign_var(left_object: Object, right_object: Object):
 
     variable: dict = vars.get(left_object.name)
 
-    if not ("V" + right_object.__class__.__name__ == variable.get("type")):
-        raise Exception(f"A {type} was passed, but a {variable.get('type')} was expected")
+    real_type = f"V{right_object.__class__.__name__}" 
+    
+    if not (real_type == variable.get("type")):
+        raise Exception(f"A {real_type} was passed, but a {variable.get('type')} was expected")
 
     left_object.copy(right_object)
 

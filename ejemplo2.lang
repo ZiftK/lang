@@ -18,7 +18,11 @@ showil " B: ";
 showil |word1| + |word2|;
 show "";
 
-value = (1+2+3)^(1-2+10-10);
+value = (1+2+3)/(10-10+3-4*2);
+
+value = 6/(-5);
+
+value = 3/-2;
 
 show value;
 

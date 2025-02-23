@@ -48,7 +48,10 @@ def p_IntMultDiv(p):
                 p[0] = p[1] * p[3]
                 return
             if p.slice[2].type == "Div":
-                p[0] = p[1] // p[3]
+                val = p[1] // p[3]
+                if val.content < 0:
+                    val += 1
+                p[0] = val
                 return
 
 
@@ -66,7 +69,7 @@ def p_IntUnary(p):
     """Unary : Sub Primary
             | Primary"""
     if len(p) > 2:
-        p[0] = - p[2]
+        p[0] = Int(content=-p[2])
     else:
         p[0] = p[1]
 
