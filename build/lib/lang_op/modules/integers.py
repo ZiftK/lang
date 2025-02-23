@@ -2,10 +2,15 @@ import re
 from lang_op.modules.object_types.alph_object import Alph
 from lang_op.modules.object_types.int_object import Int
 
+def check_is_int(value):
+    if not isinstance(value, Int):
+        return Int(content=value)
+    return value
+
 
 def p_IntegerExpression(p):
     """IntExpression : AddSub"""
-    p[0] = p[1]
+    p[0] = check_is_int(p[1])
 
 
 def p_StringLen(p):

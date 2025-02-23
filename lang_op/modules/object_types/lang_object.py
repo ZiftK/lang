@@ -86,6 +86,7 @@ class Lang(Object):
 
     def pow(self, count: Int):
 
+        print(f"{count=}")
         if len(self.__kleene_clau) >= count.content:
             return self.__kleene_clau[count.content]
 

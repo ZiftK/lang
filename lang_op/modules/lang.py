@@ -1,11 +1,17 @@
 from lang_op.modules.object_types.lang_object import Lang
 from lang_op.modules.object_types.alph_object import Alph
 from lang_op.modules.object_types.string_object import String
+from lang_op.modules.object_types.int_object import Int
 
 
 def check_is_lang(value):
     if not (value.__class__ is Lang):
         return Lang(content=value)
+    return value
+
+def check_is_int(value):
+    if not isinstance(value, Int):
+        return Int(content=value)
     return value
 
 
@@ -59,25 +65,25 @@ def p_LangGroup(p):
 def p_AlphKleeneC(p):
     """AlphKleeneC : AlphExpression KleeneC IntExpression"""
     alph: Alph = p[1]
-    p[0] = alph.get_kleene_clau(p[3])
+    p[0] = alph.get_kleene_clau(check_is_int(p[3]))
 
 
 def p_AlphPositiveC(p):
     """AlphPositiveC : AlphExpression PositiveC IntExpression"""
     alph: Alph = p[1]
-    p[0] = alph.get_positive_clau(p[3])
+    p[0] = alph.get_positive_clau(check_is_int(p[3]))
 
 
 def p_LangKleeneC(p):
     """LangKleeneC : LangExpression KleeneC IntExpression"""
     lang: Lang = p[1]
-    p[0] = lang.get_kleene_clau(p[3])
+    p[0] = lang.get_kleene_clau(check_is_int(p[3]))
 
 
 def p_LangPositiveC(p):
     """LangPositiveC : LangExpression PositiveC IntExpression"""
     lang: Lang = p[1]
-    p[0] = lang.get_positive_clau(p[3])
+    p[0] = lang.get_positive_clau(check_is_int(p[3]))
 
 
 def p_StringPrefix(p):

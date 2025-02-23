@@ -28,6 +28,11 @@ showil "Longitud de palabra 2: ";
 show longitud_palabra2;
 show "";
 
+show "";
+showil "Inversión de palabra 2: ";
+showil palabra2^-1;
+show "";
+
 showil "Prefijos de palabra 1: ";
 show prefixof palabra1;
 show "";
