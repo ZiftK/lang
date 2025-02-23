@@ -17,16 +17,15 @@ class String(Object):
 
     def __add__(self, other):
         other: String
-        self.content += other.content
-        return self
-
+        new = self.content + other.content
+        return new
+    
     def __mul__(self, other):
         other: int
         if other.content < 0:
             self.content = self.content[::-1]
 
-        self.content = self.content * abs(other.content)
-        return self
+        return self.content * abs(other.content)
 
     def __len__(self):
         return len(self.content)

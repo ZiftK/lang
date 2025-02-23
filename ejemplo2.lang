@@ -1,4 +1,21 @@
 
 String word1 = "abcde", word2 = "fghijk";
 
-show |word1|*|word2|;
+Int value = |word1|*|word2| + |word1*word2|;
+
+show value;
+
+showil "Word 1: ";
+showil word1;
+showil " Word 2: ";
+showil word2;
+show "";
+
+
+showil "A: ";
+showil |word1*word2|;
+showil " B: ";
+showil |word1| + |word2|;
+show "";
+
+
