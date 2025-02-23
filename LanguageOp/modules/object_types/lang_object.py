@@ -25,9 +25,10 @@ class Lang(Object):
         return list(chain(*(self.__kleene_clau[:length+1])))
 
     def get_kleene_clau(self, steps: Int):
+        steps += 1
         if len(self.__kleene_clau) >= steps.content:
             flat_list = self._get_flat_kleene_clau(steps.content)
-            return Lang(flat_list)
+            return flat_list
 
         steps -= len(self.__kleene_clau)
         return self.calc_kleene_clau(steps)
@@ -35,8 +36,8 @@ class Lang(Object):
     def get_positive_clau(self, steps: Int):
         steps += 1
         if len(self.__kleene_clau) >= steps.content:
-            flat_list = self._get_flat_kleene_clau()[1:steps]
-            return Lang(flat_list)
+            flat_list = self._get_flat_kleene_clau()[1:steps.content]
+            return flat_list
 
         steps -= len(self.__kleene_clau)
         return self.calc_kleene_clau(steps, include_lambda=False)
@@ -46,7 +47,7 @@ class Lang(Object):
         if steps.content == 0:
             result = self._get_flat_kleene_clau()
             result = result if include_lambda else result[1:]
-            return Lang(result)
+            return result
 
         current = self.__kleene_clau[-1]
 
@@ -71,7 +72,7 @@ class Lang(Object):
 
     def union(self, lang):
         lang: Lang
-        return Lang(self.content | lang.get_content())
+        return self.content | lang.get_content()
 
     def concat(self, lang):
         lang: Lang
@@ -81,21 +82,21 @@ class Lang(Object):
         for word in self.content:
             for word2 in other_content:
                 new_content.append(word + word2)
-        return Lang(new_content)
+        return new_content
 
     def pow(self, count: Int):
 
         if len(self.__kleene_clau) >= count.content:
-            return Lang(self.__kleene_clau[count.content])
+            return self.__kleene_clau[count.content]
 
-        aux_lang = Lang([""])
+        aux_lang = Lang(content=[""])
 
         def _pow(lang: Lang, _count: int):
 
             if _count == 0:
-                return lang
+                return lang.content
 
-            lang = lang.concat(self)
+            lang = Lang(content=lang.concat(self))
             return _pow(lang, _count - 1)
 
         return _pow(aux_lang, count)

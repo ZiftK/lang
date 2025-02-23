@@ -125,7 +125,7 @@ def p_AlphDeclare(p):
         | AlphDeclare Splitter VarName
         | AlphDeclare Splitter VarName Eq AlphExpression"""
     if len(p) <= 4:
-        unassigned: Alph = Alph(name=p[2])
+        unassigned: Alph = p[2]
         declare_var(unassigned)
 
     if len(p) == 5:
@@ -134,7 +134,7 @@ def p_AlphDeclare(p):
         declare_var(alph)
 
     if len(p) == 6:
-        alph: Alph = p[4]
+        alph: Alph = p[5]
         alph.name = p[3]
         declare_var(alph)
 

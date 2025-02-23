@@ -1,13 +1,15 @@
 from modules.object_types.alph_object import Alph
 
 
+def check_is_alph(val):
+    if val.__class__ is Alph:
+        return val
+    return Alph(content=val)
+
+
 def p_AlphExpression(p):
     """AlphExpression : AlphConcat"""
-    if not p[1].__class__ is set:
-        p[0] = p[1]
-        return
-
-    p[0] = Alph(p[1])
+    p[0] = check_is_alph(p[1])
 
 
 def p_AlphConcat(p):
@@ -50,11 +52,12 @@ def p_Alph(p):
             | OpenStruct StringExpression CloseStruct"""
 
     if p[2].__class__ is str:
-        p[0] = {p[2]}
+        val = {p[2]}
     else:
         real_content = [x.content for x in p[2]]
-        p[0] = set(real_content)
+        val = set(real_content)
 
+    p[0] = check_is_alph(val)
 
 def p_StringList(p):
     """StringList : StringList Splitter StringExpression

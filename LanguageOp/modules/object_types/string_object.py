@@ -1,5 +1,6 @@
 from modules.object_types.object import Object
 from modules.object_types.alph_object import Alph
+import itertools
 
 
 class String(Object):
@@ -40,7 +41,16 @@ class String(Object):
             include = [self.content, ""] if include_lambda else [self.content]
             return include + [self.content[-n:] for n in range(1, len(self.content) + 1)]
 
-    def calc_sub_sequences(self, alp: Alph = None):
-        suffix = self.calc_suffix(alp)
-        prefix = self.calc_prefix(alp)
+    def calc_sub_sequences(self, alph: Alph = None):
+        suffix = self.calc_suffix(alph)
+        prefix = self.calc_prefix(alph)
         return suffix + prefix
+
+    def calc_sub_strings(self, alph: Alph = None):
+        if not alph:
+            subsequences = [
+                ''.join(comb)
+                for i in range(1, len(self.content) + 1)
+                for comb in itertools.combinations(self.content, i)
+            ]
+            return subsequences

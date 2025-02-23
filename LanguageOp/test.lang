@@ -4,8 +4,10 @@
 
 String palabra1 = "abcd", palabra2 = "efgh";
 
-Alph alp1 = {"ab", "cd", "ef", "gh"};
+Alph alp1 = {"ab", "cd", "ef", "gh"}, alp2 = {"a", "b", "c"}, alp3 = {"e", "f", "g"};
 
+
+Lang lang1 = alp2*+1, lang2 = alp3*+1;
 
 //(
 ----------- OPERACIONES CON STRINGS
@@ -38,6 +40,11 @@ showil "Sub secuencias de palabra 1: ";
 show subsequenceof palabra1;
 show "";
 
+showil "Sub cadenas de palabra 1: ";
+show substringof palabra1;
+show "";
+
+
 //(
 ----------- OPERACIONES CON ALFABETOS
 )
@@ -48,21 +55,50 @@ show "";
 
 
 show "";
-show "Potencia de alfabeto 1: ";
+show "Potencia 3 de alfabeto 1: ";
 show alp1^3;
 
-Lang clausura_positiva = alp1*+3;
+Lang clausura_positiva = alp2*+3;
 
 show "";
-show "Clausura positiva de alfabeto 1 :";
+show "Clausura positiva de alfabeto 2 a exponente 3 :";
 show clausura_positiva;
 show "";
 
 Lang clausura_kleene = alp1**3;
 
 show "";
-show "Clausura de kleene de alfabeto 1: ";
+show "Clausura de kleene de alfabeto 1 a exponente 3: ";
 show clausura_kleene;
+show "";
+
+
+
+//(
+----------- OPERACIONES CON LENGUAJES
+)
+
+show "----------- OPERACIONES CON LENGUAJES";
+show "";
+
+show "";
+show "Union de lenguajes 1 y 2: ";
+show lang1 + lang2;
+show "";
+
+show "";
+show "Concatenación de lenguajes 1 y 2";
+show lang1*lang2;
+show "";
+
+show "";
+show "Clausura positiva de lenguaje 1 a exponente 3";
+show lang1*+3;
+show "";
+
+show "";
+show "Clausura de kleene de lenguae 2 a exponente 3";
+show lang2**3;
 show "";
 
 

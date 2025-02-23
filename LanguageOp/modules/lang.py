@@ -3,6 +3,12 @@ from modules.object_types.alph_object import Alph
 from modules.object_types.string_object import String
 
 
+def check_is_lang(value):
+    if not (value.__class__ is Lang):
+        return Lang(content=value)
+    return value
+
+
 def p_LangExpression(p):
     """LangExpression : StringPrefix
     | StringSuffix
@@ -11,11 +17,9 @@ def p_LangExpression(p):
     | LangKleeneC
     | LangPositiveC
     | LangUnion
-    | StringSubSequence"""
-    if not (p[1].__class__ is Lang):
-        p[0] = Lang(content=p[1])
-        return
-    p[0] = p[1]
+    | StringSubSequence
+    | StringSubString"""
+    p[0] = check_is_lang(p[1])
 
 
 def p_LangUnion(p):
@@ -95,3 +99,9 @@ def p_StringSubSequence(p):
     """StringSubSequence : SubSequence StringExpression"""
     string: String = p[2]
     p[0] = string.calc_sub_sequences()
+
+
+def p_StringSubString(p):
+    """StringSubString : SubString StringExpression"""
+    string: String = p[2]
+    p[0] = string.calc_sub_strings()
