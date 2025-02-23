@@ -78,14 +78,14 @@ def p_IntPrimary(p):
                 | Int"""
     match (len(p)):
 
-        case 4 if (p[2].__class__ is Int):
+        case 4:
+            if not (p[2].__class__ is Int):
+                p[0] = Int(content=int(p[2]))
+                return
             p[0] = p[2]
 
-        case 4 if not (p[2].__class__ is Int):
-            p[0] = Int(content=p[2])
-
-        case 2 if (p[1].__class__ is Int):
+        case 2:
+            if not (p[1].__class__ is Int):
+                p[0] = Int(content=int(p[1]))
             p[0] = p[1]
 
-        case 2 if not (p[1].__class__ is Int):
-            p[0] = Int(content=p[1])

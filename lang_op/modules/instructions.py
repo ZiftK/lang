@@ -6,12 +6,6 @@ from lang_op.modules.object_types.int_object import Int
 from lang_op.modules.object_types.object import Object
 from lang_op.modules.object_types.boolean_object import Boolean
 
-types_eq = {
-    "SuperString": "String",
-    "SuperAlph": "Alph",
-    "Integer": "Integer"
-}
-
 
 def declare_var(obj: Object):
     vars[obj.name] = {"value": obj, "type": "V" + obj.__class__.__name__}
@@ -112,7 +106,7 @@ def p_IntDeclare(p):
 
 
 def p_IntAssign(p):
-    """IntAssign : VarName Eq IntExpression"""
+    """IntAssign : VInt Eq IntExpression"""
 
     assign_var(left_object=p[1], right_object=p[3])
 
@@ -142,7 +136,7 @@ def p_AlphDeclare(p):
 
 
 def p_AlphAssign(p):
-    """AlphAssign : VarName Eq AlphExpression"""
+    """AlphAssign : VAlph Eq AlphExpression"""
 
     assign_var(left_object=p[1], right_object=p[2])
 

@@ -102,7 +102,7 @@ class Int(Object):
             return NotImplemented
 
         if modulo is None:
-            return Int(self.content ** exp)
+            return Int(int(self.content ** exp))
         else:
             if isinstance(modulo, Int):
                 mod = modulo.content
