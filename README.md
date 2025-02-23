@@ -12,3 +12,6 @@ tener python 3.11 o superior instalado.
 ### Pasos para instalarlo
   1. Descarga el **.zip** del repositorio o **clonalo**
   2.  Ejecuta **pip install .** en la carpeta **LangOp** dentro del entorno virtual donde desees instalar **lang**
+
+### Ejecutar ficheros .lang
+Para ejecutar cualquier archivo **.lang** sólo es necesario ejecutar el comando `lang <ruta de archivo .lang>`
