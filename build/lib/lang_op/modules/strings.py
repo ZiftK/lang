@@ -3,10 +3,15 @@ import re
 from lang_op.modules.variables import vars
 from lang_op.modules.object_types.string_object import String
 
+def check_string(val):
+    if not isinstance(val, String):
+        val = String(content=val)
+    return val
+
 
 def p_StringExpression(p):
     """StringExpression : StringConcat"""
-    p[0] = p[1]
+    p[0] = check_string(p[1])
 
 
 def p_StringConcat(p):
@@ -37,7 +42,5 @@ def p_StringGroup(p):
         val = p[2]
     else:
         val = p[1]
-    if not (val.__class__ is String):
-        p[0] = String(content=p[1])
-        return
-    p[0] = val
+    
+    p[0] = check_string(val)
