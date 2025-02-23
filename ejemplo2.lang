@@ -1,0 +1,4 @@
+
+String word1 = "abcde", word2 = "fghijk";
+
+show |word1|*|word2|;

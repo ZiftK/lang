@@ -4,8 +4,7 @@ from lang_op.modules.object_types.int_object import Int
 
 
 def p_IntegerExpression(p):
-    """IntExpression : StringLen
-        | AddSub"""
+    """IntExpression : AddSub"""
     p[0] = p[1]
 
 
@@ -74,6 +73,7 @@ def p_IntUnary(p):
 
 def p_IntPrimary(p):
     """Primary : LGroup IntExpression RGroup
+                | StringLen
                 | VInt
                 | Int"""
     match (len(p)):
