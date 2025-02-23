@@ -18,7 +18,9 @@ def p_StringConcat(p):
     """StringConcat : StringConcat Concat StringPow
                     | StringPow"""
     if len(p) > 2:
-        p[0] = p[1] + p[3]
+        val = check_string(p[3])
+        val2 = check_string(p[1])
+        p[0] = val2 + val
     else:
         p[0] = p[1]
 

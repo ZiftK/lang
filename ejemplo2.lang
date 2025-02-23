@@ -25,4 +25,6 @@ show value;
 
 show word1^value;
 
-String word3 = word1^(|word2|*|word1|/2);
+String word3 = "------- "*(word1^(|word2|*|word1|/2))* " //////// ";
+
+show word3;
