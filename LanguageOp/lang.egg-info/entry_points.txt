@@ -1,2 +1,0 @@
-[console_scripts]
-lang = LanguageOp.main:main
