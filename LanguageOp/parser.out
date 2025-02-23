@@ -39,19 +39,19 @@ Rule 25    BooleanAnd -> BooleanAnd And BooleanGroup
 Rule 26    BooleanAnd -> BooleanGroup
 Rule 27    StringPow -> StringPow Pow IntExpression
 Rule 28    StringPow -> StringGroup
-Rule 29    expression -> IntExpression
-Rule 30    expression -> AlphExpression
-Rule 31    expression -> StringExpression
-Rule 32    expression -> LangExpression
-Rule 33    expression -> BooleanExpression
-Rule 34    expression -> ShowVal
-Rule 35    expression -> Assigns
-Rule 36    expression -> Declares
-Rule 37    AddSub -> AddSub Add MultDiv
-Rule 38    AddSub -> AddSub Sub MultDiv
-Rule 39    AddSub -> MultDiv
-Rule 40    LangUnion -> LangUnion Add LangConcat
-Rule 41    LangUnion -> LangConcat
+Rule 29    AddSub -> AddSub Add MultDiv
+Rule 30    AddSub -> AddSub Sub MultDiv
+Rule 31    AddSub -> MultDiv
+Rule 32    LangUnion -> LangUnion Add LangConcat
+Rule 33    LangUnion -> LangConcat
+Rule 34    expression -> IntExpression
+Rule 35    expression -> AlphExpression
+Rule 36    expression -> StringExpression
+Rule 37    expression -> LangExpression
+Rule 38    expression -> BooleanExpression
+Rule 39    expression -> ShowVal
+Rule 40    expression -> Assigns
+Rule 41    expression -> Declares
 Rule 42    AlphPow -> AlphPow Pow IntExpression
 Rule 43    AlphPow -> AlphGroup
 Rule 44    StringGroup -> LGroup StringExpression RGroup
@@ -131,7 +131,7 @@ Rule 117   BooleanAssign -> VBoolean Eq BooleanExpression
 
 Terminals, with rules where they appear
 
-Add                  : 37 40
+Add                  : 29 32
 AlphType             : 103 104
 And                  : 25
 BooleanType          : 113 114
@@ -162,7 +162,7 @@ ShowInLine           : 48
 Splitter             : 81 82 83 84 98 99 105 106 110 111 115 116
 String               : 45
 StringType           : 79 80
-Sub                  : 38 86
+Sub                  : 30 86
 SubSequence          : 100
 SubString            : 101
 SuchThat             : 
@@ -179,44 +179,44 @@ error                :
 
 Nonterminals, with rules where they appear
 
-AddSub               : 3 37 38
+AddSub               : 3 29 30
 Alph                 : 55
 AlphAssign           : 73
 AlphConcat           : 7 21
 AlphDeclare          : 62 105 106
-AlphExpression       : 9 30 54 78 85 104 106 107
+AlphExpression       : 9 35 54 78 85 104 106 107
 AlphGroup            : 43
 AlphKleeneC          : 12
 AlphPositiveC        : 13
 AlphPow              : 21 22 42
-Assigns              : 35
+Assigns              : 40
 Boolean              : 50
 BooleanAnd           : 5 6 25
 BooleanAssign        : 75
 BooleanDeclare       : 64 115 116
-BooleanExpression    : 33 49 114 116 117
+BooleanExpression    : 38 49 114 116 117
 BooleanGroup         : 25 26
 BooleanOr            : 1 5
-Declares             : 36
+Declares             : 41
 IntAssign            : 72
 IntDeclare           : 61 98 99
-IntExpression        : 27 29 42 78 85 88 89 92 97 99 102
+IntExpression        : 27 34 42 78 85 88 89 92 97 99 102
 IntPow               : 57 58 59 76
 LangAssign           : 74
-LangConcat           : 40 41 52
+LangConcat           : 32 33 52
 LangDeclare          : 63 110 111
-LangExpression       : 32 67 88 92 109 111 112
+LangExpression       : 37 67 88 92 109 111 112
 LangGroup            : 52 53
 LangKleeneC          : 14
 LangPositiveC        : 15
-LangUnion            : 16 40
-MultDiv              : 37 38 39 57 58
+LangUnion            : 16 32
+MultDiv              : 29 30 31 57 58
 Primary              : 86 87
-ShowVal              : 34
+ShowVal              : 39
 StringAssign         : 71
 StringConcat         : 4 19
 StringDeclare        : 60 81 82
-StringExpression     : 8 9 31 44 70 80 82 83 84 84 93 94 95 100 101
+StringExpression     : 8 9 36 44 70 80 82 83 84 84 93 94 95 100 101
 StringGroup          : 28
 StringLen            : 2
 StringList           : 69 83
@@ -236,14 +236,14 @@ state 0
     (0) S' -> . expressions
     (23) expressions -> . expressions expression Term
     (24) expressions -> . expression Term
-    (29) expression -> . IntExpression
-    (30) expression -> . AlphExpression
-    (31) expression -> . StringExpression
-    (32) expression -> . LangExpression
-    (33) expression -> . BooleanExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (34) expression -> . IntExpression
+    (35) expression -> . AlphExpression
+    (36) expression -> . StringExpression
+    (37) expression -> . LangExpression
+    (38) expression -> . BooleanExpression
+    (39) expression -> . ShowVal
+    (40) expression -> . Assigns
+    (41) expression -> . Declares
     (2) IntExpression -> . StringLen
     (3) IntExpression -> . AddSub
     (7) AlphExpression -> . AlphConcat
@@ -272,9 +272,9 @@ state 0
     (64) Declares -> . BooleanDeclare
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (21) AlphConcat -> . AlphConcat Concat AlphPow
     (22) AlphConcat -> . AlphPow
     (19) StringConcat -> . StringConcat Concat StringPow
@@ -285,8 +285,8 @@ state 0
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (5) BooleanOr -> . BooleanOr Or BooleanAnd
@@ -429,14 +429,14 @@ state 1
 
     (0) S' -> expressions .
     (23) expressions -> expressions . expression Term
-    (29) expression -> . IntExpression
-    (30) expression -> . AlphExpression
-    (31) expression -> . StringExpression
-    (32) expression -> . LangExpression
-    (33) expression -> . BooleanExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (34) expression -> . IntExpression
+    (35) expression -> . AlphExpression
+    (36) expression -> . StringExpression
+    (37) expression -> . LangExpression
+    (38) expression -> . BooleanExpression
+    (39) expression -> . ShowVal
+    (40) expression -> . Assigns
+    (41) expression -> . Declares
     (2) IntExpression -> . StringLen
     (3) IntExpression -> . AddSub
     (7) AlphExpression -> . AlphConcat
@@ -465,9 +465,9 @@ state 1
     (64) Declares -> . BooleanDeclare
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (21) AlphConcat -> . AlphConcat Concat AlphPow
     (22) AlphConcat -> . AlphPow
     (19) StringConcat -> . StringConcat Concat StringPow
@@ -478,8 +478,8 @@ state 1
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (5) BooleanOr -> . BooleanOr Or BooleanAnd
@@ -626,66 +626,66 @@ state 2
 
 state 3
 
-    (29) expression -> IntExpression .
+    (34) expression -> IntExpression .
 
-    Term            reduce using rule 29 (expression -> IntExpression .)
+    Term            reduce using rule 34 (expression -> IntExpression .)
 
 
 state 4
 
-    (30) expression -> AlphExpression .
+    (35) expression -> AlphExpression .
     (78) AlphKleeneC -> AlphExpression . KleeneC IntExpression
     (85) AlphPositiveC -> AlphExpression . PositiveC IntExpression
 
-    Term            reduce using rule 30 (expression -> AlphExpression .)
+    Term            reduce using rule 35 (expression -> AlphExpression .)
     KleeneC         shift and go to state 76
     PositiveC       shift and go to state 77
 
 
 state 5
 
-    (31) expression -> StringExpression .
+    (36) expression -> StringExpression .
 
-    Term            reduce using rule 31 (expression -> StringExpression .)
+    Term            reduce using rule 36 (expression -> StringExpression .)
 
 
 state 6
 
-    (32) expression -> LangExpression .
+    (37) expression -> LangExpression .
     (88) LangKleeneC -> LangExpression . KleeneC IntExpression
     (92) LangPositiveC -> LangExpression . PositiveC IntExpression
 
-    Term            reduce using rule 32 (expression -> LangExpression .)
+    Term            reduce using rule 37 (expression -> LangExpression .)
     KleeneC         shift and go to state 78
     PositiveC       shift and go to state 79
 
 
 state 7
 
-    (33) expression -> BooleanExpression .
+    (38) expression -> BooleanExpression .
 
-    Term            reduce using rule 33 (expression -> BooleanExpression .)
+    Term            reduce using rule 38 (expression -> BooleanExpression .)
 
 
 state 8
 
-    (34) expression -> ShowVal .
+    (39) expression -> ShowVal .
 
-    Term            reduce using rule 34 (expression -> ShowVal .)
+    Term            reduce using rule 39 (expression -> ShowVal .)
 
 
 state 9
 
-    (35) expression -> Assigns .
+    (40) expression -> Assigns .
 
-    Term            reduce using rule 35 (expression -> Assigns .)
+    Term            reduce using rule 40 (expression -> Assigns .)
 
 
 state 10
 
-    (36) expression -> Declares .
+    (41) expression -> Declares .
 
-    Term            reduce using rule 36 (expression -> Declares .)
+    Term            reduce using rule 41 (expression -> Declares .)
 
 
 state 11
@@ -707,8 +707,8 @@ state 11
 state 12
 
     (3) IntExpression -> AddSub .
-    (37) AddSub -> AddSub . Add MultDiv
-    (38) AddSub -> AddSub . Sub MultDiv
+    (29) AddSub -> AddSub . Add MultDiv
+    (30) AddSub -> AddSub . Sub MultDiv
 
     Term            reduce using rule 3 (IntExpression -> AddSub .)
     RGroup          reduce using rule 3 (IntExpression -> AddSub .)
@@ -823,7 +823,7 @@ state 20
 state 21
 
     (16) LangExpression -> LangUnion .
-    (40) LangUnion -> LangUnion . Add LangConcat
+    (32) LangUnion -> LangUnion . Add LangConcat
 
     KleeneC         reduce using rule 16 (LangExpression -> LangUnion .)
     PositiveC       reduce using rule 16 (LangExpression -> LangUnion .)
@@ -869,14 +869,14 @@ state 24
 state 25
 
     (47) ShowVal -> Show . expression
-    (29) expression -> . IntExpression
-    (30) expression -> . AlphExpression
-    (31) expression -> . StringExpression
-    (32) expression -> . LangExpression
-    (33) expression -> . BooleanExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (34) expression -> . IntExpression
+    (35) expression -> . AlphExpression
+    (36) expression -> . StringExpression
+    (37) expression -> . LangExpression
+    (38) expression -> . BooleanExpression
+    (39) expression -> . ShowVal
+    (40) expression -> . Assigns
+    (41) expression -> . Declares
     (2) IntExpression -> . StringLen
     (3) IntExpression -> . AddSub
     (7) AlphExpression -> . AlphConcat
@@ -905,9 +905,9 @@ state 25
     (64) Declares -> . BooleanDeclare
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (21) AlphConcat -> . AlphConcat Concat AlphPow
     (22) AlphConcat -> . AlphPow
     (19) StringConcat -> . StringConcat Concat StringPow
@@ -918,8 +918,8 @@ state 25
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (5) BooleanOr -> . BooleanOr Or BooleanAnd
@@ -1060,14 +1060,14 @@ state 25
 state 26
 
     (48) ShowVal -> ShowInLine . expression
-    (29) expression -> . IntExpression
-    (30) expression -> . AlphExpression
-    (31) expression -> . StringExpression
-    (32) expression -> . LangExpression
-    (33) expression -> . BooleanExpression
-    (34) expression -> . ShowVal
-    (35) expression -> . Assigns
-    (36) expression -> . Declares
+    (34) expression -> . IntExpression
+    (35) expression -> . AlphExpression
+    (36) expression -> . StringExpression
+    (37) expression -> . LangExpression
+    (38) expression -> . BooleanExpression
+    (39) expression -> . ShowVal
+    (40) expression -> . Assigns
+    (41) expression -> . Declares
     (2) IntExpression -> . StringLen
     (3) IntExpression -> . AddSub
     (7) AlphExpression -> . AlphConcat
@@ -1096,9 +1096,9 @@ state 26
     (64) Declares -> . BooleanDeclare
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (21) AlphConcat -> . AlphConcat Concat AlphPow
     (22) AlphConcat -> . AlphPow
     (19) StringConcat -> . StringConcat Concat StringPow
@@ -1109,8 +1109,8 @@ state 26
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (5) BooleanOr -> . BooleanOr Or BooleanAnd
@@ -1357,26 +1357,26 @@ state 37
 
 state 38
 
-    (39) AddSub -> MultDiv .
+    (31) AddSub -> MultDiv .
     (57) MultDiv -> MultDiv . Concat IntPow
     (58) MultDiv -> MultDiv . Div IntPow
 
   ! shift/reduce conflict for Concat resolved as shift
-    Add             reduce using rule 39 (AddSub -> MultDiv .)
-    Sub             reduce using rule 39 (AddSub -> MultDiv .)
-    Term            reduce using rule 39 (AddSub -> MultDiv .)
-    RGroup          reduce using rule 39 (AddSub -> MultDiv .)
-    KleeneC         reduce using rule 39 (AddSub -> MultDiv .)
-    PositiveC       reduce using rule 39 (AddSub -> MultDiv .)
-    Splitter        reduce using rule 39 (AddSub -> MultDiv .)
-    Pow             reduce using rule 39 (AddSub -> MultDiv .)
-    LenOp           reduce using rule 39 (AddSub -> MultDiv .)
-    On              reduce using rule 39 (AddSub -> MultDiv .)
-    CloseStruct     reduce using rule 39 (AddSub -> MultDiv .)
+    Add             reduce using rule 31 (AddSub -> MultDiv .)
+    Sub             reduce using rule 31 (AddSub -> MultDiv .)
+    Term            reduce using rule 31 (AddSub -> MultDiv .)
+    RGroup          reduce using rule 31 (AddSub -> MultDiv .)
+    KleeneC         reduce using rule 31 (AddSub -> MultDiv .)
+    PositiveC       reduce using rule 31 (AddSub -> MultDiv .)
+    Splitter        reduce using rule 31 (AddSub -> MultDiv .)
+    Pow             reduce using rule 31 (AddSub -> MultDiv .)
+    LenOp           reduce using rule 31 (AddSub -> MultDiv .)
+    On              reduce using rule 31 (AddSub -> MultDiv .)
+    CloseStruct     reduce using rule 31 (AddSub -> MultDiv .)
     Concat          shift and go to state 96
     Div             shift and go to state 97
 
-  ! Concat          [ reduce using rule 39 (AddSub -> MultDiv .) ]
+  ! Concat          [ reduce using rule 31 (AddSub -> MultDiv .) ]
 
 
 state 39
@@ -1468,15 +1468,15 @@ state 43
 
 state 44
 
-    (41) LangUnion -> LangConcat .
+    (33) LangUnion -> LangConcat .
     (52) LangConcat -> LangConcat . Concat LangGroup
 
-    Add             reduce using rule 41 (LangUnion -> LangConcat .)
-    KleeneC         reduce using rule 41 (LangUnion -> LangConcat .)
-    PositiveC       reduce using rule 41 (LangUnion -> LangConcat .)
-    Term            reduce using rule 41 (LangUnion -> LangConcat .)
-    RGroup          reduce using rule 41 (LangUnion -> LangConcat .)
-    Splitter        reduce using rule 41 (LangUnion -> LangConcat .)
+    Add             reduce using rule 33 (LangUnion -> LangConcat .)
+    KleeneC         reduce using rule 33 (LangUnion -> LangConcat .)
+    PositiveC       reduce using rule 33 (LangUnion -> LangConcat .)
+    Term            reduce using rule 33 (LangUnion -> LangConcat .)
+    RGroup          reduce using rule 33 (LangUnion -> LangConcat .)
+    Splitter        reduce using rule 33 (LangUnion -> LangConcat .)
     Concat          shift and go to state 104
 
 
@@ -1744,17 +1744,17 @@ state 63
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (5) BooleanOr -> . BooleanOr Or BooleanAnd
     (6) BooleanOr -> . BooleanAnd
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (42) AlphPow -> . AlphPow Pow IntExpression
     (43) AlphPow -> . AlphGroup
     (27) StringPow -> . StringPow Pow IntExpression
@@ -2046,9 +2046,9 @@ state 76
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2081,9 +2081,9 @@ state 77
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2116,9 +2116,9 @@ state 78
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2151,9 +2151,9 @@ state 79
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2181,7 +2181,7 @@ state 79
 
 state 80
 
-    (37) AddSub -> AddSub Add . MultDiv
+    (29) AddSub -> AddSub Add . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2205,7 +2205,7 @@ state 80
 
 state 81
 
-    (38) AddSub -> AddSub Sub . MultDiv
+    (30) AddSub -> AddSub Sub . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2264,7 +2264,7 @@ state 83
 
 state 84
 
-    (40) LangUnion -> LangUnion Add . LangConcat
+    (32) LangUnion -> LangUnion Add . LangConcat
     (52) LangConcat -> . LangConcat Concat LangGroup
     (53) LangConcat -> . LangGroup
     (67) LangGroup -> . LGroup LangExpression RGroup
@@ -2462,9 +2462,9 @@ state 99
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2497,9 +2497,9 @@ state 100
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2532,9 +2532,9 @@ state 101
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -2662,9 +2662,9 @@ state 109
     (7) AlphExpression -> . AlphConcat
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (21) AlphConcat -> . AlphConcat Concat AlphPow
     (22) AlphConcat -> . AlphPow
     (57) MultDiv -> . MultDiv Concat IntPow
@@ -2724,8 +2724,8 @@ state 110
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (7) AlphExpression -> . AlphConcat
@@ -3025,48 +3025,48 @@ state 131
 
 state 132
 
-    (37) AddSub -> AddSub Add MultDiv .
+    (29) AddSub -> AddSub Add MultDiv .
     (57) MultDiv -> MultDiv . Concat IntPow
     (58) MultDiv -> MultDiv . Div IntPow
 
-    Add             reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    Sub             reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    Term            reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    RGroup          reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    KleeneC         reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    PositiveC       reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    Splitter        reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    Pow             reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    LenOp           reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    On              reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
-    CloseStruct     reduce using rule 37 (AddSub -> AddSub Add MultDiv .)
+    Add             reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    Sub             reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    Term            reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    RGroup          reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    KleeneC         reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    PositiveC       reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    Splitter        reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    Pow             reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    LenOp           reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    On              reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
+    CloseStruct     reduce using rule 29 (AddSub -> AddSub Add MultDiv .)
     Concat          shift and go to state 96
     Div             shift and go to state 97
 
-  ! Concat          [ reduce using rule 37 (AddSub -> AddSub Add MultDiv .) ]
+  ! Concat          [ reduce using rule 29 (AddSub -> AddSub Add MultDiv .) ]
 
 
 state 133
 
-    (38) AddSub -> AddSub Sub MultDiv .
+    (30) AddSub -> AddSub Sub MultDiv .
     (57) MultDiv -> MultDiv . Concat IntPow
     (58) MultDiv -> MultDiv . Div IntPow
 
-    Add             reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    Sub             reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    Term            reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    RGroup          reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    KleeneC         reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    PositiveC       reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    Splitter        reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    Pow             reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    LenOp           reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    On              reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
-    CloseStruct     reduce using rule 38 (AddSub -> AddSub Sub MultDiv .)
+    Add             reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    Sub             reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    Term            reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    RGroup          reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    KleeneC         reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    PositiveC       reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    Splitter        reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    Pow             reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    LenOp           reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    On              reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
+    CloseStruct     reduce using rule 30 (AddSub -> AddSub Sub MultDiv .)
     Concat          shift and go to state 96
     Div             shift and go to state 97
 
-  ! Concat          [ reduce using rule 38 (AddSub -> AddSub Sub MultDiv .) ]
+  ! Concat          [ reduce using rule 30 (AddSub -> AddSub Sub MultDiv .) ]
 
 
 state 134
@@ -3127,15 +3127,15 @@ state 136
 
 state 137
 
-    (40) LangUnion -> LangUnion Add LangConcat .
+    (32) LangUnion -> LangUnion Add LangConcat .
     (52) LangConcat -> LangConcat . Concat LangGroup
 
-    Add             reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
-    KleeneC         reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
-    PositiveC       reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
-    Term            reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
-    RGroup          reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
-    Splitter        reduce using rule 40 (LangUnion -> LangUnion Add LangConcat .)
+    Add             reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
+    KleeneC         reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
+    PositiveC       reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
+    Term            reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
+    RGroup          reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
+    Splitter        reduce using rule 32 (LangUnion -> LangUnion Add LangConcat .)
     Concat          shift and go to state 104
 
 
@@ -3157,8 +3157,8 @@ state 138
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (7) AlphExpression -> . AlphConcat
@@ -3460,9 +3460,9 @@ state 157
     (22) AlphConcat -> . AlphPow
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (42) AlphPow -> . AlphPow Pow IntExpression
     (43) AlphPow -> . AlphGroup
     (57) MultDiv -> . MultDiv Concat IntPow
@@ -3542,8 +3542,8 @@ state 160
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (21) AlphConcat -> . AlphConcat Concat AlphPow
@@ -3622,9 +3622,9 @@ state 163
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -3692,8 +3692,8 @@ state 165
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (7) AlphExpression -> . AlphConcat
@@ -3960,9 +3960,9 @@ state 179
     (3) IntExpression -> . AddSub
     (8) StringLen -> . LenOp StringExpression LenOp
     (9) StringLen -> . LenOp StringExpression On AlphExpression LenOp
-    (37) AddSub -> . AddSub Add MultDiv
-    (38) AddSub -> . AddSub Sub MultDiv
-    (39) AddSub -> . MultDiv
+    (29) AddSub -> . AddSub Add MultDiv
+    (30) AddSub -> . AddSub Sub MultDiv
+    (31) AddSub -> . MultDiv
     (57) MultDiv -> . MultDiv Concat IntPow
     (58) MultDiv -> . MultDiv Div IntPow
     (59) MultDiv -> . IntPow
@@ -4030,8 +4030,8 @@ state 181
     (85) AlphPositiveC -> . AlphExpression PositiveC IntExpression
     (88) LangKleeneC -> . LangExpression KleeneC IntExpression
     (92) LangPositiveC -> . LangExpression PositiveC IntExpression
-    (40) LangUnion -> . LangUnion Add LangConcat
-    (41) LangUnion -> . LangConcat
+    (32) LangUnion -> . LangUnion Add LangConcat
+    (33) LangUnion -> . LangConcat
     (100) StringSubSequence -> . SubSequence StringExpression
     (101) StringSubString -> . SubString StringExpression
     (7) AlphExpression -> . AlphConcat

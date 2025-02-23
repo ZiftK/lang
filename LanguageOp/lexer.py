@@ -1,6 +1,3 @@
-import copy
-import re
-
 from ply import lex
 
 from modules.variables import vars
@@ -147,7 +144,10 @@ def t_ANY_error(t):
     print(t.value)
 
 
-lexer = lex.lex()
+
+
+lexer = lex.lex(debuglog=False, debug=False)
+
 if __name__ == "__main__":
 
     with open("./test.lang", "r") as file:

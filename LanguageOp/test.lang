@@ -100,5 +100,3 @@ show "";
 show "Clausura de kleene de lenguae 2 a exponente 3";
 show lang2**3;
 show "";
-
-

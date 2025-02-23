@@ -1,4 +1,5 @@
 from ply import yacc
+import logging
 from lexer import tokens
 from modules.integers import *
 from modules.alph import *
@@ -41,10 +42,12 @@ def p_error(p):
     else:
         print("Error de sintaxis al final del archivo")
 
+logger = logging.getLogger("plylogger")
+logger.disabled = True
+
+parser = yacc.yacc(start="expressions", errorlog=logger)
 
 if __name__ == "__main__":
-    parser = yacc.yacc(start="expressions")
-
     with open("./test.lang", "r") as file:
         content = file.read()
 
